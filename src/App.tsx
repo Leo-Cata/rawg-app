@@ -1,9 +1,12 @@
-import { signInGoogle } from "./Firebase/Firebase";
+import GamesContainer from "./containers/GamesContainer";
+import { signInGoogle } from "./firebase/Firebase";
+// import { fetchGames } from "./services/RawgApi";
 
 const App = () => {
   return (
-    <div>
+    <div className="bg-purple-500">
       <button onClick={signInGoogle}>sign in</button>
+      <GamesContainer />
     </div>
   );
 };
