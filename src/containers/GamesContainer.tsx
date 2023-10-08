@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { getGames } from "../services/RawgApi";
+import { GamesSearch } from "../Types/Types";
 
 const GamesContainer = () => {
-  const [gameData, setGameData] = useState([]);
+  //save game data
+  const [gameData, setGameData] = useState<GamesSearch>();
+
+  //fetch all games by popularity
   useEffect(() => {
     const fetchGames = async () => {
       try {
@@ -19,7 +23,11 @@ const GamesContainer = () => {
   return (
     <div>
       {gameData &&
-        gameData.results.map((data) => <h6 key={data.id}>{data.name}</h6>)}
+        gameData.results.map((game) => (
+          <div key={game.id}>
+            <h6>{game.name}</h6>
+          </div>
+        ))}
     </div>
   );
 };
