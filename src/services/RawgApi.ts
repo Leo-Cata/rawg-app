@@ -14,3 +14,7 @@ export const getGames = (options: GamesSearchOptions = {}) => {
     params: options,
   });
 };
+
+export const getPlatformsLists = () => {
+  return api.get("platforms/lists/parents");
+};

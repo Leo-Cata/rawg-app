@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  width: 100dvw;
-  height: 100dvh;
-  background-color: blueviolet;
+.MuiTooltip-popper {
+  text-transform: capitalize;
 }

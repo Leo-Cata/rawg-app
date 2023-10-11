@@ -1,5 +1,4 @@
 // /games search parameters
-
 export interface GamesSearchOptions {
   page?: string;
   search?: string;
@@ -9,15 +8,16 @@ export interface GamesSearchOptions {
   dates?: string;
   metacritic?: string;
   ordering?: string;
+  page_size?: number;
 }
 
-//fetched /games type
+// fetched /games type
 export interface GamesSearch {
   count: number;
   results: Result[];
 }
 
-//where all the data about games are
+// where all the data about games are
 export interface Result {
   id: number;
   slug: string;
@@ -25,21 +25,46 @@ export interface Result {
   background_image: string;
   metacritic: number;
   playtime: number;
+  parent_platforms: Parent_Platforms[];
   platforms: Platforms[];
+  released: string;
 }
+
+export interface Parent_Platforms {
+  platform: PlatformsObject;
+}
+// initial platform information and requirements
 export interface Platforms {
-  platform: Platform2;
-  released_at: string;
-  requirements: Requirements;
+  platform: PlatformsObject;
 }
-
-export interface Platform2 {
+// details of the platform store
+export interface PlatformsObject {
   id: number;
-  slug: string;
   name: string;
+  slug: string;
 }
 
+// requirements specs for PC
 export interface Requirements {
   minimum: string;
   recommended: string;
+}
+
+// props passed to gameCards
+export interface GameCardsProps {
+  gameName: string;
+  gameImage: string;
+  // mapKey: string;
+  metacritic: number;
+  availablePlatforms: Platforms[];
+  releaseDate: string;
+}
+
+export interface AvailablePlatformsObject {
+  platformName: string;
+}
+
+// platforms icons
+export interface PlatformsIcons {
+  [key: string]: JSX.Element;
 }
