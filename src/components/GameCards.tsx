@@ -52,12 +52,12 @@ const GameCards = ({
     linux: <SiLinux size="17px" />,
   };
 
-  //regex value to turn YYYY-MM-DD into DD/MM/YYYY
+  //regex value to capture YYYY MM DD and then rearrange into DD/MM/YYY
   const dayMonthYearRegex = /(\d{4})-(\d{2})-(\d{2})/;
   const dayMonthYearStringRearrange = "$3/$2/$1";
 
   return (
-    <Card className="w-full rounded-2xl bg-[#181818]">
+    <Card className="w-full max-w-[450px] rounded-2xl bg-[#181818]">
       <CardMedia
         className="min-h-[12rem]"
         component="img"

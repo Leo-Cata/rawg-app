@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getGames, getPlatformsLists } from "../services/RawgApi";
+import { getGames } from "../services/RawgApi";
 import { GamesSearch } from "../Types/Types";
 import GameCards from "../components/GameCards";
 import { Box, Stack } from "@mui/material";
@@ -15,8 +15,6 @@ const GamesContainer = () => {
       try {
         const resp = await getGames({ page_size: 40 });
         setGameData(resp.data);
-        const platforms = await getPlatformsLists();
-        console.log("🚀 ~ fetchGames ~ platforms:", platforms);
       } catch (error) {
         console.log(error);
       }
@@ -68,7 +66,7 @@ const GamesContainer = () => {
     >
       {groupedData &&
         groupedData.map((group, index) => (
-          <Stack key={group[index].slug} className="space-y-4">
+          <Stack key={group[index].slug} className="mx-auto space-y-4 sm:mx-0">
             {group.map((game) => (
               <GameCards
                 gameName={game.name}
