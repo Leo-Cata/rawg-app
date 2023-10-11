@@ -2,7 +2,13 @@
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut,
+} from "firebase/auth";
+
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_REACT_APP_FIREBASE_API_KEY,
@@ -14,17 +20,29 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_REACT_APP_FIREBASE_APP_ID,
 };
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
+export let resp;
 
 // sign in with google
 export const signInGoogle = async () => {
   try {
     //gets the authentication data from the provider which is google in this case
-    const resp = await signInWithPopup(auth, provider);
+    resp = await signInWithPopup(auth, provider);
+    console.log(resp);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const signOutGoogle = async () => {
+  try {
+    await signOut(auth);
+    resp = "";
+    console.log("signed out");
     console.log(resp);
   } catch (error) {
     console.log(error);
