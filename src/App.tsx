@@ -1,3 +1,6 @@
+import GamesContainer from "./containers/GamesContainer";
+// import { signInGoogle } from "./firebase/Firebase";
+
 // import { db } from "./Firebase/Database";
 // import { resp, signInGoogle, signOutGoogle } from "./Firebase/Firebase";
 
@@ -9,8 +12,6 @@
 //       </button>
 //       <button onClick={signOutGoogle}>sign out</button>
 //       <button onClick={() => console.log(db, resp)}>resp</button>
-import GamesContainer from "./containers/GamesContainer";
-// import { signInGoogle } from "./firebase/Firebase";
 
 const App = () => {
   return (
