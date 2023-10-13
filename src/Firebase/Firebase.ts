@@ -1,12 +1,12 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+
 import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 // Your web app's Firebase configuration
@@ -25,26 +25,36 @@ export const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
-export let resp;
 
 // sign in with google
 export const signInGoogle = async () => {
   try {
+    // custom param to always have to choose an account, instead of automatically signing in to the previous one
+    provider.setCustomParameters({ prompt: "select_account" });
+
     //gets the authentication data from the provider which is google in this case
-    resp = await signInWithPopup(auth, provider);
-    console.log(resp);
+    await signInWithPopup(auth, provider);
   } catch (error) {
     console.log(error);
   }
 };
 
+// sign out of google account
 export const signOutGoogle = async () => {
   try {
     await signOut(auth);
-    resp = "";
-    console.log("signed out");
-    console.log(resp);
   } catch (error) {
     console.log(error);
   }
+};
+
+// check if user is logged in
+export const checkIfLoggedIn = () => {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log("logged", user);
+    } else {
+      console.log("not logged in");
+    }
+  });
 };

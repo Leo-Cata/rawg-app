@@ -8,6 +8,9 @@ import {
   setDoc,
   doc,
   getDoc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 
 //initialize the database
@@ -25,20 +28,17 @@ export const db = getFirestore(app);
 //   console.log(error);
 // }
 
-// const setData = () => {
+// set data
+// export const setData = (gameName: string) => {
 //   const docData = {
-//     first: "matias",
-//     middle: "leo",
-//     last: "cata",
+//     first: { gameName },
 //   };
 //   setDoc(doc(db, "users/leo"), docData);
 // };
-// setData();
 
-// const setDataAsync = async () => {
+// export const setDataAsync = async (gameName: string) => {
 //   const docDataAsync = {
-//     first: "synced leo",
-//     last: "synced matias",
+//     name: { gameName },
 //   };
 //   try {
 //     await setDoc(doc(db, "users/leo"), docDataAsync, { merge: true });
@@ -48,6 +48,32 @@ export const db = getFirestore(app);
 //   }
 // };
 // setDataAsync();
+
+// adds games information to user
+export const addGamesToUser = async (game) => {
+  try {
+    // get reference to the user, third argument should be uid
+    const userRef = doc(db, "users", "leo");
+
+    //update the document with game information in games array
+    await updateDoc(userRef, {
+      games: arrayUnion(game),
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const removeGamesFromUser = async (game) => {
+  try {
+    const userRef1 = doc(db, "users", "leo");
+    await updateDoc(userRef1, {
+      games: arrayRemove(game),
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // queries through the snapshot and logs one by one their id and data
 // const querySnapshot = await getDocs(collection(db, "users"));

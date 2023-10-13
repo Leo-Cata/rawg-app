@@ -1,3 +1,6 @@
+// react hooks
+import { useState } from "react";
+
 // material components
 import {
   Card,
@@ -7,6 +10,7 @@ import {
   Typography,
   Chip,
   Tooltip,
+  IconButton,
 } from "@mui/material";
 
 // types
@@ -27,8 +31,16 @@ import {
   SiLinux,
 } from "react-icons/si";
 
+// mui icons
+import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
+import StarRoundedIcon from "@mui/icons-material/StarRounded";
 //zoom effect for tooltip
 import Zoom from "@mui/material/Zoom";
+import {
+  addGamesToUser,
+  removeGamesFromUser,
+  setDataAsync,
+} from "../firebase/Database";
 
 const GameCards = ({
   gameImage,
@@ -37,6 +49,24 @@ const GameCards = ({
   releaseDate,
   gameName,
 }: GameCardsProps) => {
+  // useState to change favorite icon
+  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+
+  const addGames = (
+    gameName: string,
+    metacritic: number,
+    releaseDate: string,
+  ) => {
+    setIsFavorite((prev) => {
+      if (!prev) {
+        addGamesToUser({ gameName, metacritic, releaseDate });
+      } else {
+        removeGamesFromUser({ gameName, metacritic, releaseDate });
+      }
+      return !prev;
+    });
+  };
+
   // to show icon according to available platform
   const platformsIcons: PlatformsIcons = {
     pc: <SiWindows10 />,
@@ -103,10 +133,25 @@ const GameCards = ({
           </Tooltip>
         </Stack>
         {/* release date */}
-        <Typography variant="subtitle1">
-          Release Date:{" "}
-          {releaseDate.replace(dayMonthYearRegex, dayMonthYearStringRearrange)}
-        </Typography>
+        <Stack direction={"row"} justifyContent={"space-between"}>
+          <Typography variant="subtitle1">
+            Release Date:{" "}
+            {releaseDate.replace(
+              dayMonthYearRegex,
+              dayMonthYearStringRearrange,
+            )}
+          </Typography>
+          <IconButton
+            aria-label="add to favorite"
+            onClick={() => addGames(gameName, metacritic, releaseDate)}
+          >
+            {isFavorite ? (
+              <StarRoundedIcon className="text-yellow-400" />
+            ) : (
+              <StarBorderRoundedIcon className="text-yellow-400" />
+            )}
+          </IconButton>
+        </Stack>
       </CardContent>
     </Card>
   );
