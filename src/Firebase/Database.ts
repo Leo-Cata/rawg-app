@@ -1,17 +1,5 @@
 import { app } from "./Firebase";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  setDoc,
-  setDoc,
-  doc,
-  getDoc,
-  updateDoc,
-  arrayUnion,
-  arrayRemove,
-} from "firebase/firestore";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 
 //initialize the database
 export const db = getFirestore(app);
@@ -48,32 +36,6 @@ export const db = getFirestore(app);
 //   }
 // };
 // setDataAsync();
-
-// adds games information to user
-export const addGamesToUser = async (game) => {
-  try {
-    // get reference to the user, third argument should be uid
-    const userRef = doc(db, "users", "leo");
-
-    //update the document with game information in games array
-    await updateDoc(userRef, {
-      games: arrayUnion(game),
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const removeGamesFromUser = async (game) => {
-  try {
-    const userRef1 = doc(db, "users", "leo");
-    await updateDoc(userRef1, {
-      games: arrayRemove(game),
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 // queries through the snapshot and logs one by one their id and data
 // const querySnapshot = await getDocs(collection(db, "users"));

@@ -36,11 +36,7 @@ import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 //zoom effect for tooltip
 import Zoom from "@mui/material/Zoom";
-import {
-  addGamesToUser,
-  removeGamesFromUser,
-  setDataAsync,
-} from "../firebase/Database";
+import { addAndRemoveGames } from "../firebase/AddAndRemoveGames";
 
 const GameCards = ({
   gameImage,
@@ -57,13 +53,13 @@ const GameCards = ({
     metacritic: number,
     releaseDate: string,
   ) => {
-    setIsFavorite((prev) => {
-      if (!prev) {
-        addGamesToUser({ gameName, metacritic, releaseDate });
-      } else {
-        removeGamesFromUser({ gameName, metacritic, releaseDate });
-      }
-      return !prev;
+    setIsFavorite((prev) => !prev);
+    addAndRemoveGames({
+      gameImage,
+      availablePlatforms,
+      metacritic,
+      releaseDate,
+      gameName,
     });
   };
 
