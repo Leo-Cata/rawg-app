@@ -3,7 +3,7 @@ import { userIdContext } from "./UserContext";
 import { HandleUserId } from "../Types/Types";
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
-  const [userId, setUserId] = useState<string>("Not Logged In");
+  const [userId, setUserId] = useState<string | null>(null);
 
   // handle setting the user id
   const handleUserId: HandleUserId = (uid) => {

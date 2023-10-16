@@ -71,12 +71,12 @@ export interface PlatformsIcons {
 
 // user id setter function
 export interface HandleUserId {
-  (uid: string): void;
+  (uid: string | null): void;
 }
 
 // createContext type
 
 export interface UserContextValues {
-  userId: string;
+  userId: string | null;
   handleUserId: HandleUserId;
 }
