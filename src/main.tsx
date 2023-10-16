@@ -4,12 +4,15 @@ import App from "./App.tsx";
 import "./index.css";
 import { CssBaseline } from "@mui/material";
 import { StyledEngineProvider } from "@mui/material/styles";
+import UserProvider from "./context/UserProvider.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <StyledEngineProvider injectFirst>
       <CssBaseline>
-        <App />
+        <UserProvider>
+          <App />
+        </UserProvider>
       </CssBaseline>
     </StyledEngineProvider>
   </React.StrictMode>,

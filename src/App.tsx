@@ -5,25 +5,30 @@ import {
   signInGoogle,
   signOutGoogle,
 } from "./firebase/Firebase";
-import { Button } from "@mui/material";
-// import { signInGoogle } from "./firebase/Firebase";
-
-// import { db } from "./Firebase/Database";
-// import { resp, signInGoogle, signOutGoogle } from "./Firebase/Firebase";
-
-// const App = () => {
-//   return (
-//     <div>
-//       <button onClick={signInGoogle} className="bg-purple-700">
-//         sign in
-//       </button>
-//       <button onClick={signOutGoogle}>sign out</button>
-//       <button onClick={() => console.log(db, resp)}>resp</button>
+import { Button, Typography } from "@mui/material";
+import { useContext } from "react";
+import { userIdContext } from "./context/UserContext";
+import { UserContextValues } from "./Types/Types";
 
 const App = () => {
+  // get the values and assert the type to use UserContextValues
+  const { userId, handleUserId } = useContext(
+    userIdContext,
+  ) as UserContextValues;
+
+  const handleUidCallback = (uid: string) => {
+    handleUserId(uid); // Set the userId using handleUserId
+  };
+
+  const handleLogin = () => {
+    // Call the signInGoogle function and pass the callback function
+    signInGoogle(handleUidCallback);
+  };
+
+  console.log(userId);
   return (
     <div className="flex-grow bg-[#070703] px-4 py-10">
-      <GoogleButton onClick={signInGoogle} />
+      <GoogleButton onClick={handleLogin} />
       <Button
         onClick={checkIfLoggedIn}
         className="text-white"
@@ -34,7 +39,9 @@ const App = () => {
       <Button onClick={signOutGoogle} className="text-white" variant="outlined">
         sign out
       </Button>
-
+      <Typography variant="body1" className="text-white">
+        {userId}
+      </Typography>
       <GamesContainer />
     </div>
   );

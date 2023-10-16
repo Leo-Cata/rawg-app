@@ -68,3 +68,15 @@ export interface AvailablePlatformsObject {
 export interface PlatformsIcons {
   [key: string]: JSX.Element;
 }
+
+// user id setter function
+export interface HandleUserId {
+  (uid: string): void;
+}
+
+// createContext type
+
+export interface UserContextValues {
+  userId: string;
+  handleUserId: HandleUserId;
+}

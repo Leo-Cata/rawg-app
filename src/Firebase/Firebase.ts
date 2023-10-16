@@ -25,15 +25,26 @@ export const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
-
 // sign in with google
-export const signInGoogle = async () => {
-  try {
-    // custom param to always have to choose an account, instead of automatically signing in to the previous one
-    provider.setCustomParameters({ prompt: "select_account" });
+export const signInGoogle = async (handleUid: (uid: string) => void) => {
+  // try {
+  //   // custom param to always have to choose an account, instead of automatically signing in to the previous one
+  //   provider.setCustomParameters({ prompt: "select_account" });
 
-    //gets the authentication data from the provider which is google in this case
-    await signInWithPopup(auth, provider);
+  //   //gets the authentication data from the provider which is google in this case
+  //   await signInWithPopup(auth, provider);
+  // } catch (error) {
+  //   console.log(error);
+  // }
+  try {
+    provider.setCustomParameters({ prompt: "select_account" });
+    const result = await signInWithPopup(auth, provider);
+
+    // Once the user is signed in, you can access their UID
+    const uid = result.user.uid;
+
+    // Now, call the callback function to handle the UID
+    handleUid(uid);
   } catch (error) {
     console.log(error);
   }

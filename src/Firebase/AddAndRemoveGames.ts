@@ -4,7 +4,6 @@ import {
   doc,
   getDoc,
   setDoc,
-  updateDoc,
 } from "firebase/firestore";
 import { db } from "./Database";
 import { GameCardsProps } from "../Types/Types";
@@ -17,9 +16,8 @@ export const addAndRemoveGames = async (game: GameCardsProps) => {
     // get the document from userRef
     const userDoc = await getDoc(userRef);
 
+    //if userDoc exits and userDoc data contains games then
     if (userDoc.exists() && userDoc.data().games) {
-      //if userDoc exits and userDoc data contains games then
-
       // if in userDoc exits a game with name userGames.gameName equal to the game.gameName being passed, delete it
       if (
         userDoc
@@ -28,10 +26,10 @@ export const addAndRemoveGames = async (game: GameCardsProps) => {
             (userGames: GameCardsProps) => userGames.gameName === game.gameName,
           )
       ) {
-        await updateDoc(userRef, { games: arrayRemove(game) });
+        await setDoc(userRef, { games: arrayRemove(game) }, { merge: true });
       } else {
         // else add it to games
-        await updateDoc(userRef, { games: arrayUnion(game) });
+        await setDoc(userRef, { games: arrayUnion(game) }, { merge: true });
       }
     } else {
       // else if userDoc doesn't exist or it does't contain data().games, create a new user
