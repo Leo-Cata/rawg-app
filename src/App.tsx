@@ -7,7 +7,6 @@ import { UserContextValues } from "./Types/Types";
 import { signInGoogle } from "./firebase/SignInWithGoogle";
 import { checkIfLoggedIn } from "./firebase/CheckIfLoggedIn";
 import { signOutGoogle } from "./firebase/SignOutOfGoogle";
-
 const App = () => {
   // get the values and assert the type to use UserContextValues
   const { userId, handleUserId } = useContext(

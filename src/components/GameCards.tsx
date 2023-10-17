@@ -66,7 +66,6 @@ const GameCards = ({
         },
         userId,
       );
-      console.log("asd");
       setIsFavorite((prev) => !prev);
     } else {
       return alert("not logged in");

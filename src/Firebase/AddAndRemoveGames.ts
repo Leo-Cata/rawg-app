@@ -12,6 +12,7 @@ export const addAndRemoveGames = async (
   game: GameCardsProps,
   userId: string,
 ) => {
+  console.time("add and remove games function");
   try {
     // get the reference for the data base for user
     const userRef = doc(db, "users", userId);
@@ -21,6 +22,8 @@ export const addAndRemoveGames = async (
 
     //if userDoc exits and userDoc data contains games then
     if (userDoc.exists() && userDoc.data().games) {
+      console.time();
+
       // if in userDoc exits a game with name userGames.gameName equal to the game.gameName being passed, delete it
       if (
         userDoc
@@ -41,4 +44,5 @@ export const addAndRemoveGames = async (
   } catch (error) {
     console.log(error);
   }
+  console.timeEnd("add and remove games function");
 };

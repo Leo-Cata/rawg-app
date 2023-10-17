@@ -18,19 +18,7 @@ const GamesContainer = () => {
 
   //fetch all games by popularity
   useEffect(() => {
-    const fetchGames = async () => {
-      try {
-        const resp = await getGames({ page_size: 40 });
-        setGameData(resp.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchGames();
-  }, []);
-
-  // useEffect to get the saved games
-  useEffect(() => {
+    // gets favorite games if the user is logged in
     const getFavoriteGames = async () => {
       if (userId) {
         try {
@@ -42,7 +30,33 @@ const GamesContainer = () => {
       }
     };
     getFavoriteGames();
+
+    // then fetch the list of games from rawg
+    const fetchGames = async () => {
+      try {
+        const resp = await getGames({ page_size: 40 });
+        setGameData(resp.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchGames();
   }, [userId]);
+
+  // useEffect to get the saved games
+  // useEffect(() => {
+  //   const getFavoriteGames = async () => {
+  //     if (userId) {
+  //       try {
+  //         const resp = await readData(userId);
+  //         setUserFavGames(resp?.games);
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     }
+  //   };
+  //   getFavoriteGames();
+  // }, [userId]);
   // useEffect to set the windows width
   useEffect(() => {
     const handleResize = () => {
@@ -103,9 +117,13 @@ const GamesContainer = () => {
                 availablePlatforms={game.parent_platforms}
                 releaseDate={game.released}
                 userId={userId}
-                isInFavorite={userFavGames?.some(
-                  (favGame) => favGame.gameName === game.name,
-                )}
+                isInFavorite={
+                  userId
+                    ? userFavGames?.some(
+                        (favGame) => favGame.gameName === game.name,
+                      )
+                    : false
+                }
               />
             ))}
           </Stack>
