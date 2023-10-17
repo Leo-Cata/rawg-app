@@ -14,20 +14,25 @@ const App = () => {
     userIdContext,
   ) as UserContextValues;
 
+  // will run on mount, checking and setting the uid
   useEffect(() => {
     checkIfLoggedIn(handleUserId);
   }, [handleUserId]);
-  console.log(userId);
+
   return (
     <div className="flex-grow bg-[#070703] px-4 py-10">
-      {!userId && <GoogleButton onClick={() => signInGoogle(handleUserId)} />}
-      <Button
-        onClick={() => signOutGoogle(handleUserId)}
-        className="text-white"
-        variant="outlined"
-      >
-        sign out
-      </Button>
+      {userId ? (
+        <Button
+          onClick={() => signOutGoogle(handleUserId)}
+          className="text-white"
+          variant="outlined"
+        >
+          sign out
+        </Button>
+      ) : (
+        <GoogleButton onClick={() => signInGoogle(handleUserId)} />
+      )}
+
       <Typography variant="body1" className="text-white">
         {userId}
       </Typography>

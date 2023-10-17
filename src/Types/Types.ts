@@ -54,12 +54,14 @@ export interface Requirements {
 export interface GameCardsProps {
   gameName: string;
   gameImage: string;
-  // mapKey: string;
   metacritic: number;
   availablePlatforms: Platforms[];
   releaseDate: string;
+  userId?: string | null;
+  isInFavorite?: boolean;
 }
 
+// available platforms to make an object for gameCardsProps
 export interface AvailablePlatformsObject {
   platformName: string;
 }
@@ -75,8 +77,11 @@ export interface HandleUserId {
 }
 
 // createContext type
-
 export interface UserContextValues {
   userId: string | null;
   handleUserId: HandleUserId;
 }
+
+// interface for the user's fav games omitting unnecessary stuff
+export interface UserFavGames
+  extends Omit<GameCardsProps, "userId" | "isInFavorite"> {}

@@ -60,12 +60,11 @@ export const db = getFirestore(app);
 //   console.error("Error fetching data:", error);
 // }
 
-const readData = async () => {
-  const snapshot = await getDoc(doc(db, "users/kTERpCkf0rFNTJcAECcM"));
+// reads saved games from {userId} and then returns them
+export const readData = async (userId: string) => {
+  const snapshot = await getDoc(doc(db, `users/${userId}`));
   if (snapshot.exists()) {
     const docReadData = snapshot.data();
-    console.log(`my data ${JSON.stringify(docReadData)}`);
+    return docReadData;
   }
 };
-
-readData();

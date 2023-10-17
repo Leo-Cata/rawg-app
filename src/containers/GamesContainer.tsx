@@ -1,13 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getGames } from "../services/RawgApi";
-import { GamesSearch } from "../Types/Types";
+import { GamesSearch, UserFavGames } from "../Types/Types";
 import GameCards from "../components/GameCards";
 import { Box, Stack } from "@mui/material";
+import { readData } from "../firebase/Database";
+import { userIdContext } from "../context/UserContext";
 
 const GamesContainer = () => {
   //save game data
   const [gameData, setGameData] = useState<GamesSearch>();
   const [numberOfGroups, setNumberOfGroups] = useState<number>(4);
+  // get userId context and fav games
+  const userId = useContext(userIdContext)?.userId;
+  const [userFavGames, setUserFavGames] = useState<
+    UserFavGames[] | undefined
+  >();
 
   //fetch all games by popularity
   useEffect(() => {
@@ -22,6 +29,20 @@ const GamesContainer = () => {
     fetchGames();
   }, []);
 
+  // useEffect to get the saved games
+  useEffect(() => {
+    const getFavoriteGames = async () => {
+      if (userId) {
+        try {
+          const resp = await readData(userId);
+          setUserFavGames(resp?.games);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    };
+    getFavoriteGames();
+  }, [userId]);
   // useEffect to set the windows width
   useEffect(() => {
     const handleResize = () => {
@@ -51,11 +72,17 @@ const GamesContainer = () => {
 
   // check if gameData is true then loop to create groups of data
   if (gameData) {
+    // loops numberOfGroups times
     for (let i = 0; i < numberOfGroups; i++) {
+      // initialize group array during each loop, allowing you have multiple groups in groupedData
       const group = [];
+
+      // loop that starts at index i, while j is less than the length of the result, then skip numberOfGroups amount of elements, this allows you to create groups like [0,3,6], [1,4,7] so it looks accordingly in the grid
       for (let j = i; j < gameData.results.length; j += numberOfGroups) {
+        // pushes the game with index j to the group
         group.push(gameData?.results[j]);
       }
+      // at the end, push the group into the groupedData array
       groupedData.push(group);
     }
   }
@@ -75,6 +102,10 @@ const GamesContainer = () => {
                 metacritic={game.metacritic}
                 availablePlatforms={game.parent_platforms}
                 releaseDate={game.released}
+                userId={userId}
+                isInFavorite={userFavGames?.some(
+                  (favGame) => favGame.gameName === game.name,
+                )}
               />
             ))}
           </Stack>

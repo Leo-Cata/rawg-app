@@ -8,10 +8,13 @@ import {
 import { db } from "./Database";
 import { GameCardsProps } from "../Types/Types";
 
-export const addAndRemoveGames = async (game: GameCardsProps) => {
+export const addAndRemoveGames = async (
+  game: GameCardsProps,
+  userId: string,
+) => {
   try {
     // get the reference for the data base for user
-    const userRef = doc(db, "users", "asfasf");
+    const userRef = doc(db, "users", userId);
 
     // get the document from userRef
     const userDoc = await getDoc(userRef);

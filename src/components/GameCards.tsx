@@ -44,23 +44,33 @@ const GameCards = ({
   metacritic,
   releaseDate,
   gameName,
+  userId,
+  isInFavorite,
 }: GameCardsProps) => {
   // useState to change favorite icon
-  const [isFavorite, setIsFavorite] = useState<boolean>(false);
+  const [isFavorite, setIsFavorite] = useState(isInFavorite);
 
   const addGames = (
     gameName: string,
     metacritic: number,
     releaseDate: string,
   ) => {
-    setIsFavorite((prev) => !prev);
-    addAndRemoveGames({
-      gameImage,
-      availablePlatforms,
-      metacritic,
-      releaseDate,
-      gameName,
-    });
+    if (userId) {
+      addAndRemoveGames(
+        {
+          gameImage,
+          availablePlatforms,
+          metacritic,
+          releaseDate,
+          gameName,
+        },
+        userId,
+      );
+      console.log("asd");
+      setIsFavorite((prev) => !prev);
+    } else {
+      return alert("not logged in");
+    }
   };
 
   // to show icon according to available platform
@@ -112,7 +122,6 @@ const GameCards = ({
           <Typography variant="h5" className="flex-grow font-semibold">
             {gameName}
           </Typography>
-          {/* <Typography variant="subtitle1">{metacritic}</Typography> */}
           <Tooltip
             title="Metacritic Score"
             placement="top"
@@ -137,6 +146,7 @@ const GameCards = ({
               dayMonthYearStringRearrange,
             )}
           </Typography>
+          {/* favorite button */}
           <IconButton
             aria-label="add to favorite"
             onClick={() => addGames(gameName, metacritic, releaseDate)}
