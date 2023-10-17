@@ -1,14 +1,5 @@
 import { app } from "./Firebase";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  setDoc,
-  setDoc,
-  doc,
-  getDoc,
-} from "firebase/firestore";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
 
 //initialize the database
 export const db = getFirestore(app);
@@ -25,20 +16,17 @@ export const db = getFirestore(app);
 //   console.log(error);
 // }
 
-// const setData = () => {
+// set data
+// export const setData = (gameName: string) => {
 //   const docData = {
-//     first: "matias",
-//     middle: "leo",
-//     last: "cata",
+//     first: { gameName },
 //   };
 //   setDoc(doc(db, "users/leo"), docData);
 // };
-// setData();
 
-// const setDataAsync = async () => {
+// export const setDataAsync = async (gameName: string) => {
 //   const docDataAsync = {
-//     first: "synced leo",
-//     last: "synced matias",
+//     name: { gameName },
 //   };
 //   try {
 //     await setDoc(doc(db, "users/leo"), docDataAsync, { merge: true });
@@ -72,12 +60,11 @@ export const db = getFirestore(app);
 //   console.error("Error fetching data:", error);
 // }
 
-const readData = async () => {
-  const snapshot = await getDoc(doc(db, "users/kTERpCkf0rFNTJcAECcM"));
+// reads saved games from {userId} and then returns them
+export const readData = async (userId: string) => {
+  const snapshot = await getDoc(doc(db, `users/${userId}`));
   if (snapshot.exists()) {
     const docReadData = snapshot.data();
-    console.log(`my data ${JSON.stringify(docReadData)}`);
+    return docReadData;
   }
 };
-
-readData();
