@@ -30,6 +30,7 @@ const App = () => {
     }
   }, [userId]);
 
+  
   return (
     <div className="flex-grow bg-[#070703] px-4 py-10">
       {userId ? (
