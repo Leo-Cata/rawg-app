@@ -4,9 +4,9 @@ import { Button, Typography } from "@mui/material";
 import { useContext, useEffect } from "react";
 import { userIdContext } from "./context/UserContext";
 import { UserContextValues } from "./Types/Types";
-import { signInGoogle } from "./firebase/SignInWithGoogle";
-import { checkIfLoggedIn } from "./firebase/CheckIfLoggedIn";
-import { signOutGoogle } from "./firebase/SignOutOfGoogle";
+import { signInGoogle } from "./Firebase/SignInWithGoogle";
+import { checkIfLoggedIn } from "./Firebase/CheckIfLoggedIn";
+import { signOutGoogle } from "./Firebase/SignOutOfGoogle";
 import { useState } from "react";
 
 const App = () => {

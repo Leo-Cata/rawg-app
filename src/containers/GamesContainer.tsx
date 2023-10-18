@@ -3,7 +3,7 @@ import { getGames } from "../services/RawgApi";
 import { GamesSearch, UserFavGames } from "../Types/Types";
 import GameCards from "../components/GameCards";
 import { Box, Stack } from "@mui/material";
-import { readData } from "../firebase/Database";
+import { readData } from "../Firebase/Database";
 import { userIdContext } from "../context/UserContext";
 
 const GamesContainer = () => {

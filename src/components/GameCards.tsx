@@ -36,7 +36,7 @@ import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 //zoom effect for tooltip
 import Zoom from "@mui/material/Zoom";
-import { addAndRemoveGames } from "../firebase/AddAndRemoveGames";
+import { addAndRemoveGames } from "../Firebase/AddAndRemoveGames";
 
 const GameCards = ({
   gameImage,
