@@ -1,5 +1,5 @@
 import { signOut } from "firebase/auth";
-import { auth } from "./Firebase";
+import { auth } from "./FirebaseDatabase";
 import { HandleUserId } from "../Types/Types";
 
 // function to sign out of google, gets a function to ser the user id to null

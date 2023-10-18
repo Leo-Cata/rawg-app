@@ -9,54 +9,34 @@ import { userIdContext } from "../context/UserContext";
 const GamesContainer = () => {
   //save game data
   const [gameData, setGameData] = useState<GamesSearch>();
+
+  // state for when the windows width changes
   const [numberOfGroups, setNumberOfGroups] = useState<number>(4);
+
   // get userId context and fav games
   const userId = useContext(userIdContext)?.userId;
   const [userFavGames, setUserFavGames] = useState<
     UserFavGames[] | undefined
   >();
 
-  //fetch all games by popularity
+  //fetch all games by popularity and if the userId exists, get fav games
   useEffect(() => {
-    // gets favorite games if the user is logged in
-    const getFavoriteGames = async () => {
-      if (userId) {
-        try {
-          const resp = await readData(userId);
-          setUserFavGames(resp?.games);
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    };
-    getFavoriteGames();
-
-    // then fetch the list of games from rawg
     const fetchGames = async () => {
       try {
+        if (userId) {
+          const firestoreData = await readData(userId);
+          setUserFavGames(firestoreData?.games);
+        }
         const resp = await getGames({ page_size: 40 });
         setGameData(resp.data);
       } catch (error) {
         console.log(error);
       }
     };
+
     fetchGames();
   }, [userId]);
 
-  // useEffect to get the saved games
-  // useEffect(() => {
-  //   const getFavoriteGames = async () => {
-  //     if (userId) {
-  //       try {
-  //         const resp = await readData(userId);
-  //         setUserFavGames(resp?.games);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     }
-  //   };
-  //   getFavoriteGames();
-  // }, [userId]);
   // useEffect to set the windows width
   useEffect(() => {
     const handleResize = () => {
