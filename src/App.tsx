@@ -7,28 +7,16 @@ import { UserContextValues } from "./Types/Types";
 import { signInGoogle } from "./firebase/SignInWithGoogle";
 import { checkIfLoggedIn } from "./firebase/CheckIfLoggedIn";
 import { signOutGoogle } from "./firebase/SignOutOfGoogle";
-import { useState } from "react";
-
 const App = () => {
   // get the values and assert the type to use UserContextValues
   const { userId, handleUserId } = useContext(
     userIdContext,
   ) as UserContextValues;
 
-  // State to manage GameContainer key
-  const [gamesContainerKey, setGamesContainerKey] = useState(Date.now());
-
   // will run on mount, checking and setting the uid
   useEffect(() => {
     checkIfLoggedIn(handleUserId);
   }, [handleUserId]);
-
-  useEffect(() => {
-    //set new key for GamesContainer, making it reload
-    if (userId) {
-      setGamesContainerKey(Date.now());
-    }
-  }, [userId]);
 
   return (
     <div className="flex-grow bg-[#070703] px-4 py-10">
@@ -47,7 +35,7 @@ const App = () => {
       <Typography variant="body1" className="text-white">
         {userId}
       </Typography>
-      <GamesContainer key={gamesContainerKey} />
+      <GamesContainer />
     </div>
   );
 };
