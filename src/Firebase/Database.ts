@@ -1,4 +1,4 @@
-import { app } from "./FirebaseDatabase";
+import { app } from "./Firebase";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 
 //initialize the database

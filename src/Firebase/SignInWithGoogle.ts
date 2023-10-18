@@ -1,5 +1,5 @@
 import { signInWithPopup } from "firebase/auth";
-import { auth, provider } from "./FirebaseDatabase";
+import { auth, provider } from "./Firebase";
 import { HandleUserId } from "../Types/Types";
 
 // function to sign in with google, gets a function which will set the userId
