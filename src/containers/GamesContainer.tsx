@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { getGames } from "../services/RawgApi";
 import { GamesSearch, UserFavGames } from "../Types/Types";
-import GameCards from "../components/GameCards";
+import GameCards from "../components/GameCards/GameCards";
 import { Box, Stack } from "@mui/material";
 import { readData } from "../Firebase/Database";
 import { userIdContext } from "../context/UserContext";
