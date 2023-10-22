@@ -1,7 +1,7 @@
 // /games search parameters
 export interface GamesSearchOptions {
   page?: string;
-  search?: string;
+  search?: string | undefined;
   patforms?: number;
   genres?: string;
   tags?: string;
@@ -85,3 +85,8 @@ export interface UserContextValues {
 // interface for the user's fav games omitting unnecessary stuff
 export interface UserFavGames
   extends Omit<GameCardsProps, "userId" | "isInFavorite"> {}
+
+// Search setter type
+export interface SetSearch {
+  setSearch: (value: string) => void;
+}

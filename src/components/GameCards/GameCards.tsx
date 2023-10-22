@@ -64,7 +64,7 @@ const GameCards = ({
 
         <Stack direction={"row"} alignItems={"center"}>
           {/* release date */}
-          <CardsReleaseDate releaseDate={releaseDate} />
+          {releaseDate && <CardsReleaseDate releaseDate={releaseDate} />}
 
           {/* add to favorite */}
           <IconButton

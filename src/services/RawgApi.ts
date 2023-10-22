@@ -10,6 +10,7 @@ const api = axios.create({
 
 //fetch from /games with optional paging
 export const getGames = (options: GamesSearchOptions = {}) => {
+  console.log(options);
   return api.get(`/games`, {
     params: options,
   });
