@@ -4,7 +4,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        "custom-background": "#070703",
+        "custom-background": "#070708",
+        "custom-cards": "#252725",
       },
     },
   },

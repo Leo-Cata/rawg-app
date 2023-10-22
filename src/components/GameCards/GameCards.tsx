@@ -51,9 +51,9 @@ const GameCards = ({
     }
   };
   return (
-    <Card className="rounded-2xl bg-[#181818] transition-all hover:scale-105 hover:cursor-pointer">
+    <Card className="bg-custom-cards rounded-2xl transition-all hover:scale-105 hover:cursor-pointer">
       {/* images */}
-      <CardsMedia gameImage={gameImage} />
+      <CardsMedia gameImage={gameImage} gameName={gameName} />
 
       <CardContent className="w-full text-white group-hover:pb-0">
         {/* icons */}
@@ -64,7 +64,7 @@ const GameCards = ({
 
         <Stack direction={"row"} alignItems={"center"}>
           {/* release date */}
-          {releaseDate && <CardsReleaseDate releaseDate={releaseDate} />}
+          <CardsReleaseDate releaseDate={releaseDate} />
 
           {/* add to favorite */}
           <IconButton

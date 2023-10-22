@@ -6,12 +6,12 @@ const CardsReleaseDate = ({ releaseDate }: { releaseDate: string }) => {
   const dayMonthYearStringRearrange = "$3/$2/$1";
 
   return (
-    <>
-      <Typography variant="subtitle1" className="flex-grow">
-        Release Date:{" "}
-        {releaseDate.replace(dayMonthYearRegex, dayMonthYearStringRearrange)}
-      </Typography>
-    </>
+    <Typography variant="subtitle1" className="flex-grow">
+      Release Date:{" "}
+      {releaseDate
+        ? releaseDate.replace(dayMonthYearRegex, dayMonthYearStringRearrange)
+        : "Unannounced"}
+    </Typography>
   );
 };
 
