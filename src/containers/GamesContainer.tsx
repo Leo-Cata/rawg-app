@@ -2,11 +2,15 @@ import { useContext, useEffect, useState } from "react";
 import { getGames } from "../services/RawgApi";
 import { GamesSearch, UserFavGames } from "../Types/Types";
 import GameCards from "../components/GameCards/GameCards";
-import { Box, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { readData } from "../Firebase/Database";
 import { userIdContext } from "../context/UserContext";
+import SearchBar from "../components/SearchBar";
 
 const GamesContainer = () => {
+  // state to search for a game
+  const [search, setSearch] = useState<string>("");
+
   //save game data
   const [gameData, setGameData] = useState<GamesSearch>();
 
@@ -27,7 +31,10 @@ const GamesContainer = () => {
           const firestoreData = await readData(userId);
           setUserFavGames(firestoreData?.games);
         }
-        const resp = await getGames({ page_size: 40 });
+        const resp = await getGames({
+          page_size: 40,
+          search,
+        });
         setGameData(resp.data);
       } catch (error) {
         console.log(error);
@@ -35,7 +42,7 @@ const GamesContainer = () => {
     };
 
     fetchGames();
-  }, [userId]);
+  }, [userId, search]);
 
   // useEffect to set the windows width
   useEffect(() => {
@@ -80,35 +87,40 @@ const GamesContainer = () => {
       groupedData.push(group);
     }
   }
-
+  console.log(gameData);
+  console.log(search);
   return (
-    <Box
-      className={`grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4`}
-    >
-      {groupedData &&
-        groupedData.map((group, index) => (
-          <Stack key={group[index].slug} className="space-y-4">
-            {group.map((game) => (
-              <GameCards
-                gameName={game.name}
-                gameImage={game.background_image}
-                key={game.slug}
-                metacritic={game.metacritic}
-                availablePlatforms={game.parent_platforms}
-                releaseDate={game.released}
-                userId={userId}
-                isInFavorite={
-                  userId
-                    ? userFavGames?.some(
-                        (favGame) => favGame.gameName === game.name,
-                      )
-                    : false
-                }
-              />
-            ))}
-          </Stack>
-        ))}
-    </Box>
+    <Stack spacing={2}>
+      <SearchBar setSearch={setSearch} />
+      <Stack
+        className={`grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4`}
+      >
+        {groupedData &&
+          groupedData.map((group, index) => (
+            <Stack key={group[index].slug} className="space-y-4">
+              {group.map((game) => (
+                <GameCards
+                  gameName={game.name}
+                  gameImage={game.background_image}
+                  key={game.slug}
+                  metacritic={game.metacritic}
+                  availablePlatforms={game.parent_platforms}
+                  releaseDate={game.released}
+                  userId={userId}
+                  // if there is user id, check if the array has a matching name
+                  isInFavorite={
+                    userId
+                      ? userFavGames?.some(
+                          (favGame) => favGame.gameName === game.name,
+                        )
+                      : false
+                  }
+                />
+              ))}
+            </Stack>
+          ))}
+      </Stack>
+    </Stack>
   );
 };
 

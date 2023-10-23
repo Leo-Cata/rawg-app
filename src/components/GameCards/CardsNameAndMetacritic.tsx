@@ -13,20 +13,22 @@ const CardsNameAndMetacritic = ({
       <Typography variant="h5" className="flex-grow font-semibold">
         {gameName}
       </Typography>
-      <Tooltip
-        title="Metacritic Score"
-        placement="top"
-        TransitionComponent={Zoom}
-        arrow
-      >
-        <Chip
-          label={metacritic}
-          color="success"
-          variant="outlined"
-          size="small"
-          className="bg=[#388e3c]/10 cursor-default font-semibold"
-        />
-      </Tooltip>
+      {metacritic && (
+        <Tooltip
+          title="Metacritic Score"
+          placement="top"
+          TransitionComponent={Zoom}
+          arrow
+        >
+          <Chip
+            label={metacritic}
+            color="success"
+            variant="outlined"
+            size="small"
+            className="bg=[#388e3c]/10 cursor-default font-semibold"
+          />
+        </Tooltip>
+      )}
     </Stack>
   );
 };

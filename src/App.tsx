@@ -30,9 +30,8 @@ const App = () => {
     }
   }, [userId]);
 
-  
   return (
-    <div className="flex-grow bg-[#070703] px-4 py-10">
+    <div className="flex-grow  bg-custom-background  px-4 py-10 text-white">
       {userId ? (
         <Button
           onClick={() => signOutGoogle(handleUserId)}
@@ -45,9 +44,7 @@ const App = () => {
         <GoogleButton onClick={() => signInGoogle(handleUserId)} />
       )}
 
-      <Typography variant="body1" className="text-white">
-        {userId}
-      </Typography>
+      <Typography variant="body1">{userId}</Typography>
       <GamesContainer key={gamesContainerKey} />
     </div>
   );
