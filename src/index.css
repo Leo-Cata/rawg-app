@@ -11,6 +11,7 @@
 }
 
 /* border color for filled input */
-/* .css-zs07ro-MuiInputBase-root-MuiFilledInput-root::after {
+/* 
+.MuiInputBase-root::after {
   border-bottom: 10px solid purple;
 } */
