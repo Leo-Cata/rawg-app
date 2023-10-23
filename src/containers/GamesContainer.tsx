@@ -87,8 +87,7 @@ const GamesContainer = () => {
       groupedData.push(group);
     }
   }
-  console.log(gameData);
-  console.log(search);
+
   return (
     <Stack spacing={2}>
       <SearchBar setSearch={setSearch} />

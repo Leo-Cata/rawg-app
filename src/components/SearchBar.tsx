@@ -15,24 +15,28 @@ const SearchBar = ({ setSearch }: SetSearch) => {
     // if its a change event, setSearchString to the value, else if its a submit setSearch
     if (event.type === "change") {
       setSearchString(event.target.value);
-    } else if (event.type === "submit") {
+    } else if (event.type === "submit" || event.type === "click") {
       setSearch(searchString);
     }
   };
 
   return (
     <TextField
-      component="form"
       onChange={handleChange}
       onSubmit={handleChange}
       value={searchString}
       placeholder="Search For A Game"
       variant="filled"
-      className="bg-custom-cards h-full w-full focus:border-red-300"
+      className="bg-custom-cards"
       InputProps={{
         endAdornment: (
-          <InputAdornment position="end">
-            <SearchIcon className="text-white" />
+          <InputAdornment
+            position="end"
+            onClick={() => setSearch(searchString)}
+            onTouchEnd={() => setSearch(searchString)}
+            className="cursor-pointer text-white"
+          >
+            <SearchIcon />
           </InputAdornment>
         ),
       }}
