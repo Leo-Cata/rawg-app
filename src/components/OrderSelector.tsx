@@ -5,6 +5,7 @@ import {
   SelectChangeEvent,
   MenuItem,
 } from "@mui/material";
+// import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
 const OrderSelector = ({
   setOrdering,
@@ -15,17 +16,22 @@ const OrderSelector = ({
 }) => {
   // change ordering state
   const handleChange = (event: SelectChangeEvent) => {
+    console.log("asd");
     setOrdering(event.target.value);
   };
 
-  // if pressing on the same element, add - to reverse the order
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    // tells typescript to take this as an HTML li Element
-    const target = event.target as HTMLLIElement;
-    if (ordering === target.innerText) {
-      setOrdering(`-${ordering}`);
-    }
-  };
+  // // if pressing on the same element, add - to reverse the order
+  // const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  //   console.log("dsa");
+  //   // tells typescript to take this as an HTML li Element
+  //   const target = event.target as HTMLLIElement;
+
+  //   if (ordering === target.innerText) {
+  //     setOrdering(`-${ordering}`);
+  //   } else {
+  //     setOrdering(target.innerText);
+  //   }
+  // };
 
   return (
     <FormControl className="max-w-[15rem] bg-custom-cards">
@@ -41,17 +47,25 @@ const OrderSelector = ({
         id="orderingSelector"
         value={ordering}
         onChange={handleChange}
-        className="capitalize"
-        onClick={handleClick}
+        className="capitalize transition-transform"
+        // onClick={handleClick}
+        // startAdornment={
+        //   <ArrowUpwardIcon
+        //     className={`${
+        //       ordering.includes("-") ? "rotate-180 " : " "
+        //     } transition-transform duration-300`}
+        //     fontSize="small"
+        //   />
+        // }
       >
-        <MenuItem value="relevance">relevance</MenuItem>
-        <MenuItem value="name">name</MenuItem>
-        <MenuItem value="released">released</MenuItem>
-        <MenuItem value="added">added</MenuItem>
-        <MenuItem value="created">created</MenuItem>
-        <MenuItem value="updated">updated</MenuItem>
-        <MenuItem value="rating">rating</MenuItem>
-        <MenuItem value="-metacritic">metacritic</MenuItem>
+        <MenuItem value="relevance">Relevance</MenuItem>
+        <MenuItem value="name">Name</MenuItem>
+        <MenuItem value="-released">New</MenuItem>
+        {/* <MenuItem value="-added">Added</MenuItem> */}
+        {/* <MenuItem value="created">Created</MenuItem> */}
+        {/* <MenuItem value="-updated">Updated</MenuItem> */}
+        {/* <MenuItem value="-rating">Rating</MenuItem> */}
+        <MenuItem value="-metacritic">Metacritic</MenuItem>
       </Select>
     </FormControl>
   );
