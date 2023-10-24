@@ -7,13 +7,17 @@ import { readData } from "../Firebase/Database";
 import { userIdContext } from "../context/UserContext";
 import SearchBar from "../components/SearchBar";
 import OrderSelector from "../components/OrderSelector";
+import CustomPagination from "../components/CustomPagination";
 
 const GamesContainer = () => {
-  // state to save and set ordering
-  const [ordering, setOrdering] = useState("relevance");
+  // set page number
+  const [pageNumber, setPageNumber] = useState<number>(1);
+
+  // state to save and set gamesOrdering
+  const [gamesOrdering, setGamesOrdering] = useState("relevance");
 
   // state to search for a game
-  const [search, setSearch] = useState<string>("");
+  const [gameSearchString, setGameSearchString] = useState<string>("");
 
   //save game data
   const [gameData, setGameData] = useState<GamesSearch>();
@@ -37,8 +41,9 @@ const GamesContainer = () => {
         }
         const resp = await getGames({
           page_size: 40,
-          search,
-          ordering,
+          search: gameSearchString,
+          ordering: gamesOrdering,
+          page: pageNumber,
         });
         setGameData(resp.data);
       } catch (error) {
@@ -47,8 +52,7 @@ const GamesContainer = () => {
     };
 
     fetchGames();
-  }, [userId, search, ordering]);
-
+  }, [userId, gameSearchString, gamesOrdering, pageNumber]);
   // useEffect to set the windows width
   useEffect(() => {
     const handleResize = () => {
@@ -75,7 +79,6 @@ const GamesContainer = () => {
 
   // Initialize an array to store the grouped data
   const groupedData = [];
-
   // check if gameData is true then loop to create groups of data
   if (gameData) {
     // loops numberOfGroups times
@@ -95,14 +98,20 @@ const GamesContainer = () => {
 
   return (
     <Stack spacing={2}>
-      <SearchBar setSearch={setSearch} />
-      <OrderSelector setOrdering={setOrdering} ordering={ordering} />
+      <SearchBar setGameSearchString={setGameSearchString} />
+      <OrderSelector
+        setGamesOrdering={setGamesOrdering}
+        gamesOrdering={gamesOrdering}
+      />
       <Stack
         className={`grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4`}
       >
         {groupedData &&
           groupedData.map((group, index) => (
-            <Stack key={group[index].slug} className="space-y-4">
+            <Stack
+              key={group[index]?.slug || `group_${index}`}
+              className="space-y-4"
+            >
               {group.map((game) => (
                 <GameCards
                   gameName={game.name}
@@ -125,6 +134,10 @@ const GamesContainer = () => {
             </Stack>
           ))}
       </Stack>
+      <CustomPagination
+        setPageNumber={setPageNumber}
+        searchCount={gameData?.count}
+      />
     </Stack>
   );
 };

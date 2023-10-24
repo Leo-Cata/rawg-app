@@ -1,8 +1,8 @@
 // /games search parameters
 export interface GamesSearchOptions {
-  page?: string;
+  page?: number;
   search?: string | undefined;
-  patforms?: number;
+  platforms?: number;
   genres?: string;
   tags?: string;
   dates?: string;
@@ -88,5 +88,5 @@ export interface UserFavGames
 
 // Search setter type
 export interface SetSearch {
-  setSearch: (value: string) => void;
+  setGameSearchString: (value: string) => void;
 }

@@ -5,18 +5,17 @@ import {
   SelectChangeEvent,
   MenuItem,
 } from "@mui/material";
-// import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
 const OrderSelector = ({
-  setOrdering,
-  ordering,
+  setGamesOrdering,
+  gamesOrdering,
 }: {
-  setOrdering: (value: string) => void;
-  ordering: string;
+  setGamesOrdering: (value: string) => void;
+  gamesOrdering: string;
 }) => {
   // change ordering state
   const handleChange = (event: SelectChangeEvent) => {
-    setOrdering(event.target.value);
+    setGamesOrdering(event.target.value);
   };
 
   return (
@@ -31,7 +30,7 @@ const OrderSelector = ({
         label="order"
         labelId="ordering-selector-label"
         id="orderingSelector"
-        value={ordering}
+        value={gamesOrdering}
         onChange={handleChange}
         className="capitalize transition-transform"
       >

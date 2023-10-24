@@ -31,7 +31,7 @@ const App = () => {
   }, [userId]);
 
   return (
-    <div className="flex-grow  bg-custom-background  px-4 py-10 text-white">
+    <div className="flex-grow  bg-custom-background px-4 py-10 text-white">
       {userId ? (
         <Button
           onClick={() => signOutGoogle(handleUserId)}
