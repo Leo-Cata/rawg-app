@@ -9,7 +9,7 @@ const CustomPagination = ({
 }) => {
   let numberOfPages;
   if (searchCount) {
-    numberOfPages = Math.ceil(searchCount / 40);
+    numberOfPages = Math.ceil(searchCount / 32);
   }
 
   // gets window width
@@ -24,7 +24,7 @@ const CustomPagination = ({
   };
   return (
     <>
-      {numberOfPages && (
+      {numberOfPages && numberOfPages > 1 && (
         <Pagination
           count={numberOfPages}
           variant="outlined"

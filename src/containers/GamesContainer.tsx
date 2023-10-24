@@ -40,7 +40,7 @@ const GamesContainer = () => {
           setUserFavGames(firestoreData?.games);
         }
         const resp = await getGames({
-          page_size: 40,
+          page_size: 32,
           search: gameSearchString,
           ordering: gamesOrdering,
           page: pageNumber,
