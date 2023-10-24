@@ -6,8 +6,12 @@ import { Stack } from "@mui/material";
 import { readData } from "../Firebase/Database";
 import { userIdContext } from "../context/UserContext";
 import SearchBar from "../components/SearchBar";
+import OrderSelector from "../components/OrderSelector";
 
 const GamesContainer = () => {
+  // state to save and set ordering
+  const [ordering, setOrdering] = useState("relevance");
+
   // state to search for a game
   const [search, setSearch] = useState<string>("");
 
@@ -34,6 +38,7 @@ const GamesContainer = () => {
         const resp = await getGames({
           page_size: 40,
           search,
+          ordering,
         });
         setGameData(resp.data);
       } catch (error) {
@@ -42,7 +47,7 @@ const GamesContainer = () => {
     };
 
     fetchGames();
-  }, [userId, search]);
+  }, [userId, search, ordering]);
 
   // useEffect to set the windows width
   useEffect(() => {
@@ -91,6 +96,7 @@ const GamesContainer = () => {
   return (
     <Stack spacing={2}>
       <SearchBar setSearch={setSearch} />
+      <OrderSelector setOrdering={setOrdering} ordering={ordering} />
       <Stack
         className={`grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4`}
       >
