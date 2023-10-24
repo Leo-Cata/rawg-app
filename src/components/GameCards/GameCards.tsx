@@ -2,7 +2,15 @@
 import { useState } from "react";
 
 // material components
-import { Card, CardContent, Stack, IconButton } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Stack,
+  IconButton,
+  Snackbar,
+  Alert,
+  AlertColor,
+} from "@mui/material";
 
 // types
 import { GameCardsProps } from "../../Types/Types";
@@ -32,55 +40,106 @@ const GameCards = ({
   // useState to change favorite icon
   const [isFavorite, setIsFavorite] = useState(isInFavorite);
 
+  // snackbar opener/closer
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+
+  // snackbar message setter
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
+  //alert severity aka color setter
+  const [severity, setSeverity] = useState<AlertColor>("success");
+
   // function to add important game data to favorites and show visual feedback for favorite games
-  const addGames = () => {
+  const addGames = async () => {
     if (userId) {
-      addAndRemoveGames(
-        {
-          gameImage,
-          availablePlatforms,
-          metacritic,
-          releaseDate,
-          gameName,
-        },
-        userId,
-      );
-      setIsFavorite((prev) => !prev);
+      try {
+        await addAndRemoveGames(
+          {
+            gameImage,
+            availablePlatforms,
+            metacritic,
+            releaseDate,
+            gameName,
+          },
+          userId,
+        );
+        // changes the icon
+        setIsFavorite((prev) => !prev);
+
+        // sets the message
+        setSnackbarMessage(`${gameName} has been saved`);
+
+        // opens the snackbar
+        setIsSnackbarOpen(true);
+      } catch (error) {
+        console.log(error);
+
+        // sets severity aka color
+        setSeverity("error");
+
+        // sets the message
+        setSnackbarMessage("Theres been an error");
+        // opens the snackbar
+        setIsSnackbarOpen(true);
+      }
     } else {
-      return alert("not logged in");
+      // sets severity aka color
+      setSeverity("info");
+
+      // sets the message
+      setSnackbarMessage("You aren't logged in");
+
+      // opens the snackbar
+      setIsSnackbarOpen(true);
     }
   };
+
   return (
-    <Card className="bg-custom-cards rounded-2xl transition-all hover:scale-105 hover:cursor-pointer">
-      {/* images */}
-      <CardsMedia gameImage={gameImage} gameName={gameName} />
+    <>
+      <Card className="rounded-2xl bg-custom-cards transition-all hover:scale-105 hover:cursor-pointer">
+        {/* images */}
+        <CardsMedia gameImage={gameImage} gameName={gameName} />
 
-      <CardContent className="w-full text-white group-hover:pb-0">
-        {/* icons */}
-        <CardsPlatforms availablePlatforms={availablePlatforms} />
+        <CardContent className="w-full text-white group-hover:pb-0">
+          {/* icons */}
+          <CardsPlatforms availablePlatforms={availablePlatforms} />
 
-        {/* game name and metacritic */}
-        <CardsNameAndMetacritic gameName={gameName} metacritic={metacritic} />
+          {/* game name and metacritic */}
+          <CardsNameAndMetacritic gameName={gameName} metacritic={metacritic} />
 
-        <Stack direction={"row"} alignItems={"center"}>
-          {/* release date */}
-          <CardsReleaseDate releaseDate={releaseDate} />
+          <Stack direction={"row"} alignItems={"center"}>
+            {/* release date */}
+            <CardsReleaseDate releaseDate={releaseDate} />
 
-          {/* add to favorite */}
-          <IconButton
-            aria-label="add to favorite"
-            className="p-0 pr-[3px]"
-            onClick={() => addGames()}
-          >
-            {isFavorite ? (
-              <StarRoundedIcon className="text-yellow-500" />
-            ) : (
-              <StarBorderRoundedIcon className="text-yellow-500" />
-            )}
-          </IconButton>
-        </Stack>
-      </CardContent>
-    </Card>
+            {/* add to favorite */}
+            <IconButton
+              aria-label="add to favorite"
+              className="p-0 pr-[3px]"
+              onClick={() => addGames()}
+            >
+              {isFavorite ? (
+                <StarRoundedIcon className="text-yellow-500" />
+              ) : (
+                <StarBorderRoundedIcon className="text-yellow-500" />
+              )}
+            </IconButton>
+          </Stack>
+        </CardContent>
+      </Card>
+
+      {/* snackbar */}
+      <Snackbar
+        open={isSnackbarOpen}
+        autoHideDuration={3000}
+        onClick={() => setIsSnackbarOpen(false)}
+        onClose={() => setIsSnackbarOpen(false)}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+      >
+        <Alert severity={severity} variant="filled">
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+    </>
   );
 };
 

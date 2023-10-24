@@ -15,13 +15,14 @@ const SearchBar = ({ setSearch }: SetSearch) => {
     // if its a change event, setSearchString to the value, else if its a submit setSearch
     if (event.type === "change") {
       setSearchString(event.target.value);
-    } else if (event.type === "submit" || event.type === "click") {
+    } else if (event.type === "submit") {
       setSearch(searchString);
     }
   };
 
   return (
     <TextField
+      component={"form"}
       onChange={handleChange}
       onSubmit={handleChange}
       value={searchString}
