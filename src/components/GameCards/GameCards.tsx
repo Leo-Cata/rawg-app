@@ -96,7 +96,7 @@ const GameCards = ({
 
   return (
     <>
-      <Card className="rounded-2xl bg-custom-cards transition-all hover:scale-105 hover:cursor-pointer">
+      <Card className="rounded-2xl transition-all hover:scale-105 hover:cursor-pointer">
         {/* images */}
         <CardsMedia gameImage={gameImage} gameName={gameName} />
 

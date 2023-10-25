@@ -19,11 +19,8 @@ const OrderSelector = ({
   };
 
   return (
-    <FormControl className="max-w-[15rem] bg-custom-cards">
-      <InputLabel
-        id="ordering-selector-label"
-        className="capitalize text-white"
-      >
+    <FormControl className="max-w-[15rem]">
+      <InputLabel id="ordering-selector-label" className="capitalize">
         Order
       </InputLabel>
       <Select
@@ -32,7 +29,7 @@ const OrderSelector = ({
         id="orderingSelector"
         value={gamesOrdering}
         onChange={handleChange}
-        className="capitalize transition-transform"
+        className="capitalize"
       >
         <MenuItem value="relevance">Relevance</MenuItem>
         <MenuItem value="name">Name</MenuItem>

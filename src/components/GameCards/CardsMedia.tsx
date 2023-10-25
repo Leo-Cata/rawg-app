@@ -9,7 +9,7 @@ const CardsMedia = ({
 }) => {
   return (
     <CardMedia
-      className="flex max-h-[18rem] min-h-[12rem] text-white"
+      className="flex max-h-[18rem] min-h-[12rem]"
       component="img"
       image={gameImage}
       loading="lazy"
