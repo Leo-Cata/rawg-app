@@ -29,7 +29,7 @@ const OrderSelector = ({
         id="orderingSelector"
         value={gamesOrdering}
         onChange={handleChange}
-        className="capitalize transition-transform"
+        className="capitalize"
       >
         <MenuItem value="relevance">Relevance</MenuItem>
         <MenuItem value="name">Name</MenuItem>

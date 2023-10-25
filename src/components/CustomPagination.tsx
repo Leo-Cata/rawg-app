@@ -29,6 +29,7 @@ const CustomPagination = ({
           count={numberOfPages}
           variant="outlined"
           shape="rounded"
+          color="primary"
           className="flex w-full justify-center"
           onChange={(_, page) => {
             setPageNumber(page);

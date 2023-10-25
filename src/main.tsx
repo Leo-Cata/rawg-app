@@ -6,6 +6,7 @@ import { CssBaseline } from "@mui/material";
 import {
   StyledEngineProvider,
   ThemeProvider,
+  alpha,
   createTheme,
 } from "@mui/material/styles";
 import UserProvider from "./context/UserProvider.tsx";
@@ -13,6 +14,15 @@ import UserProvider from "./context/UserProvider.tsx";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
+    primary: {
+      main: "#512B81",
+    },
+    secondary: {
+      main: "#7d2b81",
+    },
+    action: {
+      hover: alpha("#512B81", 0.3),
+    },
   },
 });
 
