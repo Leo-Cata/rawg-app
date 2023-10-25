@@ -28,7 +28,7 @@ const SearchBar = ({ setGameSearchString }: SetSearch) => {
       value={searchString}
       placeholder="Search For A Game"
       variant="filled"
-      className="bg-custom-cards"
+      className="my-4 flex-grow sm:my-0 sm:max-w-[50rem]"
       InputProps={{
         endAdornment: (
           <InputAdornment

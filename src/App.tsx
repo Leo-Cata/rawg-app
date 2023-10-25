@@ -8,6 +8,7 @@ import { signInGoogle } from "./Firebase/SignInWithGoogle";
 import { checkIfLoggedIn } from "./Firebase/CheckIfLoggedIn";
 import { signOutGoogle } from "./Firebase/SignOutOfGoogle";
 import { useState } from "react";
+import { Stack } from "@mui/material";
 
 const App = () => {
   // get the values and assert the type to use UserContextValues
@@ -31,7 +32,7 @@ const App = () => {
   }, [userId]);
 
   return (
-    <div className="h-full flex-grow px-4 py-10 text-white">
+    <Stack paddingX={2}>
       {userId ? (
         <Button
           onClick={() => signOutGoogle(handleUserId)}
@@ -46,7 +47,7 @@ const App = () => {
 
       <Typography variant="body1">{userId}</Typography>
       <GamesContainer key={gamesContainerKey} />
-    </div>
+    </Stack>
   );
 };
 

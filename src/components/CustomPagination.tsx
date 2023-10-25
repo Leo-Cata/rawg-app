@@ -30,7 +30,7 @@ const CustomPagination = ({
           variant="outlined"
           shape="rounded"
           color="primary"
-          className="flex w-full justify-center"
+          className="flex w-full justify-center pb-4"
           onChange={(_, page) => {
             setPageNumber(page);
             scrollToTop();
