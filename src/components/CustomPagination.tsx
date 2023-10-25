@@ -28,7 +28,8 @@ const CustomPagination = ({
         <Pagination
           count={numberOfPages}
           variant="outlined"
-          className="flex w-full justify-center [&_button]:border-white [&_button]:font-bold [&_button]:text-white [&_div]:text-white"
+          shape="rounded"
+          className="flex w-full justify-center"
           onChange={(_, page) => {
             setPageNumber(page);
             scrollToTop();

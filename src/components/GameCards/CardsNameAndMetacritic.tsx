@@ -25,7 +25,7 @@ const CardsNameAndMetacritic = ({
             color="success"
             variant="outlined"
             size="small"
-            className="bg=[#388e3c]/10 cursor-default font-semibold"
+            className="cursor-default font-semibold"
           />
         </Tooltip>
       )}
