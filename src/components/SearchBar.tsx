@@ -3,7 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { ChangeEvent, useState } from "react";
 import { SetSearch } from "../Types/Types";
 
-const SearchBar = ({ setSearch }: SetSearch) => {
+const SearchBar = ({ setGameSearchString }: SetSearch) => {
   // searchString for displaying the value and setting setSearch
   const [searchString, setSearchString] = useState<string>("");
 
@@ -16,7 +16,7 @@ const SearchBar = ({ setSearch }: SetSearch) => {
     if (event.type === "change") {
       setSearchString(event.target.value);
     } else if (event.type === "submit") {
-      setSearch(searchString);
+      setGameSearchString(searchString);
     }
   };
 
@@ -33,8 +33,8 @@ const SearchBar = ({ setSearch }: SetSearch) => {
         endAdornment: (
           <InputAdornment
             position="end"
-            onClick={() => setSearch(searchString)}
-            onTouchEnd={() => setSearch(searchString)}
+            onClick={() => setGameSearchString(searchString)}
+            onTouchEnd={() => setGameSearchString(searchString)}
             className="cursor-pointer text-white"
           >
             <SearchIcon />

@@ -7,24 +7,15 @@ import {
 } from "@mui/material";
 
 const OrderSelector = ({
-  setOrdering,
-  ordering,
+  setGamesOrdering,
+  gamesOrdering,
 }: {
-  setOrdering: (value: string) => void;
-  ordering: string;
+  setGamesOrdering: (value: string) => void;
+  gamesOrdering: string;
 }) => {
   // change ordering state
   const handleChange = (event: SelectChangeEvent) => {
-    setOrdering(event.target.value);
-  };
-
-  // if pressing on the same element, add - to reverse the order
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    // tells typescript to take this as an HTML li Element
-    const target = event.target as HTMLLIElement;
-    if (ordering === target.innerText) {
-      setOrdering(`-${ordering}`);
-    }
+    setGamesOrdering(event.target.value);
   };
 
   return (
@@ -39,19 +30,14 @@ const OrderSelector = ({
         label="order"
         labelId="ordering-selector-label"
         id="orderingSelector"
-        value={ordering}
+        value={gamesOrdering}
         onChange={handleChange}
-        className="capitalize"
-        onClick={handleClick}
+        className="capitalize transition-transform"
       >
-        <MenuItem value="relevance">relevance</MenuItem>
-        <MenuItem value="name">name</MenuItem>
-        <MenuItem value="released">released</MenuItem>
-        <MenuItem value="added">added</MenuItem>
-        <MenuItem value="created">created</MenuItem>
-        <MenuItem value="updated">updated</MenuItem>
-        <MenuItem value="rating">rating</MenuItem>
-        <MenuItem value="-metacritic">metacritic</MenuItem>
+        <MenuItem value="relevance">Relevance</MenuItem>
+        <MenuItem value="name">Name</MenuItem>
+        <MenuItem value="-released">Release Date</MenuItem>
+        <MenuItem value="-metacritic">Metacritic</MenuItem>
       </Select>
     </FormControl>
   );

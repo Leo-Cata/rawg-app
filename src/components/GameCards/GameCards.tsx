@@ -102,7 +102,9 @@ const GameCards = ({
 
         <CardContent className="w-full text-white group-hover:pb-0">
           {/* icons */}
-          <CardsPlatforms availablePlatforms={availablePlatforms} />
+          {availablePlatforms && (
+            <CardsPlatforms availablePlatforms={availablePlatforms} />
+          )}
 
           {/* game name and metacritic */}
           <CardsNameAndMetacritic gameName={gameName} metacritic={metacritic} />
