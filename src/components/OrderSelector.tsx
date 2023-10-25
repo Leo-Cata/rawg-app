@@ -19,7 +19,7 @@ const OrderSelector = ({
   };
 
   return (
-    <FormControl className="max-w-[15rem]">
+    <FormControl className="max-w-[30rem]">
       <InputLabel id="ordering-selector-label" className="capitalize">
         Order
       </InputLabel>

@@ -97,12 +97,14 @@ const GamesContainer = () => {
   }
 
   return (
-    <Stack spacing={2}>
-      <SearchBar setGameSearchString={setGameSearchString} />
-      <OrderSelector
-        setGamesOrdering={setGamesOrdering}
-        gamesOrdering={gamesOrdering}
-      />
+    <Stack spacing={4}>
+      <Stack className="flex flex-col-reverse sm:flex-row sm:justify-between sm:space-x-4">
+        <OrderSelector
+          setGamesOrdering={setGamesOrdering}
+          gamesOrdering={gamesOrdering}
+        />
+        <SearchBar setGameSearchString={setGameSearchString} />
+      </Stack>
       <Stack
         className={`grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4`}
       >
