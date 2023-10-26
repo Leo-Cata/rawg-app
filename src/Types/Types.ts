@@ -90,3 +90,15 @@ export interface UserFavGames
 export interface SetSearch {
   setGameSearchString: (value: string) => void;
 }
+
+// profileData
+export interface UserDataType {
+  userDisplayName: string | undefined | null;
+  userPhoto: string | undefined | null;
+  handleUserId?: HandleUserId;
+}
+
+// profile data Setter
+export interface SetProfileData {
+  (value: UserDataType): void;
+}
