@@ -13,6 +13,7 @@ import React, { useState } from "react";
 import { signOutGoogle } from "../Firebase/SignOutOfGoogle";
 import GoogleButton from "react-google-button";
 import { signInGoogle } from "../Firebase/SignInWithGoogle";
+import { Link } from "react-router-dom";
 // import LogoutIcon from "@mui/icons-material/Logout";
 // import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
 import {
@@ -41,17 +42,18 @@ const Navbar = ({ userDisplayName, userPhoto, handleUserId }: UserDataType) => {
   return (
     <>
       <AppBar position="static" className="mb-4" component={"nav"}>
-        <Toolbar className="p-2">
-          {/* icon */}
-          <IconButton className="p-1">
-            <PiFlowerLotus className="text-5xl text-custom-secondary sm:text-5xl" />
-          </IconButton>
-          {/* site name */}
-          <span className="flex-grow">
+        <Toolbar className="flex justify-between p-2">
+          <Link to={"/"} className="flex w-fit items-center">
+            {/* icon */}
+            <IconButton className="p-1">
+              <PiFlowerLotus className="text-5xl text-custom-secondary sm:text-5xl" />
+            </IconButton>
+
+            {/* site name */}
             <Typography className="w-fit cursor-pointer" fontWeight={600}>
               Backlogged
             </Typography>
-          </span>
+          </Link>
 
           {/* display sign in with google or account profile pic */}
           {userDisplayName ? (
@@ -82,15 +84,17 @@ const Navbar = ({ userDisplayName, userPhoto, handleUserId }: UserDataType) => {
       >
         {/* saved games */}
         <MenuItem>
-          <ListItemIcon>
-            <PiBookmarksSimpleBold />
-          </ListItemIcon>
-          Saved Games
+          <Link to={"/profile"}>
+            <ListItemIcon>
+              <PiBookmarksSimpleBold className="text-lg text-yellow-500" />
+            </ListItemIcon>
+            Saved Games
+          </Link>
         </MenuItem>
 
         {/* sign out */}
         <MenuItem onClick={() => handleUserId && signOutGoogle(handleUserId)}>
-          <ListItemIcon>
+          <ListItemIcon className="text-lg">
             <PiSignOutBold />
           </ListItemIcon>
           Logout

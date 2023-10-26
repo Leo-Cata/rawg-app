@@ -6,6 +6,8 @@ import { UserContextValues, UserDataType } from "./Types/Types";
 import { checkIfLoggedIn } from "./Firebase/CheckIfLoggedIn";
 import { useState } from "react";
 import Navbar from "./components/Navbar";
+import { Routes, Route } from "react-router-dom";
+import Profile from "./components/Profile";
 
 const App = () => {
   // get the values and assert the type to use UserContextValues
@@ -39,7 +41,10 @@ const App = () => {
         handleUserId={handleUserId}
       />
       <Typography variant="body1">{userId}</Typography>
-      <GamesContainer key={gamesContainerKey} />
+      <Routes>
+        <Route path="/" element={<GamesContainer key={gamesContainerKey} />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
     </>
   );
 };

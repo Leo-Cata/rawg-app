@@ -80,6 +80,8 @@ export interface HandleUserId {
 export interface UserContextValues {
   userId: string | null;
   handleUserId: HandleUserId;
+  savedGames: GameCardsProps | undefined;
+  setSavedGames: (value: GameCardsProps) => void;
 }
 
 // interface for the user's fav games omitting unnecessary stuff
