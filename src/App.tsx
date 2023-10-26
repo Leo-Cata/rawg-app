@@ -1,12 +1,9 @@
 import GamesContainer from "./containers/GamesContainer";
-// import GoogleButton from "react-google-button";
 import { Typography } from "@mui/material";
 import { useContext, useEffect } from "react";
 import { userIdContext } from "./context/UserContext";
 import { UserContextValues, UserDataType } from "./Types/Types";
-// import { signInGoogle } from "./Firebase/SignInWithGoogle";
 import { checkIfLoggedIn } from "./Firebase/CheckIfLoggedIn";
-// import { signOutGoogle } from "./Firebase/SignOutOfGoogle";
 import { useState } from "react";
 import Navbar from "./components/Navbar";
 

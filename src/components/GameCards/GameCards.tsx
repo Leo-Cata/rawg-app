@@ -116,13 +116,13 @@ const GameCards = ({
             {/* add to favorite */}
             <IconButton
               aria-label="add to favorite"
-              className="p-0 pr-[3px]"
+              className="p-0"
               onClick={() => addGames()}
             >
               {isFavorite ? (
-                <StarRoundedIcon className="text-yellow-500" />
+                <StarRoundedIcon className="text-center text-yellow-500" />
               ) : (
-                <StarBorderRoundedIcon className="text-yellow-500" />
+                <StarBorderRoundedIcon className="text-center text-yellow-500" />
               )}
             </IconButton>
           </Stack>

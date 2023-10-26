@@ -2,16 +2,24 @@ import {
   AppBar,
   Avatar,
   IconButton,
-  Button,
   Menu,
   MenuItem,
   Toolbar,
+  ListItemIcon,
+  Typography,
 } from "@mui/material";
 import { UserDataType } from "../Types/Types";
 import React, { useState } from "react";
 import { signOutGoogle } from "../Firebase/SignOutOfGoogle";
 import GoogleButton from "react-google-button";
 import { signInGoogle } from "../Firebase/SignInWithGoogle";
+// import LogoutIcon from "@mui/icons-material/Logout";
+// import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
+import {
+  PiSignOutBold,
+  PiBookmarksSimpleBold,
+  PiFlowerLotus,
+} from "react-icons/pi";
 
 const Navbar = ({ userDisplayName, userPhoto, handleUserId }: UserDataType) => {
   // state to set the element
@@ -29,10 +37,23 @@ const Navbar = ({ userDisplayName, userPhoto, handleUserId }: UserDataType) => {
   const handleClose = () => {
     setAnchorElement(null);
   };
+
   return (
     <>
-      <AppBar position="static" className="mb-4">
-        <Toolbar className="flex justify-end">
+      <AppBar position="static" className="mb-4" component={"nav"}>
+        <Toolbar className="p-2">
+          {/* icon */}
+          <IconButton className="p-1">
+            <PiFlowerLotus className="text-5xl text-custom-secondary sm:text-5xl" />
+          </IconButton>
+          {/* site name */}
+          <span className="flex-grow">
+            <Typography className="w-fit cursor-pointer" fontWeight={600}>
+              Backlogged
+            </Typography>
+          </span>
+
+          {/* display sign in with google or account profile pic */}
           {userDisplayName ? (
             <IconButton
               onClick={handleMenu}
@@ -44,17 +65,35 @@ const Navbar = ({ userDisplayName, userPhoto, handleUserId }: UserDataType) => {
             </IconButton>
           ) : (
             <GoogleButton
+              label="Google Sign In"
+              className="ml-2"
               onClick={() => handleUserId && signInGoogle(handleUserId)}
             />
           )}
         </Toolbar>
       </AppBar>
-      <Menu open={openMenu} anchorEl={anchorElement} onClose={handleClose}>
-        <MenuItem onClick={handleClose}>{userDisplayName}</MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Button onClick={() => handleUserId && signOutGoogle(handleUserId)}>
-            Log Out
-          </Button>
+
+      {/* menu that is shown when pressing on the avatar icon button */}
+      <Menu
+        open={openMenu}
+        anchorEl={anchorElement}
+        onClose={handleClose}
+        onClick={handleClose}
+      >
+        {/* saved games */}
+        <MenuItem>
+          <ListItemIcon>
+            <PiBookmarksSimpleBold />
+          </ListItemIcon>
+          Saved Games
+        </MenuItem>
+
+        {/* sign out */}
+        <MenuItem onClick={() => handleUserId && signOutGoogle(handleUserId)}>
+          <ListItemIcon>
+            <PiSignOutBold />
+          </ListItemIcon>
+          Logout
         </MenuItem>
       </Menu>
     </>
