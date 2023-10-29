@@ -1,19 +1,19 @@
 import { CardMedia } from "@mui/material";
 
 const CardsMedia = ({
-  gameImage,
-  gameName,
+  background_image,
+  name,
 }: {
-  gameImage: string;
-  gameName: string;
+  background_image: string;
+  name: string;
 }) => {
   return (
     <CardMedia
       className="flex max-h-[18rem] min-h-[12rem]"
       component="img"
-      image={gameImage}
+      image={background_image}
       loading="lazy"
-      alt={gameName}
+      alt={name}
     />
   );
 };

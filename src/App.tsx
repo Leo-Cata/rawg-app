@@ -43,7 +43,15 @@ const App = () => {
       <Typography variant="body1">{userId}</Typography>
       <Routes>
         <Route path="/" element={<GamesContainer key={gamesContainerKey} />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/profile"
+          element={
+            <Profile
+              userDisplayName={profileData?.userDisplayName}
+              userPhoto={profileData?.userPhoto}
+            />
+          }
+        />
       </Routes>
     </>
   );
