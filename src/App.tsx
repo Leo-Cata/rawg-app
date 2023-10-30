@@ -1,5 +1,4 @@
 import GamesContainer from "./containers/GamesContainer";
-import { Typography } from "@mui/material";
 import { useContext, useEffect } from "react";
 import { userIdContext } from "./context/UserContext";
 import { UserContextValues, UserDataType } from "./Types/Types";
@@ -7,7 +6,7 @@ import { checkIfLoggedIn } from "./Firebase/CheckIfLoggedIn";
 import { useState } from "react";
 import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
-import Profile from "./components/Profile";
+import ProfileContainer from "./containers/ProfileContainer";
 
 const App = () => {
   // get the values and assert the type to use UserContextValues
@@ -44,7 +43,6 @@ const App = () => {
             userPhoto={profileData?.userPhoto}
             handleUserId={handleUserId}
           />
-          <Typography variant="body1">{userId}</Typography>
           <Routes>
             <Route
               path="/"
@@ -53,7 +51,7 @@ const App = () => {
             <Route
               path="/profile"
               element={
-                <Profile
+                <ProfileContainer
                   userDisplayName={profileData?.userDisplayName}
                   userPhoto={profileData?.userPhoto}
                 />

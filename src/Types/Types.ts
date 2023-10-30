@@ -90,10 +90,6 @@ export interface UserContextValues {
   setSavedGames: (value: GameData[]) => void;
 }
 
-// interface for the user's fav games omitting unnecessary stuff
-// export interface UserFavGames
-//   extends Omit<GameCardsProps, "userId" | "isInFavorite"> {}
-
 // Search setter type
 export interface SetSearch {
   setGameSearchString: (value: string) => void;
@@ -104,6 +100,11 @@ export interface UserDataType {
   userDisplayName: string | undefined | null;
   userPhoto: string | undefined | null;
   handleUserId?: HandleUserId;
+}
+
+export interface ProfileData extends Omit<UserDataType, "UserDataType"> {
+  savedGamesLength: number | undefined;
+  userId: string | undefined | null;
 }
 
 // profile data Setter

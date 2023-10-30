@@ -1,102 +1,101 @@
-import { useContext, useState } from "react";
-import { userIdContext } from "../context/UserContext";
-import GameCards from "./GameCards/GameCards";
-import { Stack, Avatar, Paper, Typography } from "@mui/material";
-import { useEffect } from "react";
-import { readData } from "../Firebase/Database";
-import { GameData, UserDataType } from "../Types/Types";
-import { useNavigate } from "react-router-dom";
-import groupData from "../utils/GroupedData";
+import {
+  Paper,
+  IconButton,
+  Avatar,
+  Typography,
+  Menu,
+  MenuItem,
+} from "@mui/material";
+// icons
+import { AiOutlineMore } from "react-icons/ai";
+import { MdDelete } from "react-icons/md";
+import { AiFillStar } from "react-icons/ai";
 
-const Profile = ({ userDisplayName, userPhoto }: UserDataType) => {
-  // gets userId
-  const userId = useContext(userIdContext)?.userId;
+import { ProfileData } from "../Types/Types";
+import { useState } from "react";
+import { deleteSavedGames } from "../Firebase/DeleteSavedGames";
+import { deleteAccount } from "../Firebase/DeleteAccount";
+// import { signOutGoogle } from "../Firebase/SignOutOfGoogle";
 
-  // to set the number of groups dynamically
-  const [numberOfGroups, setNumberOfGroups] = useState<number>(1);
+const Profile = ({
+  userPhoto,
+  userDisplayName,
+  savedGamesLength,
+  userId,
+}: ProfileData) => {
+  // gets anchor element
+  const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
 
-  // to navigate to the main page
-  const nav = useNavigate();
+  //turns state into boolean
+  const openMenu = Boolean(anchorElement);
 
-  // sets the saved games from firestore
-  const [savedGames, setSavedGames] = useState<GameData[]>();
+  // sets the anchor element to whatever we click on
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElement(event.currentTarget);
+  };
 
-  useEffect(() => {
-    //fetches saved games if the user is logged in
-    const fetchFirestoreGames = async () => {
-      if (userId) {
-        try {
-          const firestoreData = await readData(userId);
-          setSavedGames(firestoreData?.games);
-        } catch (error) {
-          console.log(error);
-        }
-      } else {
-        nav("/");
-      }
-    };
+  // sets the anchor element to null
+  const handleClose = () => {
+    setAnchorElement(null);
+  };
+  // waits for deleteSavedGames to run and then reload
+  const handleDeleteGames = async () => {
+    await deleteSavedGames(userId);
+    window.location.reload();
+  };
 
-    fetchFirestoreGames();
-  }, [userId, nav]);
-
-  // useEffect to set the windows width
-  useEffect(() => {
-    const handleResize = () => {
-      // gets the current viewport width to set the numbers of groups
-      const newViewportWidth = window.innerWidth;
-      if (newViewportWidth <= 639) {
-        setNumberOfGroups(1);
-      } else if (newViewportWidth <= 767) {
-        setNumberOfGroups(2);
-      } else if (newViewportWidth <= 1279) {
-        setNumberOfGroups(3);
-      } else {
-        setNumberOfGroups(4);
-      }
-    };
-    // runs the code once to set the initial value
-    handleResize();
-
-    // runs whenever the windows is resized
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  const groupedGamesData = groupData(savedGames, numberOfGroups);
-  console.log(groupedGamesData);
+  //if handleUserId await to delete account, the logout then reload
+  const handleDeleteAccount = async () => {
+    await deleteAccount(userId);
+    window.location.reload();
+  };
 
   return (
-    <Stack className="flex flex-col items-center" spacing={10}>
-      <Paper className="mx-2 flex w-full max-w-[500px] flex-col items-center py-4">
+    <>
+      <Paper className="mx-2 flex w-full max-w-[500px] flex-col items-center p-4">
+        <IconButton
+          className="self-end p-0"
+          onClick={handleMenu}
+          aria-controls={openMenu ? "account-settings" : undefined}
+          aria-haspopup="true"
+          aria-expanded={openMenu ? "true" : undefined}
+        >
+          <AiOutlineMore />
+        </IconButton>
         <Avatar
           src={userPhoto ? userPhoto : ""}
-          alt={`${userDisplayName} profile picture`}
-          className="h-32 w-32"
+          alt={`${userDisplayName} profileContainer picture`}
+          className="flex h-32 w-32"
         />
-        <Typography className="py-4">{userDisplayName}</Typography>
+        <Typography className="py-2" variant="h5">
+          {userDisplayName}
+        </Typography>
+        <Typography variant="body1">{savedGamesLength} Games Saved</Typography>
       </Paper>
 
-      <Stack className=" grid grid-cols-1 gap-4 px-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-        {groupedGamesData &&
-          groupedGamesData.map((group, index) => (
-            <Stack key={`group_${index}`}>
-              {group.map((game) => (
-                <GameCards
-                  name={game.name}
-                  background_image={game.background_image}
-                  key={game.name}
-                  metacritic={game.metacritic}
-                  parent_platforms={game.parent_platforms}
-                  released={game.released}
-                  userId={userId}
-                  isInFavorite={true}
-                />
-              ))}
-            </Stack>
-          ))}
-      </Stack>
-    </Stack>
+      {/* popup menu */}
+      <Menu
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+        open={openMenu}
+        anchorEl={anchorElement}
+        onClose={handleClose}
+        onClick={handleClose}
+      >
+        <MenuItem className="space-y-1" onClick={handleDeleteGames}>
+          <AiFillStar className=" mr-1 text-yellow-500" /> Delete Saved Games
+        </MenuItem>
+        <MenuItem className="space-y-1" onClick={handleDeleteAccount}>
+          <MdDelete className=" mr-1 text-red-500" /> Delete Account
+        </MenuItem>
+      </Menu>
+    </>
   );
 };
 

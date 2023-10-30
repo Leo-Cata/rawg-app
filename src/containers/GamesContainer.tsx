@@ -82,11 +82,10 @@ const GamesContainer = () => {
   }, []);
 
   const groupedData = groupData(gameData?.results, numberOfGroups);
-  console.log(groupedData);
 
   return (
     <Stack spacing={4} paddingX={2}>
-      <Stack className="flex flex-col-reverse sm:flex-row sm:justify-between sm:space-x-4">
+      <Stack className="flex flex-col-reverse pt-6 sm:flex-row sm:justify-between sm:space-x-4">
         <OrderSelector
           setGamesOrdering={setGamesOrdering}
           gamesOrdering={gamesOrdering}

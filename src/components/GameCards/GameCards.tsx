@@ -16,9 +16,9 @@ import {
 import { GameData } from "../../Types/Types";
 
 // mui icons
-import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
-import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
+import { AiFillStar } from "react-icons/ai";
+import { AiOutlineStar } from "react-icons/ai";
 // firebase function to add and remove data
 import { addAndRemoveGames } from "../../Firebase/AddAndRemoveGames";
 
@@ -67,8 +67,12 @@ const GameCards = ({
         setIsFavorite((prev) => !prev);
 
         // sets the message
-        setSnackbarMessage(`${name} has been saved`);
-
+        setSnackbarMessage(
+          `${
+            isFavorite ? `${name} has been deleted` : `${name} has been saved`
+          } `,
+        );
+        setSeverity(`${isFavorite ? "error" : "success"}`);
         // opens the snackbar
         setIsSnackbarOpen(true);
       } catch (error) {
@@ -120,9 +124,9 @@ const GameCards = ({
               onClick={() => addGames()}
             >
               {isFavorite ? (
-                <StarRoundedIcon className="text-center text-yellow-500" />
+                <AiFillStar className="text-center text-yellow-500" />
               ) : (
-                <StarBorderRoundedIcon className="text-center text-yellow-500" />
+                <AiOutlineStar className="text-center text-yellow-500" />
               )}
             </IconButton>
           </Stack>

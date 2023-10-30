@@ -18,7 +18,6 @@ export const addAndRemoveGames = async (game: GameData, userId: string) => {
 
     //if userDoc exits and userDoc data contains games then
     if (userDoc.exists() && userDoc.data().games) {
-      console.time();
       // if in userDoc exits a game with name userGames.gameName equal to the game.gameName being passed, delete it
       if (
         userDoc

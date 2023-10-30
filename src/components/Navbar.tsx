@@ -14,13 +14,8 @@ import { signOutGoogle } from "../Firebase/SignOutOfGoogle";
 import GoogleButton from "react-google-button";
 import { signInGoogle } from "../Firebase/SignInWithGoogle";
 import { Link } from "react-router-dom";
-// import LogoutIcon from "@mui/icons-material/Logout";
-// import SportsEsportsIcon from "@mui/icons-material/SportsEsports";
-import {
-  PiSignOutBold,
-  PiBookmarksSimpleBold,
-  PiFlowerLotus,
-} from "react-icons/pi";
+
+import { PiSignOutBold, PiUserBold, PiFlowerLotus } from "react-icons/pi";
 
 const Navbar = ({ userDisplayName, userPhoto, handleUserId }: UserDataType) => {
   // state to set the element
@@ -84,11 +79,11 @@ const Navbar = ({ userDisplayName, userPhoto, handleUserId }: UserDataType) => {
       >
         {/* saved games */}
         <MenuItem>
-          <Link to={"/profile"}>
+          <Link to={"/profile"} className="flex items-center">
             <ListItemIcon>
-              <PiBookmarksSimpleBold className="text-lg text-yellow-500" />
+              <PiUserBold className="text-lg text-purple-700" />
             </ListItemIcon>
-            Saved Games
+            Profile
           </Link>
         </MenuItem>
 

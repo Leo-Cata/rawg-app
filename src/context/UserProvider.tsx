@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { userIdContext } from "./UserContext";
-import { HandleUserId, UserFavGames } from "../Types/Types";
+import { HandleUserId, GameData } from "../Types/Types";
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [userId, setUserId] = useState<string | null>(null);
 
   // saved games
-  const [savedGames, setSavedGames] = useState<UserFavGames[] | undefined>();
+  const [savedGames, setSavedGames] = useState<GameData[] | undefined>();
 
   // handle setting the user id
   const handleUserId: HandleUserId = (uid) => {
