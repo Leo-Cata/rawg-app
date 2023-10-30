@@ -21,9 +21,11 @@ const App = () => {
   // sets profile data
   const [profileData, setProfileData] = useState<UserDataType | null>();
 
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
   // will run on mount, checking and setting the uid
   useEffect(() => {
-    checkIfLoggedIn(handleUserId, setProfileData);
+    checkIfLoggedIn(handleUserId, setProfileData, setIsLoaded);
   }, [handleUserId]);
 
   useEffect(() => {
@@ -35,24 +37,31 @@ const App = () => {
 
   return (
     <>
-      <Navbar
-        userDisplayName={profileData?.userDisplayName}
-        userPhoto={profileData?.userPhoto}
-        handleUserId={handleUserId}
-      />
-      <Typography variant="body1">{userId}</Typography>
-      <Routes>
-        <Route path="/" element={<GamesContainer key={gamesContainerKey} />} />
-        <Route
-          path="/profile"
-          element={
-            <Profile
-              userDisplayName={profileData?.userDisplayName}
-              userPhoto={profileData?.userPhoto}
+      {isLoaded && (
+        <>
+          <Navbar
+            userDisplayName={profileData?.userDisplayName}
+            userPhoto={profileData?.userPhoto}
+            handleUserId={handleUserId}
+          />
+          <Typography variant="body1">{userId}</Typography>
+          <Routes>
+            <Route
+              path="/"
+              element={<GamesContainer key={gamesContainerKey} />}
             />
-          }
-        />
-      </Routes>
+            <Route
+              path="/profile"
+              element={
+                <Profile
+                  userDisplayName={profileData?.userDisplayName}
+                  userPhoto={profileData?.userPhoto}
+                />
+              }
+            />
+          </Routes>
+        </>
+      )}
     </>
   );
 };

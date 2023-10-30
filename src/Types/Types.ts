@@ -110,3 +110,8 @@ export interface UserDataType {
 export interface SetProfileData {
   (value: UserDataType): void;
 }
+
+// loading setter interface
+export interface SetIsLoaded {
+  (value: boolean): void;
+}

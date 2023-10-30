@@ -12,6 +12,7 @@ const Profile = ({ userDisplayName, userPhoto }: UserDataType) => {
   // gets userId
   const userId = useContext(userIdContext)?.userId;
 
+  // to set the number of groups dynamically
   const [numberOfGroups, setNumberOfGroups] = useState<number>(1);
 
   // to navigate to the main page
@@ -21,6 +22,7 @@ const Profile = ({ userDisplayName, userPhoto }: UserDataType) => {
   const [savedGames, setSavedGames] = useState<GameData[]>();
 
   useEffect(() => {
+    //fetches saved games if the user is logged in
     const fetchFirestoreGames = async () => {
       if (userId) {
         try {
@@ -33,6 +35,7 @@ const Profile = ({ userDisplayName, userPhoto }: UserDataType) => {
         nav("/");
       }
     };
+
     fetchFirestoreGames();
   }, [userId, nav]);
 
