@@ -1,14 +1,12 @@
 import GamesContainer from "./containers/GamesContainer";
-import GoogleButton from "react-google-button";
-import { Button, Typography } from "@mui/material";
 import { useContext, useEffect } from "react";
 import { userIdContext } from "./context/UserContext";
-import { UserContextValues } from "./Types/Types";
-import { signInGoogle } from "./Firebase/SignInWithGoogle";
+import { UserContextValues, UserDataType } from "./Types/Types";
 import { checkIfLoggedIn } from "./Firebase/CheckIfLoggedIn";
-import { signOutGoogle } from "./Firebase/SignOutOfGoogle";
 import { useState } from "react";
-import { Stack } from "@mui/material";
+import Navbar from "./components/Navbar";
+import { Routes, Route } from "react-router-dom";
+import ProfileContainer from "./containers/ProfileContainer";
 
 const App = () => {
   // get the values and assert the type to use UserContextValues
@@ -19,35 +17,50 @@ const App = () => {
   // State to manage GameContainer key
   const [gamesContainerKey, setGamesContainerKey] = useState(Date.now());
 
+  // sets profile data
+  const [profileData, setProfileData] = useState<UserDataType | null>();
+
+  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
   // will run on mount, checking and setting the uid
   useEffect(() => {
-    checkIfLoggedIn(handleUserId);
+    checkIfLoggedIn(handleUserId, setProfileData, setIsLoaded);
   }, [handleUserId]);
 
   useEffect(() => {
     //set new key for GamesContainer, making it reload
-    if (userId) {
-      setGamesContainerKey(Date.now());
-    }
+    setGamesContainerKey(Date.now());
+    // deletes the profile data
+    setProfileData(null);
   }, [userId]);
 
   return (
-    <Stack paddingX={2}>
-      {userId ? (
-        <Button
-          onClick={() => signOutGoogle(handleUserId)}
-          className="text-white"
-          variant="outlined"
-        >
-          sign out
-        </Button>
-      ) : (
-        <GoogleButton onClick={() => signInGoogle(handleUserId)} />
+    <>
+      {isLoaded && (
+        <>
+          <Navbar
+            userDisplayName={profileData?.userDisplayName}
+            userPhoto={profileData?.userPhoto}
+            handleUserId={handleUserId}
+          />
+          <Routes>
+            <Route
+              path="/"
+              element={<GamesContainer key={gamesContainerKey} />}
+            />
+            <Route
+              path="/profile"
+              element={
+                <ProfileContainer
+                  userDisplayName={profileData?.userDisplayName}
+                  userPhoto={profileData?.userPhoto}
+                />
+              }
+            />
+          </Routes>
+        </>
       )}
-
-      <Typography variant="body1">{userId}</Typography>
-      <GamesContainer key={gamesContainerKey} />
-    </Stack>
+    </>
   );
 };
 

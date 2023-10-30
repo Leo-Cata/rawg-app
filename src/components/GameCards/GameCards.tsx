@@ -13,12 +13,12 @@ import {
 } from "@mui/material";
 
 // types
-import { GameCardsProps } from "../../Types/Types";
+import { GameData } from "../../Types/Types";
 
 // mui icons
-import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
-import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
+import { AiFillStar } from "react-icons/ai";
+import { AiOutlineStar } from "react-icons/ai";
 // firebase function to add and remove data
 import { addAndRemoveGames } from "../../Firebase/AddAndRemoveGames";
 
@@ -29,14 +29,14 @@ import CardsReleaseDate from "./CardsReleaseDate";
 import CardsNameAndMetacritic from "./CardsNameAndMetacritic";
 
 const GameCards = ({
-  gameImage,
-  availablePlatforms,
+  background_image,
+  parent_platforms,
   metacritic,
-  releaseDate,
-  gameName,
+  released,
+  name,
   userId,
   isInFavorite,
-}: GameCardsProps) => {
+}: GameData) => {
   // useState to change favorite icon
   const [isFavorite, setIsFavorite] = useState(isInFavorite);
 
@@ -55,11 +55,11 @@ const GameCards = ({
       try {
         await addAndRemoveGames(
           {
-            gameImage,
-            availablePlatforms,
+            background_image,
+            parent_platforms,
             metacritic,
-            releaseDate,
-            gameName,
+            released,
+            name,
           },
           userId,
         );
@@ -67,8 +67,12 @@ const GameCards = ({
         setIsFavorite((prev) => !prev);
 
         // sets the message
-        setSnackbarMessage(`${gameName} has been saved`);
-
+        setSnackbarMessage(
+          `${
+            isFavorite ? `${name} has been deleted` : `${name} has been saved`
+          } `,
+        );
+        setSeverity(`${isFavorite ? "error" : "success"}`);
         // opens the snackbar
         setIsSnackbarOpen(true);
       } catch (error) {
@@ -98,31 +102,31 @@ const GameCards = ({
     <>
       <Card className="rounded-2xl transition-all hover:scale-105 hover:cursor-pointer">
         {/* images */}
-        <CardsMedia gameImage={gameImage} gameName={gameName} />
+        <CardsMedia background_image={background_image} name={name} />
 
         <CardContent className="w-full text-white group-hover:pb-0">
           {/* icons */}
-          {availablePlatforms && (
-            <CardsPlatforms availablePlatforms={availablePlatforms} />
+          {parent_platforms && (
+            <CardsPlatforms parent_platforms={parent_platforms} />
           )}
 
           {/* game name and metacritic */}
-          <CardsNameAndMetacritic gameName={gameName} metacritic={metacritic} />
+          <CardsNameAndMetacritic name={name} metacritic={metacritic} />
 
           <Stack direction={"row"} alignItems={"center"}>
             {/* release date */}
-            <CardsReleaseDate releaseDate={releaseDate} />
+            <CardsReleaseDate released={released} />
 
             {/* add to favorite */}
             <IconButton
               aria-label="add to favorite"
-              className="p-0 pr-[3px]"
+              className="p-0"
               onClick={() => addGames()}
             >
               {isFavorite ? (
-                <StarRoundedIcon className="text-yellow-500" />
+                <AiFillStar className="text-center text-yellow-500" />
               ) : (
-                <StarBorderRoundedIcon className="text-yellow-500" />
+                <AiOutlineStar className="text-center text-yellow-500" />
               )}
             </IconButton>
           </Stack>

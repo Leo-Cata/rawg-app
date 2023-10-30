@@ -2,16 +2,16 @@ import { Stack, Typography, Tooltip, Chip } from "@mui/material";
 import Zoom from "@mui/material/Zoom";
 
 const CardsNameAndMetacritic = ({
-  gameName,
+  name,
   metacritic,
 }: {
-  gameName: string;
+  name: string;
   metacritic: number;
 }) => {
   return (
     <Stack direction={"row"} alignItems={"center"} className="pb-2">
       <Typography variant="h5" className="flex-grow font-semibold">
-        {gameName}
+        {name}
       </Typography>
       {metacritic && (
         <Tooltip

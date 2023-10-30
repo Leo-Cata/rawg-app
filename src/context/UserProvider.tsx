@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { userIdContext } from "./UserContext";
-import { HandleUserId } from "../Types/Types";
+import { HandleUserId, GameData } from "../Types/Types";
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [userId, setUserId] = useState<string | null>(null);
+
+  // saved games
+  const [savedGames, setSavedGames] = useState<GameData[] | undefined>();
 
   // handle setting the user id
   const handleUserId: HandleUserId = (uid) => {
@@ -12,7 +15,9 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     // from userContext you use the context created, hence why its not userProvider.Provider
-    <userIdContext.Provider value={{ userId, handleUserId }}>
+    <userIdContext.Provider
+      value={{ userId, handleUserId, savedGames, setSavedGames }}
+    >
       {children}
     </userIdContext.Provider>
   );

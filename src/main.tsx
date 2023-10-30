@@ -10,6 +10,7 @@ import {
   createTheme,
 } from "@mui/material/styles";
 import UserProvider from "./context/UserProvider.tsx";
+import { BrowserRouter } from "react-router-dom";
 
 const darkTheme = createTheme({
   palette: {
@@ -32,7 +33,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <ThemeProvider theme={darkTheme}>
         <CssBaseline>
           <UserProvider>
-            <App />
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
           </UserProvider>
         </CssBaseline>
       </ThemeProvider>

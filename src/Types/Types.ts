@@ -19,15 +19,21 @@ export interface GamesSearch {
 
 // where all the data about games are
 export interface Result {
-  id: number;
-  slug: string;
+  id?: number;
+  slug?: string;
   name: string;
   background_image: string;
   metacritic: number;
-  playtime: number;
+  playtime?: number;
   parent_platforms: Parent_Platforms[];
   platforms: Platforms[];
   released: string;
+}
+
+export interface GameData
+  extends Omit<Result, "id" | "playtime" | "platforms"> {
+  userId?: string | undefined | null;
+  isInFavorite?: boolean;
 }
 
 export interface Parent_Platforms {
@@ -80,13 +86,33 @@ export interface HandleUserId {
 export interface UserContextValues {
   userId: string | null;
   handleUserId: HandleUserId;
+  savedGames: GameData[] | undefined;
+  setSavedGames: (value: GameData[]) => void;
 }
-
-// interface for the user's fav games omitting unnecessary stuff
-export interface UserFavGames
-  extends Omit<GameCardsProps, "userId" | "isInFavorite"> {}
 
 // Search setter type
 export interface SetSearch {
   setGameSearchString: (value: string) => void;
+}
+
+// profileData
+export interface UserDataType {
+  userDisplayName: string | undefined | null;
+  userPhoto: string | undefined | null;
+  handleUserId?: HandleUserId;
+}
+
+export interface ProfileData extends Omit<UserDataType, "UserDataType"> {
+  savedGamesLength: number | undefined;
+  userId: string | undefined | null;
+}
+
+// profile data Setter
+export interface SetProfileData {
+  (value: UserDataType): void;
+}
+
+// loading setter interface
+export interface SetIsLoaded {
+  (value: boolean): void;
 }

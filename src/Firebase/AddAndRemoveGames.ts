@@ -6,12 +6,9 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { db } from "./Database";
-import { GameCardsProps } from "../Types/Types";
+import { GameData } from "../Types/Types";
 
-export const addAndRemoveGames = async (
-  game: GameCardsProps,
-  userId: string,
-) => {
+export const addAndRemoveGames = async (game: GameData, userId: string) => {
   try {
     // get the reference for the data base for user
     const userRef = doc(db, "users", userId);
@@ -21,14 +18,11 @@ export const addAndRemoveGames = async (
 
     //if userDoc exits and userDoc data contains games then
     if (userDoc.exists() && userDoc.data().games) {
-      console.time();
       // if in userDoc exits a game with name userGames.gameName equal to the game.gameName being passed, delete it
       if (
         userDoc
           .data()
-          ?.games.some(
-            (userGames: GameCardsProps) => userGames.gameName === game.gameName,
-          )
+          ?.games.some((userGames: GameData) => userGames.name === game.name)
       ) {
         await setDoc(userRef, { games: arrayRemove(game) }, { merge: true });
       } else {

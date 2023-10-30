@@ -20,9 +20,9 @@ import {
 import { Platforms, PlatformsIcons } from "../../Types/Types";
 
 const CardsPlatforms = ({
-  availablePlatforms,
+  parent_platforms,
 }: {
-  availablePlatforms: Platforms[];
+  parent_platforms: Platforms[];
 }) => {
   // to show icon according to available platform
   const platformsIcons: PlatformsIcons = {
@@ -40,7 +40,7 @@ const CardsPlatforms = ({
   };
   return (
     <Stack direction={"row"} flexWrap={"wrap"} className="mb-1 space-x-2">
-      {availablePlatforms.map((platforms) => (
+      {parent_platforms.map((platforms) => (
         <Tooltip
           title={platforms.platform.slug}
           key={platforms.platform.name}
