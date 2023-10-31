@@ -2,14 +2,16 @@ import { Pagination } from "@mui/material";
 
 const CustomPagination = ({
   setPageNumber,
-  searchCount,
+  ItemsCount,
+  itemsPerPage,
 }: {
   setPageNumber: (value: number) => void;
-  searchCount: number | undefined;
+  ItemsCount: number | undefined;
+  itemsPerPage: number;
 }) => {
-  let numberOfPages;
-  if (searchCount) {
-    numberOfPages = Math.ceil(searchCount / 32);
+  let numberOfPages = 0;
+  if (ItemsCount) {
+    numberOfPages = Math.ceil(ItemsCount / itemsPerPage);
   }
 
   // gets window width
@@ -22,9 +24,10 @@ const CustomPagination = ({
       behavior: "smooth",
     });
   };
+
   return (
     <>
-      {numberOfPages && numberOfPages > 1 && (
+      {numberOfPages > 1 && (
         <Pagination
           count={numberOfPages}
           variant="outlined"
@@ -32,8 +35,8 @@ const CustomPagination = ({
           color="primary"
           className="flex w-full justify-center pb-4"
           onChange={(_, page) => {
-            setPageNumber(page);
             scrollToTop();
+            setPageNumber(page);
           }}
           siblingCount={windowsWidth > 500 ? 2 : 0}
         />

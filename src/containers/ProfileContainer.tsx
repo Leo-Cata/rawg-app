@@ -1,13 +1,32 @@
-import { useContext, useState } from "react";
+// react hooks
+import { useContext, useState, useEffect } from "react";
+
+//context
 import { userIdContext } from "../context/UserContext";
+
+// gameCards component which we use to map
 import GameCards from "../components/GameCards/GameCards";
+
+// mui component
 import { Stack } from "@mui/material";
-import { useEffect } from "react";
+
+//  readData aka saved games
 import { readData } from "../Firebase/Database";
+
+// types
 import { GameData, UserDataType } from "../Types/Types";
+
+// RRD navigation to main page
 import { useNavigate } from "react-router-dom";
+
+// function to divide the items into groups
 import groupData from "../utils/GroupedData";
+
+// profile card component
 import Profile from "../components/Profile";
+
+// pagination component
+import CustomPagination from "../components/CustomPagination";
 
 const ProfileContainer = ({ userDisplayName, userPhoto }: UserDataType) => {
   // gets userId
@@ -21,6 +40,21 @@ const ProfileContainer = ({ userDisplayName, userPhoto }: UserDataType) => {
 
   // sets the saved games from firestore
   const [savedGames, setSavedGames] = useState<GameData[]>();
+
+  // sets the page to show the range of the sliced array
+  const [PageNumber, setPageNumber] = useState<number>(1);
+
+  // amount of items to be shown in each page
+  const itemsPerPage: number = 20;
+
+  // calculate the start - 1 because the pagination starts at 1
+  const indexStart: number = (PageNumber - 1) * itemsPerPage;
+
+  // the end of the index will be itemsPerPage more than the start of the index
+  const indexEnd: number = indexStart + itemsPerPage;
+
+  // sliced array to pass to groupedGamesData
+  const slicedSavedGames = savedGames?.slice(indexStart, indexEnd);
 
   useEffect(() => {
     //fetches saved games if the user is logged in
@@ -64,7 +98,8 @@ const ProfileContainer = ({ userDisplayName, userPhoto }: UserDataType) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const groupedGamesData = groupData(savedGames, numberOfGroups);
+  // runs a function to split the games into numberOfGroups
+  const groupedGamesData = groupData(slicedSavedGames, numberOfGroups);
 
   return (
     <Stack className="flex flex-col items-center" spacing={4} paddingX={2}>
@@ -94,6 +129,11 @@ const ProfileContainer = ({ userDisplayName, userPhoto }: UserDataType) => {
             </Stack>
           ))}
       </Stack>
+      <CustomPagination
+        setPageNumber={setPageNumber}
+        itemsPerPage={itemsPerPage}
+        ItemsCount={savedGames?.length}
+      />
     </Stack>
   );
 };
