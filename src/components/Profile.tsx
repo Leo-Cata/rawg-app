@@ -70,7 +70,9 @@ const Profile = ({
         <Typography className="py-2" variant="h5">
           {userDisplayName}
         </Typography>
-        <Typography variant="body1">{savedGamesLength} Games Saved</Typography>
+        <Typography variant="body1">
+          {savedGamesLength ? savedGamesLength : "0"} Games Saved
+        </Typography>
       </Paper>
 
       {/* popup menu */}

@@ -31,6 +31,8 @@ const GamesContainer = () => {
 
   const [savedGames, setSavedGames] = useState<GameData[] | undefined>();
 
+  const itemsPerPage: number = 32;
+
   //fetch all games by popularity and if the userId exists, get fav games
   useEffect(() => {
     const fetchGames = async () => {
@@ -123,7 +125,8 @@ const GamesContainer = () => {
       </Stack>
       <CustomPagination
         setPageNumber={setPageNumber}
-        searchCount={gameData?.count}
+        ItemsCount={gameData?.count}
+        itemsPerPage={itemsPerPage}
       />
     </Stack>
   );
