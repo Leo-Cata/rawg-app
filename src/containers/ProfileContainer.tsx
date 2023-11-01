@@ -27,6 +27,7 @@ import Profile from "../components/Profile";
 
 // pagination component
 import CustomPagination from "../components/CustomPagination";
+import CardsSkeleton from "../components/CardsSkeleton";
 
 const ProfileContainer = ({ userDisplayName, userPhoto }: UserDataType) => {
   // gets userId
@@ -110,8 +111,8 @@ const ProfileContainer = ({ userDisplayName, userPhoto }: UserDataType) => {
         userId={userId}
       />
 
-      <Stack className="grid grid-cols-1 gap-4 px-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-        {groupedGamesData &&
+      <Stack className="grid w-full grid-cols-1 gap-4 px-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+        {savedGames ? (
           groupedGamesData.map((group, index) => (
             <Stack key={`group_${index}`} className="space-y-4">
               {group.map((game) => (
@@ -127,12 +128,15 @@ const ProfileContainer = ({ userDisplayName, userPhoto }: UserDataType) => {
                 />
               ))}
             </Stack>
-          ))}
+          ))
+        ) : (
+          <CardsSkeleton itemsPerPage={itemsPerPage} />
+        )}
       </Stack>
       <CustomPagination
         setPageNumber={setPageNumber}
         itemsPerPage={itemsPerPage}
-        ItemsCount={savedGames?.length}
+        itemsCount={savedGames?.length}
       />
     </Stack>
   );

@@ -116,3 +116,12 @@ export interface SetProfileData {
 export interface SetIsLoaded {
   (value: boolean): void;
 }
+
+export interface ItemsPerPage {
+  itemsPerPage: number;
+}
+
+export interface PaginationPropsType extends ItemsPerPage {
+  setPageNumber: (value: number) => void;
+  itemsCount: number | undefined;
+}
