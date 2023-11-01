@@ -9,6 +9,7 @@ import SearchBar from "../components/SearchBar";
 import OrderSelector from "../components/OrderSelector";
 import CustomPagination from "../components/CustomPagination";
 import groupData from "../utils/GroupedData";
+import CardsSkeleton from "../components/CardsSkeleton";
 
 const GamesContainer = () => {
   // set page number
@@ -38,6 +39,7 @@ const GamesContainer = () => {
     const fetchGames = async () => {
       try {
         if (userId) {
+          setGameData(undefined);
           // gets the data from firestore
           const firestoreData = await readData(userId);
 
@@ -45,7 +47,7 @@ const GamesContainer = () => {
           setSavedGames(firestoreData?.games);
         }
         const resp = await getGames({
-          page_size: 32,
+          page_size: itemsPerPage,
           search: gameSearchString,
           ordering: gamesOrdering,
           page: pageNumber,
@@ -83,10 +85,12 @@ const GamesContainer = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // pass the game data and the number of groups and return an array of arrays
   const groupedData = groupData(gameData?.results, numberOfGroups);
 
   return (
     <Stack spacing={4} paddingX={2}>
+      {/* order selector and search bar */}
       <Stack className="flex flex-col-reverse pt-6 sm:flex-row sm:justify-between sm:space-x-4">
         <OrderSelector
           setGamesOrdering={setGamesOrdering}
@@ -94,8 +98,10 @@ const GamesContainer = () => {
         />
         <SearchBar setGameSearchString={setGameSearchString} />
       </Stack>
+
+      {/* game cards/skeleton */}
       <Stack className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-        {groupedData &&
+        {gameData ? (
           groupedData.map((group, index) => (
             <Stack
               key={group[index]?.slug || `group_${index}`}
@@ -121,11 +127,16 @@ const GamesContainer = () => {
                 />
               ))}
             </Stack>
-          ))}
+          ))
+        ) : (
+          <CardsSkeleton itemsPerPage={itemsPerPage} />
+        )}
       </Stack>
+
+      {/* pagination */}
       <CustomPagination
         setPageNumber={setPageNumber}
-        ItemsCount={gameData?.count}
+        itemsCount={gameData?.count}
         itemsPerPage={itemsPerPage}
       />
     </Stack>

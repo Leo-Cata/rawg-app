@@ -1,17 +1,14 @@
 import { Pagination } from "@mui/material";
+import { PaginationPropsType } from "../Types/Types";
 
 const CustomPagination = ({
   setPageNumber,
-  ItemsCount,
+  itemsCount,
   itemsPerPage,
-}: {
-  setPageNumber: (value: number) => void;
-  ItemsCount: number | undefined;
-  itemsPerPage: number;
-}) => {
+}: PaginationPropsType) => {
   let numberOfPages = 0;
-  if (ItemsCount) {
-    numberOfPages = Math.ceil(ItemsCount / itemsPerPage);
+  if (itemsCount) {
+    numberOfPages = Math.ceil(itemsCount / itemsPerPage);
   }
 
   // gets window width
