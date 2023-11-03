@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getGameInfo, getGameScreenshots } from "../services/RawgApi";
 import { GameInfo, GameScreenshots } from "../Types/Types";
+import GamePage from "../components/GamePage/GamePage";
 
 const GameInfoContainer = () => {
   // get the slug from the url
@@ -34,7 +35,7 @@ const GameInfoContainer = () => {
     fetchGameInfo();
   }, [slug]);
 
-  return <div>{slug}</div>;
+  return <>{gameData && <GamePage gameData={gameData} />}</>;
 };
 
 export default GameInfoContainer;

@@ -144,7 +144,7 @@ interface Esrb_rating {
 }
 
 // extends platforms and adds the release date and an object
-interface GameInfoPlatform extends Platforms {
+export interface GameInfoPlatform extends Platforms {
   released_at: string;
   requirements: Requirements[];
 }
@@ -158,8 +158,9 @@ export interface GameInfo {
   website: string;
   playtime: number;
   achievements: number;
-  esrb_rating: Esrb_rating[];
+  esrb_rating: Esrb_rating;
   platforms: GameInfoPlatform[];
+  parent_platforms: Parent_Platforms[];
 }
 
 // game screenshots results
@@ -167,8 +168,10 @@ export interface GameScreenshots {
   image: string;
 }
 
-// game screenshots
-// export interface GameScreenshots {
-//   count: number;
-//   results: GameScreenshotsResults[];
-// }
+// game page tags
+export interface GameTagsProps {
+  title: string;
+  text?: string;
+  chip?: number;
+  GameInfoPlatform?: GameInfoPlatform[];
+}
