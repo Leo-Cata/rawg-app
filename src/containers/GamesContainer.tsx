@@ -116,6 +116,7 @@ const GamesContainer = () => {
                   parent_platforms={game.parent_platforms}
                   released={game.released}
                   userId={userId}
+                  slug={game.slug}
                   // if there is user id, check if the array has a matching name
                   isInFavorite={
                     userId

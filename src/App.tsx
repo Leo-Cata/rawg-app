@@ -7,6 +7,7 @@ import { useState } from "react";
 import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
 import ProfileContainer from "./containers/ProfileContainer";
+import GameInfoContainer from "./containers/GameInfoContainer";
 
 const App = () => {
   // get the values and assert the type to use UserContextValues
@@ -57,6 +58,7 @@ const App = () => {
                 />
               }
             />
+            <Route path="/games/:slug" element={<GameInfoContainer />} />
           </Routes>
         </>
       )}

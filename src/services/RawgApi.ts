@@ -17,6 +17,17 @@ export const getGames = (options: GamesSearchOptions = {}) => {
   });
 };
 
+// helper to get all platforms list
 export const getPlatformsLists = () => {
   return api.get("platforms/lists/parents");
+};
+
+// fetch for a game
+export const getGameInfo = (slug: string) => {
+  return api.get(`games/${slug}`);
+};
+
+// fetch game screenshots
+export const getGameScreenshots = (slug: string) => {
+  return api.get(`games/${slug}/screenshots`);
 };

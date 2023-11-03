@@ -20,7 +20,7 @@ export interface GamesSearch {
 // where all the data about games are
 export interface Result {
   id?: number;
-  slug?: string;
+  slug: string;
   name: string;
   background_image: string;
   metacritic: number;
@@ -39,10 +39,12 @@ export interface GameData
 export interface Parent_Platforms {
   platform: PlatformsObject;
 }
+
 // initial platform information and requirements
 export interface Platforms {
   platform: PlatformsObject;
 }
+
 // details of the platform store
 export interface PlatformsObject {
   id: number;
@@ -117,11 +119,56 @@ export interface SetIsLoaded {
   (value: boolean): void;
 }
 
+// separated from pagination props to be used alone
 export interface ItemsPerPage {
   itemsPerPage: number;
 }
 
+// pagination props
 export interface PaginationPropsType extends ItemsPerPage {
   setPageNumber: (value: number) => void;
   itemsCount: number | undefined;
 }
+
+// game info
+
+// metacritic and their urls
+interface Metacritic_Platforms {
+  metascore: number;
+  ulr: string;
+}
+
+// esrb rating
+interface Esrb_rating {
+  name: string;
+}
+
+// extends platforms and adds the release date and an object
+interface GameInfoPlatform extends Platforms {
+  released_at: string;
+  requirements: Requirements[];
+}
+
+export interface GameInfo {
+  name: string;
+  description: string;
+  metacritic: number;
+  metacritic_platforms: Metacritic_Platforms[];
+  released: string;
+  website: string;
+  playtime: number;
+  achievements: number;
+  esrb_rating: Esrb_rating[];
+  platforms: GameInfoPlatform[];
+}
+
+// game screenshots results
+export interface GameScreenshots {
+  image: string;
+}
+
+// game screenshots
+// export interface GameScreenshots {
+//   count: number;
+//   results: GameScreenshotsResults[];
+// }

@@ -125,6 +125,7 @@ const ProfileContainer = ({ userDisplayName, userPhoto }: UserDataType) => {
                   released={game.released}
                   userId={userId}
                   isInFavorite={true}
+                  slug={game.slug}
                 />
               ))}
             </Stack>
