@@ -149,6 +149,11 @@ export interface GameInfoPlatform extends Platforms {
   requirements: Requirements[];
 }
 
+export interface Genres {
+  name: string;
+  id: number;
+}
+
 export interface GameInfo {
   name: string;
   description: string;
@@ -161,6 +166,9 @@ export interface GameInfo {
   esrb_rating: Esrb_rating;
   platforms: GameInfoPlatform[];
   parent_platforms: Parent_Platforms[];
+  background_image: string;
+  genres: Genres[];
+  tags: Genres[];
 }
 
 // game screenshots results
@@ -172,6 +180,4 @@ export interface GameScreenshots {
 export interface GameTagsProps {
   title: string;
   text?: string;
-  chip?: number;
-  GameInfoPlatform?: GameInfoPlatform[];
 }

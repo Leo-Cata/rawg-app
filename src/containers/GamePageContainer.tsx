@@ -4,16 +4,13 @@ import { getGameInfo, getGameScreenshots } from "../services/RawgApi";
 import { GameInfo, GameScreenshots } from "../Types/Types";
 import GamePage from "../components/GamePage/GamePage";
 
-const GameInfoContainer = () => {
+const GamePageContainer = () => {
   // get the slug from the url
   const { slug } = useParams();
 
   // state for the game data and the screenshots
   const [gameData, setGameData] = useState<GameInfo>();
   const [gameScreenshots, setGameScreenshots] = useState<GameScreenshots[]>();
-
-  console.log(gameScreenshots);
-  console.log(gameData);
 
   useEffect(() => {
     // fetch data about the game if the slug isn't falsy
@@ -35,7 +32,13 @@ const GameInfoContainer = () => {
     fetchGameInfo();
   }, [slug]);
 
-  return <>{gameData && <GamePage gameData={gameData} />}</>;
+  return (
+    <>
+      {gameData && gameScreenshots && (
+        <GamePage gameData={gameData} gameScreenshots={gameScreenshots} />
+      )}
+    </>
+  );
 };
 
-export default GameInfoContainer;
+export default GamePageContainer;
