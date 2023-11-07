@@ -10,7 +10,14 @@
 .MuiSelect-icon {
   color: white;
 }
-
+p {
+  padding-bottom: 0.5rem;
+}
+h3 {
+  padding-top: 0.5rem;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
 /* border color for filled input */
 /* 
 .MuiInputBase-root::after {

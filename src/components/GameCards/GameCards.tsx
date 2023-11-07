@@ -15,10 +15,10 @@ import {
 // types
 import { GameData } from "../../Types/Types";
 
-// mui icons
-
+// react icons
 import { AiFillStar } from "react-icons/ai";
 import { AiOutlineStar } from "react-icons/ai";
+
 // firebase function to add and remove data
 import { addAndRemoveGames } from "../../Firebase/AddAndRemoveGames";
 
@@ -28,6 +28,9 @@ import CardsPlatforms from "./CardsPlatforms";
 import CardsReleaseDate from "./CardsReleaseDate";
 import CardsNameAndMetacritic from "./CardsNameAndMetacritic";
 
+// react-router-dom
+import { Link } from "react-router-dom";
+
 const GameCards = ({
   background_image,
   parent_platforms,
@@ -36,6 +39,7 @@ const GameCards = ({
   name,
   userId,
   isInFavorite,
+  slug,
 }: GameData) => {
   // useState to change favorite icon
   const [isFavorite, setIsFavorite] = useState(isInFavorite);
@@ -60,6 +64,7 @@ const GameCards = ({
             metacritic,
             released,
             name,
+            slug,
           },
           userId,
         );
@@ -101,36 +106,38 @@ const GameCards = ({
   return (
     <>
       <Card className="rounded-2xl transition-all hover:scale-105 hover:cursor-pointer">
-        {/* images */}
-        <CardsMedia background_image={background_image} name={name} />
+        <Link to={`/games/${slug}`}>
+          {/* images */}
+          <CardsMedia background_image={background_image} name={name} />
 
-        <CardContent className="w-full text-white group-hover:pb-0">
-          {/* icons */}
-          {parent_platforms && (
-            <CardsPlatforms parent_platforms={parent_platforms} />
-          )}
+          <CardContent className="w-full text-white group-hover:pb-0">
+            {/* icons */}
+            {parent_platforms && (
+              <CardsPlatforms parent_platforms={parent_platforms} />
+            )}
 
-          {/* game name and metacritic */}
-          <CardsNameAndMetacritic name={name} metacritic={metacritic} />
+            {/* game name and metacritic */}
+            <CardsNameAndMetacritic name={name} metacritic={metacritic} />
 
-          <Stack direction={"row"} alignItems={"center"}>
-            {/* release date */}
-            <CardsReleaseDate released={released} />
+            <Stack direction={"row"} alignItems={"center"}>
+              {/* release date */}
+              <CardsReleaseDate released={released} />
 
-            {/* add to favorite */}
-            <IconButton
-              aria-label="add to favorite"
-              className="p-0"
-              onClick={() => addGames()}
-            >
-              {isFavorite ? (
-                <AiFillStar className="text-center text-yellow-500" />
-              ) : (
-                <AiOutlineStar className="text-center text-yellow-500" />
-              )}
-            </IconButton>
-          </Stack>
-        </CardContent>
+              {/* add to favorite */}
+              <IconButton
+                aria-label="add to favorite"
+                className="p-0"
+                onClick={() => addGames()}
+              >
+                {isFavorite ? (
+                  <AiFillStar className="text-center text-yellow-500" />
+                ) : (
+                  <AiOutlineStar className="text-center text-yellow-500" />
+                )}
+              </IconButton>
+            </Stack>
+          </CardContent>
+        </Link>
       </Card>
 
       {/* snackbar */}

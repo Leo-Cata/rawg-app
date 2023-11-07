@@ -38,11 +38,17 @@ const CardsPlatforms = ({
     web: <SiGooglechrome />,
     linux: <SiLinux size="17px" />,
   };
+
   return (
-    <Stack direction={"row"} flexWrap={"wrap"} className="mb-1 space-x-2">
+    <Stack
+      direction={"row"}
+      flexWrap={"wrap"}
+      className="w-fit space-x-2"
+      alignItems={"flex-end"}
+    >
       {parent_platforms.map((platforms) => (
         <Tooltip
-          title={platforms.platform.slug}
+          title={platforms.platform.name}
           key={platforms.platform.name}
           placement="top"
           TransitionComponent={Zoom}
