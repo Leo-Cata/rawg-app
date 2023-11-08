@@ -7,6 +7,8 @@ import DescriptionGamePage from "./DescriptionGamePage";
 import MetascoreDetailsGamePage from "./Details/MetascoreDetailsGamePage";
 import ArrayDetails from "./Details/ArrayDetails";
 import TagsGamePage from "./TagsGamePage";
+import ImageGamePage from "./Details/ImageGamePage";
+import CarouselGamePage from "./Details/CarouselGamePage";
 
 const GamePage = ({
   gameData,
@@ -15,9 +17,6 @@ const GamePage = ({
   gameData: GameInfo;
   gameScreenshots: GameScreenshots[];
 }) => {
-  console.log("🚀 ~ gameScreenshots:", gameScreenshots);
-  console.log(gameData.tags);
-
   return (
     <Grid container justifyContent={"center"} marginY={8} px={2}>
       <Grid item className=" space-y-8" maxWidth={"1200px"}>
@@ -26,7 +25,10 @@ const GamePage = ({
           {gameData.name}
         </Typography>
 
-        {/* carousel */}
+        <ImageGamePage
+          background_image={gameData.background_image}
+          name={gameData.name}
+        />
 
         {/* chips for release date, playtime and platforms */}
         <ChipsGamePage
@@ -37,6 +39,9 @@ const GamePage = ({
 
         {/* game description */}
         <DescriptionGamePage gameDescription={gameData.description} />
+
+        {/* carousel */}
+        <CarouselGamePage gameScreenshots={gameScreenshots} />
 
         {/* information columns */}
         <Stack
