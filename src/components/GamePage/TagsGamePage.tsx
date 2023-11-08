@@ -9,7 +9,7 @@ const TagsGamePage = ({ tags }: { tags: Genres[] }) => {
       <TitleDetails title="Tags" />
       {tags && (
         <Typography>
-          {tags
+          {tags.length
             ? tags.map((tag, index) => (
                 <React.Fragment key={tag.id}>
                   {tag.name}
