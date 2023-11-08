@@ -45,14 +45,11 @@ const GamePage = ({
           maxWidth={"600px"}
         >
           {/* esrb rating */}
-          {
-            <DetailsGamePage
-              title="Age rating"
-              text={
-                gameData.esrb_rating ? gameData.esrb_rating.name : undefined
-              }
-            />
-          }
+
+          <DetailsGamePage
+            title="Age rating"
+            text={gameData.esrb_rating ? gameData.esrb_rating.name : undefined}
+          />
 
           {/* metascore */}
           <MetascoreDetailsGamePage metascore={gameData.metacritic} />

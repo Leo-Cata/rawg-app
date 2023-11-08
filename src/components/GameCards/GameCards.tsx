@@ -105,39 +105,41 @@ const GameCards = ({
 
   return (
     <>
-      <Card className="rounded-2xl transition-all hover:scale-105 hover:cursor-pointer">
+      <Card className="rounded-2xl transition-all hover:scale-105">
         <Link to={`/games/${slug}`}>
           {/* images */}
           <CardsMedia background_image={background_image} name={name} />
-
-          <CardContent className="w-full text-white group-hover:pb-0">
-            {/* icons */}
-            {parent_platforms && (
-              <CardsPlatforms parent_platforms={parent_platforms} />
-            )}
-
-            {/* game name and metacritic */}
-            <CardsNameAndMetacritic name={name} metacritic={metacritic} />
-
-            <Stack direction={"row"} alignItems={"center"}>
-              {/* release date */}
-              <CardsReleaseDate released={released} />
-
-              {/* add to favorite */}
-              <IconButton
-                aria-label="add to favorite"
-                className="p-0"
-                onClick={() => addGames()}
-              >
-                {isFavorite ? (
-                  <AiFillStar className="text-center text-yellow-500" />
-                ) : (
-                  <AiOutlineStar className="text-center text-yellow-500" />
-                )}
-              </IconButton>
-            </Stack>
-          </CardContent>
         </Link>
+
+        <CardContent className="w-full text-white group-hover:pb-0">
+          {/* icons */}
+          {parent_platforms && (
+            <CardsPlatforms parent_platforms={parent_platforms} />
+          )}
+
+          {/* game name and metacritic */}
+          <Link to={`/games/${slug}`}>
+            <CardsNameAndMetacritic name={name} metacritic={metacritic} />
+          </Link>
+
+          <Stack direction={"row"} alignItems={"center"}>
+            {/* release date */}
+            <CardsReleaseDate released={released} />
+
+            {/* add to favorite */}
+            <IconButton
+              aria-label="add to favorite"
+              className="p-0"
+              onClick={() => addGames()}
+            >
+              {isFavorite ? (
+                <AiFillStar className="text-center text-yellow-500" />
+              ) : (
+                <AiOutlineStar className="text-center text-yellow-500" />
+              )}
+            </IconButton>
+          </Stack>
+        </CardContent>
       </Card>
 
       {/* snackbar */}
