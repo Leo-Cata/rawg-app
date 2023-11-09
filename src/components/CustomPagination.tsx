@@ -3,6 +3,7 @@ import { PaginationPropsType } from "../Types/Types";
 
 const CustomPagination = ({
   setPageNumber,
+  pageNumber,
   itemsCount,
   itemsPerPage,
 }: PaginationPropsType) => {
@@ -13,15 +14,6 @@ const CustomPagination = ({
 
   // gets window width
   const windowsWidth = window.innerWidth;
-
-  const scrollToTop = () => {
-    //must be written this way because window.scroll does not work when routing
-    document.documentElement.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
   return (
     <>
       {numberOfPages > 1 && (
@@ -32,9 +24,10 @@ const CustomPagination = ({
           color="primary"
           className="flex w-full justify-center pb-4"
           onChange={(_, page) => {
-            scrollToTop();
             setPageNumber(page);
+            console.log(page);
           }}
+          page={pageNumber}
           siblingCount={windowsWidth > 500 ? 2 : 0}
         />
       )}

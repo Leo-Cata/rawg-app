@@ -19,6 +19,7 @@ const GamesContainer = () => {
 
   // set page number
   const [pageNumber, setPageNumber] = useState<number>(1);
+  console.log(pageNumber);
 
   // state to save and set gamesOrdering
   const [gamesOrdering, setGamesOrdering] = useState("relevance");
@@ -80,6 +81,17 @@ const GamesContainer = () => {
   // pass the game data and the number of groups and return an array of arrays
   const groupedData = groupData(gameData?.results, numberOfGroups);
 
+  // once there is gameData scroll up
+  if (gameData) {
+    (() => {
+      //must be written this way because window.scroll does not work when routing
+      document.documentElement.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    })();
+  }
+
   return (
     <Stack spacing={4} paddingX={2}>
       {/* order selector and search bar */}
@@ -92,9 +104,9 @@ const GamesContainer = () => {
       </Stack>
 
       {/* game cards/skeleton */}
-      <Stack className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-        {gameData ? (
-          groupedData.map((group, index) => (
+      {gameData ? (
+        <Stack className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+          {groupedData.map((group, index) => (
             <Stack
               key={group[index]?.slug || `group_${index}`}
               className="space-y-4"
@@ -120,17 +132,18 @@ const GamesContainer = () => {
                 />
               ))}
             </Stack>
-          ))
-        ) : (
-          <CardsSkeleton itemsPerPage={itemsPerPage} />
-        )}
-      </Stack>
+          ))}
+        </Stack>
+      ) : (
+        <CardsSkeleton itemsPerPage={itemsPerPage} />
+      )}
 
       {/* pagination */}
       <CustomPagination
         setPageNumber={setPageNumber}
         itemsCount={gameData?.count}
         itemsPerPage={itemsPerPage}
+        pageNumber={pageNumber}
       />
     </Stack>
   );

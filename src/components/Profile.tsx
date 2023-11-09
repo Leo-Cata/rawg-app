@@ -15,7 +15,6 @@ import { ProfileData } from "../Types/Types";
 import { useState } from "react";
 import { deleteSavedGames } from "../Firebase/DeleteSavedGames";
 import { deleteAccount } from "../Firebase/DeleteAccount";
-// import { signOutGoogle } from "../Firebase/SignOutOfGoogle";
 
 const Profile = ({
   userPhoto,
