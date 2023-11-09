@@ -101,10 +101,9 @@ const ProfileContainer = ({ userDisplayName, userPhoto }: UserDataType) => {
         savedGamesLength={savedGames?.length}
         userId={userId}
       />
-
-      <Stack className="grid w-full grid-cols-1 gap-4 px-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-        {savedGames ? (
-          groupedGamesData.map((group, index) => (
+      {savedGames ? (
+        <Stack className="grid w-full grid-cols-1 gap-4 px-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+          {groupedGamesData.map((group, index) => (
             <Stack key={`group_${index}`} className="space-y-4">
               {group.map((game) => (
                 <GameCards
@@ -120,12 +119,14 @@ const ProfileContainer = ({ userDisplayName, userPhoto }: UserDataType) => {
                 />
               ))}
             </Stack>
-          ))
-        ) : (
-          <CardsSkeleton itemsPerPage={itemsPerPage} />
-        )}
-      </Stack>
+          ))}
+        </Stack>
+      ) : (
+        <CardsSkeleton itemsPerPage={itemsPerPage} />
+      )}
+
       <CustomPagination
+        pageNumber={PageNumber}
         setPageNumber={setPageNumber}
         itemsPerPage={itemsPerPage}
         itemsCount={savedGames?.length}

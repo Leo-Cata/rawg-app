@@ -127,6 +127,7 @@ export interface ItemsPerPage {
 // pagination props
 export interface PaginationPropsType extends ItemsPerPage {
   setPageNumber: (value: number) => void;
+  pageNumber: number;
   itemsCount: number | undefined;
 }
 
