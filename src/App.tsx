@@ -50,6 +50,10 @@ const App = () => {
               element={<GamesContainer key={gamesContainerKey} />}
             />
             <Route
+              path="/search/:slug"
+              element={<GamesContainer key={gamesContainerKey} />}
+            />
+            <Route
               path="/profile"
               element={
                 <ProfileContainer
