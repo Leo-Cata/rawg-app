@@ -10,7 +10,7 @@ const ImageGamePage = ({
       <img
         src={background_image}
         alt={`${name} background img`}
-        className="max-w-auto rounded-2xl sm:max-w-[640px]"
+        className="w-full rounded-2xl "
       />
     </div>
   );

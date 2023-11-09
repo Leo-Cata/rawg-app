@@ -23,3 +23,22 @@ h3 {
 .MuiInputBase-root::after {
   border-bottom: 10px solid purple;
 } */
+
+/* swiper buttons */
+.swiper-button-prev,
+.swiper-button-next {
+  color: #7d2b81;
+}
+
+/* swiper pagination progress bar */
+.swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
+  background-color: #7d2b81;
+  height: 6px;
+}
+.swiper-horizontal > .swiper-pagination-progressbar,
+.swiper-pagination-progressbar.swiper-pagination-horizontal,
+.swiper-vertical
+  > .swiper-pagination-progressbar.swiper-pagination-progressbar-opposite,
+.swiper-pagination-progressbar.swiper-pagination-vertical.swiper-pagination-progressbar-opposite {
+  height: 6px;
+}
