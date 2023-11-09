@@ -10,6 +10,7 @@ import OrderSelector from "../components/OrderSelector";
 import CustomPagination from "../components/CustomPagination";
 import groupData from "../utils/GroupedData";
 import CardsSkeleton from "../components/CardsSkeleton";
+import { handleResize } from "../utils/WindowWidth";
 
 const GamesContainer = () => {
   // set page number
@@ -63,26 +64,16 @@ const GamesContainer = () => {
 
   // useEffect to set the windows width
   useEffect(() => {
-    const handleResize = () => {
-      // gets the current viewport width to set the numbers of groups
-      const newViewportWidth = window.innerWidth;
-      if (newViewportWidth <= 639) {
-        setNumberOfGroups(1);
-      } else if (newViewportWidth <= 767) {
-        setNumberOfGroups(2);
-      } else if (newViewportWidth <= 1279) {
-        setNumberOfGroups(3);
-      } else {
-        setNumberOfGroups(4);
-      }
-    };
-    // runs the code once to set the initial value
-    handleResize();
+    // passes the setter to dynamically manage the number of rows
+    handleResize(setNumberOfGroups);
+
+    // wrapper callback to prevent handleResize from running in the listener
+    const handleResizeWrapper = () => handleResize(setNumberOfGroups);
 
     // runs whenever the windows is resized
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResizeWrapper);
 
-    return () => window.removeEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResizeWrapper);
   }, []);
 
   // pass the game data and the number of groups and return an array of arrays

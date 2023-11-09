@@ -7,8 +7,8 @@ import DescriptionGamePage from "./DescriptionGamePage";
 import MetascoreDetailsGamePage from "./Details/MetascoreDetailsGamePage";
 import ArrayDetails from "./Details/ArrayDetails";
 import TagsGamePage from "./TagsGamePage";
-import ImageGamePage from "./Details/ImageGamePage";
-import CarouselGamePage from "./Details/CarouselGamePage";
+import ImageGamePage from "./ImageGamePage";
+import CarouselGamePage from "./CarouselGamePage";
 
 const GamePage = ({
   gameData,
@@ -19,7 +19,7 @@ const GamePage = ({
 }) => {
   return (
     <Grid container justifyContent={"center"} marginY={8} px={2}>
-      <Grid item className=" space-y-8" maxWidth={"1200px"}>
+      <Grid item maxWidth={"1200px"} width={"100%"} className="space-y-8">
         {/* tittle */}
         <Typography variant="h1" textAlign={"center"}>
           {gameData.name}
