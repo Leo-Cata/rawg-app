@@ -11,16 +11,17 @@ import CustomPagination from "../components/CustomPagination";
 import groupData from "../utils/GroupedData";
 import CardsSkeleton from "../components/CardsSkeleton";
 import { handleResize } from "../utils/WindowWidth";
+import { useParams } from "react-router-dom";
 
 const GamesContainer = () => {
+  // gets the slug from the browsers search bar
+  const URLSlug = useParams();
+
   // set page number
   const [pageNumber, setPageNumber] = useState<number>(1);
 
   // state to save and set gamesOrdering
   const [gamesOrdering, setGamesOrdering] = useState("relevance");
-
-  // state to search for a game
-  const [gameSearchString, setGameSearchString] = useState<string>("");
 
   //save game data
   const [gameData, setGameData] = useState<GamesSearch>();
@@ -49,7 +50,7 @@ const GamesContainer = () => {
         }
         const resp = await getGames({
           page_size: itemsPerPage,
-          search: gameSearchString,
+          search: URLSlug.slug,
           ordering: gamesOrdering,
           page: pageNumber,
         });
@@ -60,7 +61,7 @@ const GamesContainer = () => {
     };
 
     fetchGames();
-  }, [userId, gameSearchString, gamesOrdering, pageNumber, setSavedGames]);
+  }, [userId, gamesOrdering, pageNumber, setSavedGames, URLSlug]);
 
   // useEffect to set the windows width
   useEffect(() => {
@@ -87,7 +88,7 @@ const GamesContainer = () => {
           setGamesOrdering={setGamesOrdering}
           gamesOrdering={gamesOrdering}
         />
-        <SearchBar setGameSearchString={setGameSearchString} />
+        <SearchBar />
       </Stack>
 
       {/* game cards/skeleton */}

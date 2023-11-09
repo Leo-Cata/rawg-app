@@ -1,9 +1,11 @@
 import { InputAdornment, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { ChangeEvent, useState } from "react";
-import { SetSearch } from "../Types/Types";
+import { useNavigate } from "react-router-dom";
 
-const SearchBar = ({ setGameSearchString }: SetSearch) => {
+const SearchBar = () => {
+  // navigation
+  const nav = useNavigate();
   // searchString for displaying the value and setting setSearch
   const [searchString, setSearchString] = useState<string>("");
 
@@ -12,14 +14,13 @@ const SearchBar = ({ setGameSearchString }: SetSearch) => {
     // prevents from reloading when hitting enter
     event.preventDefault();
 
-    // if its a change event, setSearchString to the value, else if its a submit setSearch
+    // if its a change event, setSearchString to the value, else if its a submit navs to searchString
     if (event.type === "change") {
       setSearchString(event.target.value);
     } else if (event.type === "submit") {
-      setGameSearchString(searchString);
+      nav(`/search/${searchString}`);
     }
   };
-
   return (
     <TextField
       component={"form"}
@@ -33,8 +34,8 @@ const SearchBar = ({ setGameSearchString }: SetSearch) => {
         endAdornment: (
           <InputAdornment
             position="end"
-            onClick={() => setGameSearchString(searchString)}
-            onTouchEnd={() => setGameSearchString(searchString)}
+            onClick={() => setSearchString(searchString)}
+            onTouchEnd={() => setSearchString(searchString)}
             className="cursor-pointer text-white"
           >
             <SearchIcon />
