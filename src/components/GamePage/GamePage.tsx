@@ -51,30 +51,40 @@ const GamePage = ({
         <CarouselGamePage gameScreenshots={gameScreenshots} />
 
         {/* information columns */}
-        <Stack
-          display={"grid"}
-          gridTemplateColumns={"repeat(2, minmax(0, 1fr))"}
-          maxWidth={"600px"}
-        >
-          {/* esrb rating */}
+        <div>
+          <Stack
+            display={"grid"}
+            gridTemplateColumns={"repeat(2, minmax(0, 1fr))"}
+            maxWidth={"600px"}
+          >
+            {/* esrb rating */}
 
-          <DetailsGamePage
-            title="Age rating"
-            text={gameData.esrb_rating ? gameData.esrb_rating.name : undefined}
-          />
+            <DetailsGamePage
+              title="Age rating"
+              text={
+                gameData.esrb_rating ? gameData.esrb_rating.name : undefined
+              }
+            />
 
-          {/* metascore */}
-          <MetascoreDetailsGamePage metascore={gameData.metacritic} />
+            {/* metascore */}
+            <MetascoreDetailsGamePage metascore={gameData.metacritic} />
 
-          {/* platforms */}
-          <ArrayDetails title="Platforms" platforms={gameData.platforms} />
+            {/* platforms */}
+            <ArrayDetails title="Platforms" platforms={gameData.platforms} />
 
-          {/* genres */}
-          <ArrayDetails title="Genres" genres={gameData.genres} />
-        </Stack>
+            {/* genres */}
+            <ArrayDetails title="Genres" tags={gameData.genres} />
 
-        {/* tags */}
-        <TagsGamePage tags={gameData.tags} />
+            {/* developers */}
+            <ArrayDetails title="Developers" tags={gameData.developers} />
+
+            {/* publishers */}
+            <ArrayDetails title="Publishers" tags={gameData.publishers} />
+          </Stack>
+
+          {/* tags */}
+          <TagsGamePage tags={gameData.tags} />
+        </div>
       </Grid>
     </Grid>
   );
