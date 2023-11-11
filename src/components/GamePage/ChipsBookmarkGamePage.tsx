@@ -41,6 +41,11 @@ const ChipsBookmarkGamePage = ({
 
   // function to add important game data to favorites and show visual feedback for favorite games
   const addGames = async () => {
+    // opens the snackbar, sets the text to loading and color to info
+    setIsSnackbarOpen(true);
+    setSnackbarMessage(`Loading...`);
+    setSeverity("info");
+
     if (userId) {
       try {
         await addAndRemoveGames(
@@ -64,7 +69,10 @@ const ChipsBookmarkGamePage = ({
           } `,
         );
         setSeverity(`${isBookmarked ? "error" : "success"}`);
-        // opens the snackbar
+
+        // closes the current snackbar and then reopens it updated
+        setIsSnackbarOpen(false);
+
         setIsSnackbarOpen(true);
       } catch (error) {
         console.log(error);

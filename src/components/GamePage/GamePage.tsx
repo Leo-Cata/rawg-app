@@ -73,7 +73,7 @@ const GamePage = ({
             <ArrayDetails title="Platforms" platforms={gameData.platforms} />
 
             {/* genres */}
-            <ArrayDetails title="Tags" tags={gameData.genres} />
+            <ArrayDetails title="Genres" tags={gameData.genres} />
 
             {/* developers */}
             <ArrayDetails title="Developers" tags={gameData.developers} />
