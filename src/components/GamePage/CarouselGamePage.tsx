@@ -35,7 +35,7 @@ const CarouselGamePage = ({
               enabled: true,
             },
           },
-          0: { navigation: { enabled: false } },
+          320: { navigation: { enabled: false } },
         }}
         navigation={true}
         loop

@@ -1,14 +1,14 @@
 import { GameInfo, GameScreenshots } from "../../Types/Types";
 import { Grid, Typography, Stack } from "@mui/material";
 import DetailsGamePage from "./Details/DetailsGamePage";
-import ChipsGamePage from "./ChipsGamePage";
+import ChipsBookmarkGamePage from "./ChipsBookmarkGamePage";
 import DescriptionGamePage from "./DescriptionGamePage";
-// import CarouselGamePage from "./CarouselGamePage";
 import MetascoreDetailsGamePage from "./Details/MetascoreDetailsGamePage";
 import ArrayDetails from "./Details/ArrayDetails";
 import TagsGamePage from "./TagsGamePage";
 import ImageGamePage from "./ImageGamePage";
 import CarouselGamePage from "./CarouselGamePage";
+import { useLocation } from "react-router-dom";
 
 const GamePage = ({
   gameData,
@@ -17,6 +17,9 @@ const GamePage = ({
   gameData: GameInfo;
   gameScreenshots: GameScreenshots[];
 }) => {
+  // gets the state to check if the game is in favorite
+  const { state } = useLocation();
+
   return (
     <Grid container justifyContent={"center"} marginY={8} px={2}>
       <Grid item maxWidth={"1200px"} width={"100%"} className="space-y-8">
@@ -30,13 +33,17 @@ const GamePage = ({
           name={gameData.name}
         />
 
-        {/* chips for release date, playtime and platforms */}
-        <ChipsGamePage
-          releaseDate={gameData.released}
-          platforms={gameData.parent_platforms}
+        {/* chips for release date, playtime, platforms and to add to favorites */}
+        <ChipsBookmarkGamePage
+          released={gameData.released}
           playtime={gameData.playtime}
+          background_image={gameData.background_image}
+          parent_platforms={gameData.parent_platforms}
+          metacritic={gameData.metacritic}
+          name={gameData.name}
+          slug={gameData.slug}
+          isInFavorite={state}
         />
-
         {/* game description */}
         <DescriptionGamePage gameDescription={gameData.description} />
 

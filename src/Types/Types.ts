@@ -30,8 +30,7 @@ export interface Result {
   released: string;
 }
 
-export interface GameData
-  extends Omit<Result, "id" | "playtime" | "platforms"> {
+export interface GameData extends Omit<Result, "id" | "platforms"> {
   userId?: string | undefined | null;
   isInFavorite?: boolean;
 }
@@ -156,6 +155,7 @@ export interface Genres {
 }
 
 export interface GameInfo {
+  slug: string;
   name: string;
   description: string;
   metacritic: number;

@@ -19,7 +19,6 @@ const GamesContainer = () => {
 
   // set page number
   const [pageNumber, setPageNumber] = useState<number>(1);
-  console.log(pageNumber);
 
   // state to save and set gamesOrdering
   const [gamesOrdering, setGamesOrdering] = useState("relevance");
@@ -43,6 +42,7 @@ const GamesContainer = () => {
       try {
         if (userId) {
           setGameData(undefined);
+
           // gets the data from firestore
           const firestoreData = await readData(userId);
 
