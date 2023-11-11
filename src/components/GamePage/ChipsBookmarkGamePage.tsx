@@ -1,44 +1,29 @@
-// react hooks
-import { useState } from "react";
-
-// material components
 import {
-  Card,
-  CardContent,
-  Stack,
+  Box,
+  Chip,
   IconButton,
+  Stack,
   Snackbar,
   Alert,
   AlertColor,
 } from "@mui/material";
-
-// types
+import CardsPlatforms from "../GameCards/CardsPlatforms";
+import { yearFormatter } from "../../utils/YearFormatter";
 import { GameData } from "../../Types/Types";
-
-// react icons
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
-
-// firebase function to add and remove data
+import { useContext, useState } from "react";
+import { userIdContext } from "../../context/UserContext";
 import { addAndRemoveGames } from "../../Firebase/AddAndRemoveGames";
 
-// components
-import CardsMedia from "./CardsMedia";
-import CardsPlatforms from "./CardsPlatforms";
-import CardsReleaseDate from "./CardsReleaseDate";
-import CardsNameAndMetacritic from "./CardsNameAndMetacritic";
-
-// react-router-dom
-import { Link } from "react-router-dom";
-
-const GameCards = ({
+const ChipsBookmarkGamePage = ({
   background_image,
   parent_platforms,
   metacritic,
-  released,
   name,
-  userId,
-  isInFavorite,
   slug,
+  released,
+  playtime,
+  isInFavorite,
 }: GameData) => {
   // useState to change bookmark icon
   const [isBookmarked, setIsBookmarked] = useState(isInFavorite);
@@ -51,6 +36,8 @@ const GameCards = ({
 
   //alert severity aka color setter
   const [severity, setSeverity] = useState<AlertColor>("success");
+  //user id
+  const userId = useContext(userIdContext)?.userId;
 
   // function to add important game data to favorites and show visual feedback for favorite games
   const addGames = async () => {
@@ -101,42 +88,42 @@ const GameCards = ({
       setIsSnackbarOpen(true);
     }
   };
-  console.log(isBookmarked, isInFavorite);
 
   return (
     <>
-      <Card className="rounded-2xl transition-all hover:scale-105">
-        <Link to={`/games/${slug}`} state={isBookmarked}>
-          {/* images */}
-          <CardsMedia background_image={background_image} name={name} />
-        </Link>
+      <Box className="space-y-1 font-bold">
+        <Stack
+          direction={"row"}
+          alignItems={"center"}
+          justifyContent={"space-between"}
+        >
+          <Chip
+            label={`Released: ${
+              released ? yearFormatter(released) : "Unannounced"
+            }`}
+            color="primary"
+          />
+          <CardsPlatforms parent_platforms={parent_platforms} />
+        </Stack>
 
-        <CardContent className="w-full text-white group-hover:pb-0">
-          {/* icons */}
-          {parent_platforms && (
-            <CardsPlatforms parent_platforms={parent_platforms} />
-          )}
+        <Stack
+          direction={"row"}
+          alignItems={"center"}
+          justifyContent={"space-between"}
+        >
+          {/* playtime */}
+          <Chip label={`Average Playtime: ${playtime} Hours`} color="primary" />
 
-          {/* game name and metacritic */}
-          <Link to={`/games/${slug}`}>
-            <CardsNameAndMetacritic name={name} metacritic={metacritic} />
-          </Link>
-
-          <Stack direction={"row"} alignItems={"center"}>
-            {/* release date */}
-            <CardsReleaseDate released={released} />
-
-            {/* add to favorite */}
-            <IconButton
-              aria-label="add to favorite"
-              onClick={addGames}
-              className="p-1 text-yellow-500"
-            >
-              {isBookmarked ? <FaBookmark /> : <FaRegBookmark />}
-            </IconButton>
-          </Stack>
-        </CardContent>
-      </Card>
+          {/* bookmark */}
+          <IconButton
+            aria-label="add to bookmarks"
+            onClick={addGames}
+            className="text-yellow-500"
+          >
+            {isBookmarked ? <FaBookmark /> : <FaRegBookmark />}
+          </IconButton>
+        </Stack>
+      </Box>
 
       {/* snackbar */}
       <Snackbar
@@ -154,4 +141,4 @@ const GameCards = ({
   );
 };
 
-export default GameCards;
+export default ChipsBookmarkGamePage;

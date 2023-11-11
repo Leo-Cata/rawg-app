@@ -19,8 +19,9 @@ const GamePageContainer = () => {
         try {
           // fetch the info of the game
           const gameInfo = await getGameInfo(slug);
-          //
           setGameData(gameInfo.data);
+
+          // get images
           const gameImages = await getGameScreenshots(slug);
           setGameScreenshots(gameImages.data.results);
         } catch (error) {
