@@ -1,15 +1,15 @@
 import { Typography, Box } from "@mui/material";
 import React from "react";
-import { Genres, Parent_Platforms } from "../../../Types/Types";
+import { Tags, Parent_Platforms } from "../../../Types/Types";
 import TitleDetails from "./TitleDetails";
 
 const ArrayDetails = ({
   platforms,
-  genres,
+  tags,
   title,
 }: {
   platforms?: Parent_Platforms[];
-  genres?: Genres[];
+  tags?: Tags[];
   title: string;
 }) => {
   return (
@@ -31,15 +31,15 @@ const ArrayDetails = ({
         </Typography>
       )}
 
-      {genres && (
+      {tags?.length && (
         <Typography>
-          {genres
-            ? genres.map((array, index) => (
+          {tags
+            ? tags.map((array, index) => (
                 <React.Fragment key={array.id}>
                   {array.name}
 
                   {/* if the index is equal to the length + 1 of the GameInfoPlatform, don't add a coma */}
-                  {genres.length === index + 1 ? "" : ", "}
+                  {tags.length === index + 1 ? "" : ", "}
                 </React.Fragment>
               ))
             : "Not Found"}

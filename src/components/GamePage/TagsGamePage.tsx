@@ -1,9 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import TitleDetails from "./Details/TitleDetails";
-import { Genres } from "../../Types/Types";
+import { Tags } from "../../Types/Types";
 import React from "react";
 
-const TagsGamePage = ({ tags }: { tags: Genres[] }) => {
+const TagsGamePage = ({ tags }: { tags: Tags[] }) => {
   return (
     <Box maxWidth={"600px"}>
       <TitleDetails title="Tags" />

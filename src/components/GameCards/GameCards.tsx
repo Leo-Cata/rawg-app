@@ -101,7 +101,6 @@ const GameCards = ({
       setIsSnackbarOpen(true);
     }
   };
-  console.log(isBookmarked, isInFavorite);
 
   return (
     <>

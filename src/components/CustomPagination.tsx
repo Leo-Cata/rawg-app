@@ -25,7 +25,7 @@ const CustomPagination = ({
           className="flex w-full justify-center pb-4"
           onChange={(_, page) => {
             setPageNumber(page);
-            console.log(page);
+            page;
           }}
           page={pageNumber}
           siblingCount={windowsWidth > 500 ? 2 : 0}

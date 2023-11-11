@@ -70,7 +70,7 @@ const Profile = ({
           {userDisplayName}
         </Typography>
         <Typography variant="body1">
-          {savedGamesLength ? savedGamesLength : "0"} Games Saved
+          {savedGamesLength ? savedGamesLength : "0"} Games Backlogged
         </Typography>
       </Paper>
 

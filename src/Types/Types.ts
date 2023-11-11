@@ -149,7 +149,7 @@ export interface GameInfoPlatform extends Platforms {
   requirements: Requirements[];
 }
 
-export interface Genres {
+export interface Tags {
   name: string;
   id: number;
 }
@@ -168,8 +168,10 @@ export interface GameInfo {
   platforms: GameInfoPlatform[];
   parent_platforms: Parent_Platforms[];
   background_image: string;
-  genres: Genres[];
-  tags: Genres[];
+  genres: Tags[];
+  tags: Tags[];
+  developers: Tags[];
+  publishers: Tags[];
 }
 
 // game screenshots results
