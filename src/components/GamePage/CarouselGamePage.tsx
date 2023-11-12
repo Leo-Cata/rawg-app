@@ -26,6 +26,7 @@ const CarouselGamePage = ({
   const handleClose = () => {
     setIsImageOpen(false);
   };
+
   return (
     <>
       <Swiper
@@ -56,6 +57,7 @@ const CarouselGamePage = ({
           </SwiperSlide>
         ))}
       </Swiper>
+
       {/* full screens image */}
       {isImageOpen && (
         <div

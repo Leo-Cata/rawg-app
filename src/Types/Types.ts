@@ -1,3 +1,5 @@
+import { AlertColor } from "@mui/material";
+
 // /games search parameters
 export interface GamesSearchOptions {
   page?: number;
@@ -183,4 +185,20 @@ export interface GameScreenshots {
 export interface GameTagsProps {
   title: string;
   text?: string;
+}
+
+// add games util setters
+export interface AddGamesProps extends Omit<GameData, "isInFavorite"> {
+  setIsSnackbarOpen: (value: boolean) => void;
+  setSnackbarMessage: (value: string) => void;
+  setSeverity: (value: AlertColor) => void;
+  setIsBookmarked: (value: (prev: boolean | undefined) => boolean) => void;
+  isBookmarked: boolean | undefined;
+  userId: string | undefined | null;
+  name: string;
+  background_image: string;
+  metacritic: number;
+  parent_platforms: Parent_Platforms[];
+  released: string;
+  slug: string;
 }
