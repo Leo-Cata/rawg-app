@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import { Routes, Route } from "react-router-dom";
 import ProfileContainer from "./containers/ProfileContainer";
 import GamePageContainer from "./containers/GamePageContainer";
+import Footer from "./components/Footer";
 
 const App = () => {
   // get the values and assert the type to use UserContextValues
@@ -36,9 +37,9 @@ const App = () => {
   }, [userId]);
 
   return (
-    <>
+    <main className="flex min-h-screen flex-col">
       {isLoaded && (
-        <>
+        <div className="flex-grow">
           <Navbar
             userDisplayName={profileData?.userDisplayName}
             userPhoto={profileData?.userPhoto}
@@ -64,9 +65,10 @@ const App = () => {
             />
             <Route path="/games/:slug" element={<GamePageContainer />} />
           </Routes>
-        </>
+        </div>
       )}
-    </>
+      <Footer />
+    </main>
   );
 };
 
