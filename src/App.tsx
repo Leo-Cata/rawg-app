@@ -4,7 +4,7 @@ import { userIdContext } from "./context/UserContext";
 import { UserContextValues, UserDataType } from "./Types/Types";
 import { checkIfLoggedIn } from "./Firebase/CheckIfLoggedIn";
 import { useState } from "react";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import { Routes, Route } from "react-router-dom";
 import ProfileContainer from "./containers/ProfileContainer";
 import GamePageContainer from "./containers/GamePageContainer";

@@ -7,15 +7,19 @@ import {
   Toolbar,
   ListItemIcon,
   Typography,
+  Button,
 } from "@mui/material";
-import { UserDataType } from "../Types/Types";
+import { UserDataType } from "../../Types/Types";
 import React, { useState } from "react";
-import { signOutGoogle } from "../Firebase/SignOutOfGoogle";
-import GoogleButton from "react-google-button";
-import { signInGoogle } from "../Firebase/SignInWithGoogle";
+import { signOutGoogle } from "../../Firebase/SignOutOfGoogle";
+import { FcGoogle } from "react-icons/fc";
+import { signInGoogle } from "../../Firebase/SignInWithGoogle";
 import { Link } from "react-router-dom";
 
 import { PiSignOutBold, PiUserBold, PiFlowerLotus } from "react-icons/pi";
+
+import SearchBar from "./SearchBar";
+import MobileSearchBar from "./MobileSearchBar";
 
 const Navbar = ({ userDisplayName, userPhoto, handleUserId }: UserDataType) => {
   // state to set the element
@@ -37,18 +41,28 @@ const Navbar = ({ userDisplayName, userPhoto, handleUserId }: UserDataType) => {
   return (
     <>
       <AppBar position="static" className="mb-4" component={"nav"}>
-        <Toolbar className="flex justify-between p-2">
+        <Toolbar className="flex justify-between space-x-4 p-2">
           <Link to={"/"} className="flex w-fit items-center">
             {/* icon */}
             <IconButton className="p-1">
-              <PiFlowerLotus className="text-5xl text-custom-secondary sm:text-5xl" />
+              <PiFlowerLotus className="text-5xl text-custom-secondary" />
             </IconButton>
 
             {/* site name */}
-            <Typography className="w-fit cursor-pointer" fontWeight={600}>
+            <Typography className="w-fit cursor-pointer pt-1" fontWeight={600}>
               Backlogged
             </Typography>
           </Link>
+
+          {/* desktop search bar */}
+          <div className="hidden w-full max-w-fit sm:block sm:max-w-[20rem] lg:max-w-[40rem]">
+            <SearchBar />
+          </div>
+
+          {/* mobile search bar */}
+          <div className="block sm:hidden">
+            <MobileSearchBar />
+          </div>
 
           {/* display sign in with google or account profile pic */}
           {userDisplayName ? (
@@ -61,11 +75,14 @@ const Navbar = ({ userDisplayName, userPhoto, handleUserId }: UserDataType) => {
               <Avatar src={userPhoto ? userPhoto : ""} />
             </IconButton>
           ) : (
-            <GoogleButton
-              label="Google Sign In"
-              className="ml-2"
+            <Button
+              variant="text"
+              color="info"
+              className="text-md font-bold capitalize"
               onClick={() => handleUserId && signInGoogle(handleUserId)}
-            />
+            >
+              Sign In With <FcGoogle className="pl-1" size="24px" />
+            </Button>
           )}
         </Toolbar>
       </AppBar>
