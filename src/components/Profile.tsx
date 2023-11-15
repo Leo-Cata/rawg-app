@@ -69,7 +69,7 @@ const Profile = ({
         <Typography className="py-2" variant="h5">
           {userDisplayName}
         </Typography>
-        <Typography variant="body1">
+        <Typography variant="body1" className="font-hyperlegible">
           {savedGamesLength ? savedGamesLength : "0"} Games Backlogged
         </Typography>
       </Paper>

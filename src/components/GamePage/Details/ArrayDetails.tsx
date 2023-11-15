@@ -17,7 +17,7 @@ const ArrayDetails = ({
       <TitleDetails title={title} />
       {/* for the GameInfoPlatform we map through them */}
       {platforms && (
-        <Typography>
+        <Typography variant="subtitle1" className="font-hyperlegible">
           {platforms
             ? platforms.map((array, index) => (
                 <React.Fragment key={array.platform.id}>
@@ -32,7 +32,7 @@ const ArrayDetails = ({
       )}
 
       {tags?.length && (
-        <Typography>
+        <Typography variant="subtitle1" className="font-hyperlegible">
           {tags
             ? tags.map((array, index) => (
                 <React.Fragment key={array.id}>

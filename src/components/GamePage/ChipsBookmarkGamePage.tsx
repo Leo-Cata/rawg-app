@@ -52,6 +52,7 @@ const ChipsBookmarkGamePage = ({
               released ? yearFormatter(released) : "Unannounced"
             }`}
             color="primary"
+            className=" font-hyperlegible"
           />
           <CardsPlatforms parent_platforms={parent_platforms} />
         </Stack>
@@ -62,7 +63,11 @@ const ChipsBookmarkGamePage = ({
           justifyContent={"space-between"}
         >
           {/* playtime */}
-          <Chip label={`Average Playtime: ${playtime} Hours`} color="primary" />
+          <Chip
+            label={`Average Playtime: ${playtime} Hours`}
+            color="primary"
+            className=" font-hyperlegible"
+          />
 
           {/* bookmark */}
           <IconButton

@@ -10,7 +10,9 @@ const DetailsGamePage = ({ title, text }: GameTagsProps) => {
 
       {/* if there is text display it */}
 
-      <Typography>{text ? text : "Not Found"}</Typography>
+      <Typography variant="subtitle1" className="font-hyperlegible">
+        {text ? text : "Not Found"}
+      </Typography>
     </Box>
   );
 };
