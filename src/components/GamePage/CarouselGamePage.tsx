@@ -1,4 +1,5 @@
 import { GameScreenshots } from "../../Types/Types";
+
 // Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -10,7 +11,13 @@ import "swiper/css/virtual";
 
 // modules from swiper
 import { Navigation, Virtual, Pagination, Autoplay } from "swiper/modules";
+
+// react hooks
 import { useEffect, useState } from "react";
+
+// close icon
+import { RiCloseCircleFill } from "react-icons/ri";
+
 const CarouselGamePage = ({
   gameScreenshots,
 }: {
@@ -28,6 +35,7 @@ const CarouselGamePage = ({
   };
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
   useEffect(() => {
     // sets the width
     const handleWindowResize = () => {
@@ -42,8 +50,22 @@ const CarouselGamePage = ({
     return () => window.removeEventListener("resize", handleWindowResize);
   }, []);
 
+  useEffect(() => {
+    // every time isImageOpen changes state, this will prevent the scrolling or enable it
+    if (isImageOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    // cleanup function
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isImageOpen]);
+
   return (
-    <>
+    <div>
       <Swiper
         navigation={windowWidth < 1000 ? false : true}
         loop
@@ -60,7 +82,12 @@ const CarouselGamePage = ({
             virtualIndex={index}
             onClick={() => handleOpen(index)}
           >
-            <img src={screenshot.image} alt="game screenshot" loading="lazy" />
+            <img
+              src={screenshot.image}
+              alt="game screenshot"
+              loading="lazy"
+              className="w-full rounded-2xl"
+            />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -69,16 +96,19 @@ const CarouselGamePage = ({
       {isImageOpen && (
         <div
           onClick={handleClose}
-          className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-75"
+          className="fixed left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center bg-black bg-opacity-75 "
         >
-          <img
-            src={selectedImage}
-            alt="fullscreen image"
-            className="max-h-full max-w-full"
-          />
+          <div className="relative">
+            <img
+              src={selectedImage}
+              alt="fullscreen image"
+              className="max-h-full max-w-full"
+            />
+            <RiCloseCircleFill className="absolute right-[1%] top-[1%] z-20 text-2xl font-extrabold" />
+          </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
