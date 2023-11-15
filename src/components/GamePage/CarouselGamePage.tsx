@@ -1,3 +1,4 @@
+// type
 import { GameScreenshots } from "../../Types/Types";
 
 // Swiper React components

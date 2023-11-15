@@ -1,3 +1,4 @@
+// mui components
 import {
   AppBar,
   Avatar,
@@ -9,11 +10,21 @@ import {
   Typography,
   Button,
 } from "@mui/material";
+
+// type
 import { UserDataType } from "../../Types/Types";
+
+// hooks
 import React, { useState } from "react";
+
+// firebase function to sign out/in
 import { signOutGoogle } from "../../Firebase/SignOutOfGoogle";
-import { FcGoogle } from "react-icons/fc";
 import { signInGoogle } from "../../Firebase/SignInWithGoogle";
+
+// react icons
+import { FcGoogle } from "react-icons/fc";
+
+// router link component
 import { Link } from "react-router-dom";
 
 import { PiSignOutBold, PiUserBold } from "react-icons/pi";

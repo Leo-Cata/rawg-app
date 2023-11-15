@@ -1,5 +1,8 @@
+// firebase methods
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "./Firebase";
+
+// type
 import { HandleUserId } from "../Types/Types";
 
 // function to sign in with google, gets a function which will set the userId

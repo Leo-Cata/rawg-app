@@ -1,6 +1,9 @@
+// firebase method
 import { getAuth } from "firebase/auth";
-import { db } from "./Database";
 import { deleteDoc, doc } from "firebase/firestore";
+
+// database ref
+import { db } from "./Database";
 
 export const deleteAccount = async (userId: string | null | undefined) => {
   // get user, if it exists  then delete

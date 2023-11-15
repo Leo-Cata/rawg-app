@@ -1,7 +1,16 @@
+// router params to get them from the url
 import { useParams } from "react-router-dom";
+
+// hooks
 import { useEffect, useState } from "react";
+
+// api fetchers
 import { getGameInfo, getGameScreenshots } from "../services/RawgApi";
+
+// types
 import { GameInfo, GameScreenshots } from "../Types/Types";
+
+// component
 import GamePage from "../components/GamePage/GamePage";
 
 const GamePageContainer = () => {

@@ -1,4 +1,7 @@
+// database ref
 import { db } from "./Database";
+
+// firebase methods
 import { deleteField, doc, getDoc, updateDoc } from "firebase/firestore";
 
 export const deleteSavedGames = async (userId: string | undefined | null) => {

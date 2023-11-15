@@ -1,3 +1,4 @@
+// mui component
 import {
   Paper,
   IconButton,
@@ -6,13 +7,18 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
-// icons
-import { AiOutlineMore } from "react-icons/ai";
-import { MdDelete } from "react-icons/md";
-import { AiFillStar } from "react-icons/ai";
 
+// react icons
+import { AiOutlineMore, AiFillStar } from "react-icons/ai";
+import { MdDelete } from "react-icons/md";
+
+// type
 import { ProfileData } from "../Types/Types";
+
+// hook
 import { useState } from "react";
+
+// functions to delete saved games/account
 import { deleteSavedGames } from "../Firebase/DeleteSavedGames";
 import { deleteAccount } from "../Firebase/DeleteAccount";
 

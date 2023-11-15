@@ -1,3 +1,4 @@
+// mui components
 import {
   Box,
   Chip,
@@ -7,13 +8,25 @@ import {
   Alert,
   AlertColor,
 } from "@mui/material";
+
+// component
 import CardsPlatforms from "../GameCards/CardsPlatforms";
+
+// formatter util
 import { yearFormatter } from "../../utils/YearFormatter";
+
+// type
 import { GameData } from "../../Types/Types";
+
+// react icons
 import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
+
+// react hooks and context
 import { useContext, useState } from "react";
 import { userIdContext } from "../../context/UserContext";
-import { addGames } from "../../utils/AddGames";
+
+// util to add and delete games
+import { gamesHandler } from "../../utils/AddGames";
 
 const ChipsBookmarkGamePage = ({
   background_image,
@@ -73,7 +86,7 @@ const ChipsBookmarkGamePage = ({
           <IconButton
             aria-label="add to bookmarks"
             onClick={() =>
-              addGames({
+              gamesHandler({
                 setIsSnackbarOpen,
                 setSnackbarMessage,
                 setSeverity,

@@ -1,4 +1,7 @@
+// mui components
 import { Box, Typography, Chip } from "@mui/material";
+
+// component
 import TitleDetails from "./TitleDetails";
 
 const MetascoreDetailsGamePage = ({ metascore }: { metascore: number }) => {

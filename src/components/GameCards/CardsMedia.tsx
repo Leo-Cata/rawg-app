@@ -1,3 +1,4 @@
+// mui component
 import { CardMedia } from "@mui/material";
 
 const CardsMedia = ({

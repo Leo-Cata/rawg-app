@@ -1,4 +1,4 @@
-// Import the functions you need from the SDKs you need
+// firebase methods
 import { initializeApp } from "firebase/app";
 
 import { getAuth, GoogleAuthProvider } from "firebase/auth";

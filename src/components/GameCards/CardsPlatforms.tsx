@@ -1,3 +1,4 @@
+// mui components
 import { Stack, Typography, Tooltip } from "@mui/material";
 
 // zoom animation for the tooltips

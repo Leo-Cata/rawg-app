@@ -1,5 +1,10 @@
+// firebase method
 import { onAuthStateChanged } from "firebase/auth";
+
+// auth ref
 import { auth } from "./Firebase";
+
+// types
 import { HandleUserId, SetIsLoaded, SetProfileData } from "../Types/Types";
 
 // function which will run on the first app mount, sets logged in, will set the id

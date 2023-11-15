@@ -28,7 +28,7 @@ import CardsNameAndMetacritic from "./CardsNameAndMetacritic";
 import { Link } from "react-router-dom";
 
 // function to add and remove data
-import { addGames } from "../../utils/AddGames";
+import { gamesHandler } from "../../utils/AddGames";
 
 const GameCards = ({
   background_image,
@@ -79,7 +79,7 @@ const GameCards = ({
             <IconButton
               aria-label="add to favorite"
               onClick={() =>
-                addGames({
+                gamesHandler({
                   setIsSnackbarOpen,
                   setSnackbarMessage,
                   setSeverity,

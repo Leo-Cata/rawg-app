@@ -1,6 +1,6 @@
+// type
 import { GameData } from "../Types/Types";
 
-// TODO: make 1 interface for fav games and results
 const groupData = (
   gameData: GameData[] | undefined,
   numberOfGroups: number,

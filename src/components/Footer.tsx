@@ -1,4 +1,7 @@
+// mui component
 import { AppBar, Box, Link, Stack, Toolbar, Typography } from "@mui/material";
+
+// react icons
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 const Footer = () => {
   return (

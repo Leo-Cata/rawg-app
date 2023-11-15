@@ -1,4 +1,7 @@
+// mui component
 import { Typography } from "@mui/material";
+
+// library to clean the HTML
 import DOMPurify from "dompurify";
 
 const DescriptionGamePage = ({

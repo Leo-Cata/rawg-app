@@ -1,3 +1,4 @@
+// mui component
 import { Typography } from "@mui/material";
 
 const TitleDetails = ({ title }: { title: string }) => {

@@ -1,6 +1,13 @@
+// mui components
 import { Typography, Box } from "@mui/material";
+
+// react import necessary for the fragments
 import React from "react";
+
+// types
 import { Tags, Parent_Platforms } from "../../../Types/Types";
+
+// component
 import TitleDetails from "./TitleDetails";
 
 const ArrayDetails = ({
