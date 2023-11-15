@@ -202,3 +202,9 @@ export interface AddGamesProps extends Omit<GameData, "isInFavorite"> {
   released: string;
   slug: string;
 }
+
+// search bar value state
+export interface SearchValue {
+  holdValue: string;
+  setHoldValue: (value: string) => void;
+}

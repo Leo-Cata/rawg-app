@@ -1,16 +1,38 @@
+// react hooks
 import { useContext, useEffect, useState } from "react";
+
+// api fetcher
 import { getGames } from "../services/RawgApi";
+
+// types
 import { GameData, GamesSearch } from "../Types/Types";
+
+// cards component for mapping
 import GameCards from "../components/GameCards/GameCards";
+
+// mui component
 import { Stack } from "@mui/material";
+
+//firebase data fetcher
 import { readData } from "../Firebase/Database";
+
+//context
 import { userIdContext } from "../context/UserContext";
-import SearchBar from "../components/SearchBar";
+
+// order selector component
 import OrderSelector from "../components/OrderSelector";
+
+// pagination
 import CustomPagination from "../components/CustomPagination";
+
+// utils to group the data depending on the windows width
 import groupData from "../utils/GroupedData";
-import CardsSkeleton from "../components/CardsSkeleton";
 import { handleResize } from "../utils/WindowWidth";
+
+// skeleton
+import CardsSkeleton from "../components/CardsSkeleton";
+
+// get params from url
 import { useParams } from "react-router-dom";
 
 const GamesContainer = () => {
@@ -94,14 +116,11 @@ const GamesContainer = () => {
 
   return (
     <Stack spacing={4} paddingX={2}>
-      {/* order selector and search bar */}
-      <Stack className="flex flex-col-reverse pt-6 sm:flex-row sm:justify-between sm:space-x-4">
-        <OrderSelector
-          setGamesOrdering={setGamesOrdering}
-          gamesOrdering={gamesOrdering}
-        />
-        <SearchBar />
-      </Stack>
+      {/* order selector  */}
+      <OrderSelector
+        setGamesOrdering={setGamesOrdering}
+        gamesOrdering={gamesOrdering}
+      />
 
       {/* game cards/skeleton */}
       {gameData ? (
