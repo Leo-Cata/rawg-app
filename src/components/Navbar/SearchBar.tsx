@@ -12,8 +12,8 @@ const SearchBar = ({
   holdValue,
   setHoldValue,
 }: {
-  holdValue: string;
-  setHoldValue: (value: string) => void;
+  holdValue?: string;
+  setHoldValue?: (value: string) => void;
 }) => {
   // navigation
   const nav = useNavigate();
@@ -31,7 +31,7 @@ const SearchBar = ({
       setSearchString(event.target.value);
 
       // sets the value to hold for mobile
-      setHoldValue(event.target.value);
+      setHoldValue && setHoldValue(event.target.value);
     } else if (event.type === "submit") {
       // if there is a string search, else go to main page
       if (searchString) {
