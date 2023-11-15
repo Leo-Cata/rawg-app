@@ -1,4 +1,7 @@
+// mui component
 import { Typography } from "@mui/material";
+
+// library to clean the HTML
 import DOMPurify from "dompurify";
 
 const DescriptionGamePage = ({
@@ -14,8 +17,8 @@ const DescriptionGamePage = ({
         About
       </Typography>
       <Typography
-        className="max-w-[1200px]"
-        variant="h6"
+        className="font-hyperlegible max-w-[1200px]"
+        variant="h5"
         dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
       />
     </div>

@@ -1,4 +1,7 @@
+// mui component
 import { Pagination } from "@mui/material";
+
+// type
 import { PaginationPropsType } from "../Types/Types";
 
 const CustomPagination = ({

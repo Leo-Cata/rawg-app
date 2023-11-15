@@ -1,3 +1,4 @@
+// firebase methods
 import {
   arrayRemove,
   arrayUnion,
@@ -5,7 +6,11 @@ import {
   getDoc,
   setDoc,
 } from "firebase/firestore";
+
+// database ref
 import { db } from "./Database";
+
+// type
 import { GameData } from "../Types/Types";
 
 export const addAndRemoveGames = async (game: GameData, userId: string) => {

@@ -1,4 +1,7 @@
+// mui component
 import { AppBar, Box, Link, Stack, Toolbar, Typography } from "@mui/material";
+
+// react icons
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 const Footer = () => {
   return (
@@ -10,26 +13,6 @@ const Footer = () => {
             width={"100%"}
             className="flex flex-col justify-evenly space-y-1 sm:flex-row sm:items-end"
           >
-            {/* rawg */}
-            <Box>
-              <Typography variant="subtitle1">
-                All Data Provided by {""}
-                <Link
-                  alignItems={"center"}
-                  justifyContent={"center"}
-                  className="font-bold text-blue-400  decoration-blue-400"
-                >
-                  <a
-                    href="https://rawg.io/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    RAWG
-                  </a>
-                </Link>
-              </Typography>
-            </Box>
-
             {/* github */}
 
             <Box>
@@ -58,6 +41,40 @@ const Footer = () => {
                   Connect With Me on LinkedIn
                 </Typography>
               </a>
+            </Box>
+
+            {/* rawg */}
+            <Box>
+              <Typography variant="subtitle1">
+                All Data Provided by {""}
+                <Link
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                  className="font-bold text-blue-400  decoration-blue-400"
+                >
+                  <a
+                    href="https://rawg.io/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    RAWG
+                  </a>
+                </Link>
+              </Typography>
+            </Box>
+
+            {/* icon */}
+            <Box>
+              <Typography variant="subtitle1">
+                <a
+                  href="https://www.flaticon.com/free-icons/lotus"
+                  title="lotus icons"
+                  className="flex flex-row items-center space-x-2 hover:text-blue-400 hover:underline "
+                >
+                  <img src="/lotus.png" alt="lotus icon" className="w-6 pr-1" />
+                  Lotus icon created by Hexagon075 - Flaticon
+                </a>
+              </Typography>
             </Box>
           </Stack>
         </Toolbar>

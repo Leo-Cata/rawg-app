@@ -1,9 +1,12 @@
+// firebase function to add and remove games
 import { addAndRemoveGames } from "../Firebase/AddAndRemoveGames";
+
+// type
 import { AddGamesProps } from "../Types/Types";
 
 // function to add important game data to favorites and show visual feedback for favorite games
 
-export const addGames = async ({
+export const gamesHandler = async ({
   setIsSnackbarOpen,
   setSnackbarMessage,
   setSeverity,

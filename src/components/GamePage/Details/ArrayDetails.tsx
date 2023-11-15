@@ -1,6 +1,13 @@
+// mui components
 import { Typography, Box } from "@mui/material";
+
+// react import necessary for the fragments
 import React from "react";
+
+// types
 import { Tags, Parent_Platforms } from "../../../Types/Types";
+
+// component
 import TitleDetails from "./TitleDetails";
 
 const ArrayDetails = ({
@@ -17,7 +24,7 @@ const ArrayDetails = ({
       <TitleDetails title={title} />
       {/* for the GameInfoPlatform we map through them */}
       {platforms && (
-        <Typography>
+        <Typography variant="subtitle1" className="font-hyperlegible">
           {platforms
             ? platforms.map((array, index) => (
                 <React.Fragment key={array.platform.id}>
@@ -32,7 +39,7 @@ const ArrayDetails = ({
       )}
 
       {tags?.length && (
-        <Typography>
+        <Typography variant="subtitle1" className="font-hyperlegible">
           {tags
             ? tags.map((array, index) => (
                 <React.Fragment key={array.id}>

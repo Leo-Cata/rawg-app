@@ -132,8 +132,28 @@ export interface PaginationPropsType extends ItemsPerPage {
   itemsCount: number | undefined;
 }
 
-// game info
+// game info starts
 
+// interface of the data you get when fetching a game
+export interface GameInfo {
+  slug: string;
+  name: string;
+  description: string;
+  metacritic: number;
+  metacritic_platforms: Metacritic_Platforms[];
+  released: string;
+  website: string;
+  playtime: number;
+  achievements: number;
+  esrb_rating: Esrb_rating;
+  platforms: GameInfoPlatform[];
+  parent_platforms: Parent_Platforms[];
+  background_image: string;
+  genres: Tags[];
+  tags: Tags[];
+  developers: Tags[];
+  publishers: Tags[];
+}
 // metacritic and their urls
 interface Metacritic_Platforms {
   metascore: number;
@@ -154,26 +174,6 @@ export interface GameInfoPlatform extends Platforms {
 export interface Tags {
   name: string;
   id: number;
-}
-
-export interface GameInfo {
-  slug: string;
-  name: string;
-  description: string;
-  metacritic: number;
-  metacritic_platforms: Metacritic_Platforms[];
-  released: string;
-  website: string;
-  playtime: number;
-  achievements: number;
-  esrb_rating: Esrb_rating;
-  platforms: GameInfoPlatform[];
-  parent_platforms: Parent_Platforms[];
-  background_image: string;
-  genres: Tags[];
-  tags: Tags[];
-  developers: Tags[];
-  publishers: Tags[];
 }
 
 // game screenshots results

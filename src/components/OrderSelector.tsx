@@ -1,3 +1,4 @@
+// mui components
 import {
   FormControl,
   InputLabel,
@@ -19,7 +20,7 @@ const OrderSelector = ({
   };
 
   return (
-    <FormControl className="max-w-[20rem]">
+    <FormControl className="w-full max-w-[20rem]">
       <InputLabel id="ordering-selector-label" className="capitalize">
         Order
       </InputLabel>

@@ -1,3 +1,4 @@
+// mui components
 import {
   AppBar,
   Avatar,
@@ -9,14 +10,24 @@ import {
   Typography,
   Button,
 } from "@mui/material";
+
+// type
 import { UserDataType } from "../../Types/Types";
+
+// hooks
 import React, { useState } from "react";
+
+// firebase function to sign out/in
 import { signOutGoogle } from "../../Firebase/SignOutOfGoogle";
-import { FcGoogle } from "react-icons/fc";
 import { signInGoogle } from "../../Firebase/SignInWithGoogle";
+
+// react icons
+import { FcGoogle } from "react-icons/fc";
+
+// router link component
 import { Link } from "react-router-dom";
 
-import { PiSignOutBold, PiUserBold, PiFlowerLotus } from "react-icons/pi";
+import { PiSignOutBold, PiUserBold } from "react-icons/pi";
 
 import SearchBar from "./SearchBar";
 import MobileSearchBar from "./MobileSearchBar";
@@ -46,8 +57,8 @@ const Navbar = ({ userDisplayName, userPhoto, handleUserId }: UserDataType) => {
         <Toolbar className="flex justify-between space-x-4 p-2">
           <Link to={"/"} className="flex w-fit items-center">
             {/* icon */}
-            <IconButton className="p-1">
-              <PiFlowerLotus className="text-5xl text-custom-secondary" />
+            <IconButton className="w-12 p-1">
+              <img src="/lotus.png" alt="lotus icon" />
             </IconButton>
 
             {/* site name */}

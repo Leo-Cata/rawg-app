@@ -1,4 +1,7 @@
+// mui component
 import { Skeleton } from "@mui/material";
+
+//type
 import { ItemsPerPage } from "../Types/Types";
 
 const CardsSkeleton = ({ itemsPerPage }: ItemsPerPage) => {

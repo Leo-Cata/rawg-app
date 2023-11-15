@@ -1,13 +1,29 @@
+// container which fetches the list of games
 import GamesContainer from "./containers/GamesContainer";
-import { useContext, useEffect } from "react";
+
+// hooks and context
+import { useContext, useEffect, useState } from "react";
 import { userIdContext } from "./context/UserContext";
+
+// types
 import { UserContextValues, UserDataType } from "./Types/Types";
+
+// function to check if the user is logged in
 import { checkIfLoggedIn } from "./Firebase/CheckIfLoggedIn";
-import { useState } from "react";
+
+// navbar component
 import Navbar from "./components/Navbar/Navbar";
+
+// router components
 import { Routes, Route } from "react-router-dom";
+
+// container which fetches the profile information
 import ProfileContainer from "./containers/ProfileContainer";
+
+// container which fetches data of a single game
 import GamePageContainer from "./containers/GamePageContainer";
+
+// footer
 import Footer from "./components/Footer";
 
 const App = () => {

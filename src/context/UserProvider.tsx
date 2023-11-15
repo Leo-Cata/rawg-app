@@ -1,5 +1,10 @@
-import React, { useState } from "react";
+// hook
+import { useState } from "react";
+
+// context
 import { userIdContext } from "./UserContext";
+
+// type
 import { HandleUserId, GameData } from "../Types/Types";
 
 const UserProvider = ({ children }: { children: React.ReactNode }) => {

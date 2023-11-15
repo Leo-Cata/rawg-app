@@ -1,5 +1,10 @@
+// types
 import { GameInfo, GameScreenshots } from "../../Types/Types";
+
+// mui components
 import { Grid, Typography, Stack } from "@mui/material";
+
+// components
 import DetailsGamePage from "./Details/DetailsGamePage";
 import ChipsBookmarkGamePage from "./ChipsBookmarkGamePage";
 import DescriptionGamePage from "./DescriptionGamePage";
@@ -8,6 +13,8 @@ import ArrayDetails from "./Details/ArrayDetails";
 import TagsGamePage from "./TagsGamePage";
 import ImageGamePage from "./ImageGamePage";
 import CarouselGamePage from "./CarouselGamePage";
+
+// router hook to get state from the url
 import { useLocation } from "react-router-dom";
 
 const GamePage = ({

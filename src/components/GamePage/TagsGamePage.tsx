@@ -1,6 +1,13 @@
+// mui component
 import { Box, Typography } from "@mui/material";
+
+// component
 import TitleDetails from "./Details/TitleDetails";
+
+//type
 import { Tags } from "../../Types/Types";
+
+//react to be able to use fragments
 import React from "react";
 
 const TagsGamePage = ({ tags }: { tags: Tags[] }) => {

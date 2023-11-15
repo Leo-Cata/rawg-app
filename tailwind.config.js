@@ -7,6 +7,9 @@ export default {
         "custom-primary": "#512B81",
         "custom-secondary": "#7d2b81",
       },
+      fontFamily: {
+        hyperlegible: ['"Atkinson Hyperlegible"', "sans-serif"],
+      },
     },
   },
   plugins: [],

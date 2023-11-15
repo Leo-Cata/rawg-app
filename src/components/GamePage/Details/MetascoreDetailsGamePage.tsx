@@ -1,11 +1,20 @@
+// mui components
 import { Box, Typography, Chip } from "@mui/material";
+
+// component
+import TitleDetails from "./TitleDetails";
 
 const MetascoreDetailsGamePage = ({ metascore }: { metascore: number }) => {
   return (
     <Box>
-      <Typography className="text-white/50 underline">Metascore</Typography>
+      <TitleDetails title="Metascore" />
       {metascore ? (
-        <Chip label={metascore} color="success" variant="outlined" />
+        <Chip
+          label={metascore}
+          color="success"
+          variant="outlined"
+          className=" font-hyperlegible my-1"
+        />
       ) : (
         <Typography>Not Found</Typography>
       )}

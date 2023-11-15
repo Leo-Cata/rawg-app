@@ -117,10 +117,12 @@ const GamesContainer = () => {
   return (
     <Stack spacing={4} paddingX={2}>
       {/* order selector  */}
-      <OrderSelector
-        setGamesOrdering={setGamesOrdering}
-        gamesOrdering={gamesOrdering}
-      />
+      <div className="flex w-full justify-center sm:block">
+        <OrderSelector
+          setGamesOrdering={setGamesOrdering}
+          gamesOrdering={gamesOrdering}
+        />
+      </div>
 
       {/* game cards/skeleton */}
       {gameData ? (

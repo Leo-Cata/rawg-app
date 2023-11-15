@@ -1,11 +1,14 @@
+// axios library import
 import axios from "axios";
+
+// type
 import { GamesSearchOptions } from "../Types/Types";
 
 const api = axios.create({
   baseURL: "https://api.rawg.io/api",
   params: {
     key: import.meta.env.VITE_REACT_APP_RAWG_API_KEY,
-    // search_exact: true,
+    // search_exact: true, change this to search for exact matches
     search_precise: true,
   },
 });
