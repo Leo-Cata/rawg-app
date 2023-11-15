@@ -10,7 +10,7 @@ import "swiper/css/virtual";
 
 // modules from swiper
 import { Navigation, Virtual, Pagination, Autoplay } from "swiper/modules";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const CarouselGamePage = ({
   gameScreenshots,
 }: {
@@ -27,18 +27,25 @@ const CarouselGamePage = ({
     setIsImageOpen(false);
   };
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  useEffect(() => {
+    // sets the width
+    const handleWindowResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    handleWindowResize();
+
+    // attaches the function to run when the window resizes
+    window.addEventListener("resize", handleWindowResize);
+
+    // cleanup function to prevent memory leak and unexpected behavior
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, []);
+
   return (
     <>
       <Swiper
-        breakpoints={{
-          1000: {
-            navigation: {
-              enabled: true,
-            },
-          },
-          320: { navigation: { enabled: false } },
-        }}
-        navigation={true}
+        navigation={windowWidth < 1000 ? false : true}
         loop
         pagination={{ clickable: true, type: "progressbar" }}
         modules={[Navigation, Virtual, Pagination, Autoplay]}
