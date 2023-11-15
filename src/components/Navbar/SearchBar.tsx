@@ -8,13 +8,10 @@ import { ChangeEvent, useState } from "react";
 // router dom hook
 import { useNavigate } from "react-router-dom";
 
-const SearchBar = ({
-  holdValue,
-  setHoldValue,
-}: {
-  holdValue?: string;
-  setHoldValue?: (value: string) => void;
-}) => {
+// type
+import { SearchValue } from "../../Types/Types";
+
+const SearchBar = ({ holdValue, setHoldValue }: SearchValue) => {
   // navigation
   const nav = useNavigate();
   // searchString for displaying the value and setting setSearch
@@ -30,7 +27,7 @@ const SearchBar = ({
       // set the search string
       setSearchString(event.target.value);
 
-      // sets the value to hold for mobile
+      // sets the value to hold when transitioning from mobile to desktop width
       setHoldValue && setHoldValue(event.target.value);
     } else if (event.type === "submit") {
       // if there is a string search, else go to main page
@@ -45,7 +42,7 @@ const SearchBar = ({
       component={"form"}
       onChange={handleChange}
       onSubmit={handleChange}
-      value={holdValue ? holdValue : searchString}
+      value={holdValue}
       placeholder="Search For A Game"
       variant="standard"
       className="w-full flex-grow px-2 "

@@ -38,6 +38,8 @@ const Navbar = ({ userDisplayName, userPhoto, handleUserId }: UserDataType) => {
     setAnchorElement(null);
   };
 
+  const [holdValue, setHoldValue] = useState("");
+
   return (
     <>
       <AppBar position="static" className="mb-4" component={"nav"}>
@@ -56,12 +58,15 @@ const Navbar = ({ userDisplayName, userPhoto, handleUserId }: UserDataType) => {
 
           {/* desktop search bar */}
           <div className="hidden w-full max-w-fit sm:block sm:max-w-[20rem] lg:max-w-[40rem]">
-            <SearchBar />
+            <SearchBar holdValue={holdValue} setHoldValue={setHoldValue} />
           </div>
 
           {/* mobile search bar */}
           <div className="block sm:hidden">
-            <MobileSearchBar />
+            <MobileSearchBar
+              holdValue={holdValue}
+              setHoldValue={setHoldValue}
+            />
           </div>
 
           {/* display sign in with google or account profile pic */}

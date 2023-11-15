@@ -7,8 +7,9 @@ import SearchIcon from "@mui/icons-material/Search";
 
 //search bar component
 import SearchBar from "./SearchBar";
+import { SearchValue } from "../../Types/Types";
 
-const MobileSearchBar = () => {
+const MobileSearchBar = ({ holdValue, setHoldValue }: SearchValue) => {
   // state to set the element
   const [anchorElement, setAnchorElement] = useState<null | HTMLElement>(null);
 
@@ -26,7 +27,6 @@ const MobileSearchBar = () => {
   };
 
   // state to hold the value of the search string on mobile
-  const [holdValue, setHoldValue] = useState("");
 
   return (
     <>
