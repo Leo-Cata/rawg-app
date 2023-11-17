@@ -29,6 +29,7 @@ import Profile from "../components/Profile";
 import CustomPagination from "../components/CustomPagination";
 import CardsSkeleton from "../components/CardsSkeleton";
 import { handleResize } from "../utils/WindowWidth";
+import NoGamesBacklogged from "../components/NoGamesBacklogged";
 
 const ProfileContainer = ({ userDisplayName, userPhoto }: UserDataType) => {
   // gets userId
@@ -42,6 +43,7 @@ const ProfileContainer = ({ userDisplayName, userPhoto }: UserDataType) => {
 
   // sets the saved games from firestore
   const [savedGames, setSavedGames] = useState<GameData[]>();
+  console.log("🚀 ~ ProfileContainer ~ savedGames:", savedGames);
 
   // sets the page to show the range of the sliced array
   const [PageNumber, setPageNumber] = useState<number>(1);
@@ -64,7 +66,8 @@ const ProfileContainer = ({ userDisplayName, userPhoto }: UserDataType) => {
       if (userId) {
         try {
           const firestoreData = await readData(userId);
-          setSavedGames(firestoreData?.games);
+
+          setSavedGames(firestoreData?.games || []);
         } catch (error) {
           console.log(error);
         }
@@ -101,7 +104,7 @@ const ProfileContainer = ({ userDisplayName, userPhoto }: UserDataType) => {
         savedGamesLength={savedGames?.length}
         userId={userId}
       />
-      {savedGames ? (
+      {savedGames?.length ? (
         <Stack className="grid w-full grid-cols-1 gap-4 px-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
           {groupedGamesData.map((group, index) => (
             <Stack key={`group_${index}`} className="space-y-4">
@@ -121,10 +124,11 @@ const ProfileContainer = ({ userDisplayName, userPhoto }: UserDataType) => {
             </Stack>
           ))}
         </Stack>
-      ) : (
+      ) : !savedGames ? (
         <CardsSkeleton itemsPerPage={itemsPerPage} />
+      ) : (
+        <NoGamesBacklogged />
       )}
-
       <CustomPagination
         pageNumber={PageNumber}
         setPageNumber={setPageNumber}
