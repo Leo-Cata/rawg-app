@@ -24,7 +24,7 @@ import ProfileContainer from "./containers/ProfileContainer";
 import GamePageContainer from "./containers/GamePageContainer";
 
 // footer
-import Footer from "./components/Footer";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   // get the values and assert the type to use UserContextValues
@@ -54,35 +54,38 @@ const App = () => {
 
   return (
     <main className="flex min-h-screen flex-col">
-      {isLoaded && (
-        <div className="flex-grow">
-          <Navbar
-            userDisplayName={profileData?.userDisplayName}
-            userPhoto={profileData?.userPhoto}
-            handleUserId={handleUserId}
-          />
-          <Routes>
-            <Route
-              path="/"
-              element={<GamesContainer key={gamesContainerKey} />}
+      <div className="mb-28 flex-grow">
+        {isLoaded && (
+          <>
+            <Navbar
+              userDisplayName={profileData?.userDisplayName}
+              userPhoto={profileData?.userPhoto}
+              handleUserId={handleUserId}
             />
-            <Route
-              path="/search/:slug"
-              element={<GamesContainer key={gamesContainerKey} />}
-            />
-            <Route
-              path="/profile"
-              element={
-                <ProfileContainer
-                  userDisplayName={profileData?.userDisplayName}
-                  userPhoto={profileData?.userPhoto}
-                />
-              }
-            />
-            <Route path="/games/:slug" element={<GamePageContainer />} />
-          </Routes>
-        </div>
-      )}
+            <Routes>
+              <Route
+                path="/"
+                element={<GamesContainer key={gamesContainerKey} />}
+              />
+              <Route
+                path="/search/:slug"
+                element={<GamesContainer key={gamesContainerKey} />}
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProfileContainer
+                    userDisplayName={profileData?.userDisplayName}
+                    userPhoto={profileData?.userPhoto}
+                  />
+                }
+              />
+              <Route path="/games/:slug" element={<GamePageContainer />} />
+            </Routes>
+          </>
+        )}
+      </div>
+
       <Footer />
     </main>
   );
