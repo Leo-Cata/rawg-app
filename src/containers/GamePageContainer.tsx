@@ -1,5 +1,5 @@
 // router params to get them from the url
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 // hooks
 import { useEffect, useState } from "react";
@@ -21,6 +21,9 @@ const GamePageContainer = () => {
   const [gameData, setGameData] = useState<GameInfo>();
   const [gameScreenshots, setGameScreenshots] = useState<GameScreenshots[]>();
 
+  // react router navigation
+  const nav = useNavigate();
+
   useEffect(() => {
     // fetch data about the game if the slug isn't falsy
     const fetchGameInfo = async () => {
@@ -35,12 +38,13 @@ const GamePageContainer = () => {
           setGameScreenshots(gameImages.data.results);
         } catch (error) {
           console.log(error);
+          nav("*");
         }
       }
     };
 
     fetchGameInfo();
-  }, [slug]);
+  }, [slug, nav]);
 
   return (
     <>
