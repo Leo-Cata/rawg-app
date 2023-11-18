@@ -25,6 +25,7 @@ import GamePageContainer from "./containers/GamePageContainer";
 
 // footer
 import Footer from "./components/Footer/Footer";
+import NotFoundContainer from "./containers/NotFoundContainer";
 
 const App = () => {
   // get the values and assert the type to use UserContextValues
@@ -54,7 +55,7 @@ const App = () => {
 
   return (
     <main className="flex min-h-screen flex-col">
-      <div className="mb-28 flex-grow">
+      <div className="flex-grow">
         {isLoaded && (
           <>
             <Navbar
@@ -81,6 +82,8 @@ const App = () => {
                 }
               />
               <Route path="/games/:slug" element={<GamePageContainer />} />
+
+              <Route path="*" element={<NotFoundContainer />} />
             </Routes>
           </>
         )}
