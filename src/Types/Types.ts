@@ -208,3 +208,10 @@ export interface SearchValue {
   holdValue: string;
   setHoldValue: (value: string) => void;
 }
+
+// quote type
+export interface GameQuote {
+  quote: string;
+  character: string;
+  title: string;
+}
