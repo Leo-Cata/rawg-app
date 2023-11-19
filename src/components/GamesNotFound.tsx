@@ -7,6 +7,7 @@ const GamesNotFound = () => {
       justifyContent={"center"}
       alignItems={"center"}
       minHeight={"350px"}
+      component={"section"}
     >
       <img
         src="/dark-souls-bonfire.gif"

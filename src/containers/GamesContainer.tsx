@@ -115,9 +115,8 @@ const GamesContainer = () => {
     })();
   }
 
-  console.log(gameData?.count);
   return (
-    <Stack spacing={4} paddingX={2}>
+    <Stack spacing={4} paddingX={2} component={"section"}>
       {/* order selector  */}
       <div className="flex w-full justify-center sm:block">
         <OrderSelector

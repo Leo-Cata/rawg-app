@@ -12,6 +12,7 @@ const NotFound = ({ gameQuote }: { gameQuote: GameQuote | undefined }) => {
       alignItems={"center"}
       paddingX={2}
       className="py-36"
+      component={"section"}
     >
       <div className="flex items-baseline justify-center">
         <Typography variant="h2" className="mr-1.5 text-[9rem]">
