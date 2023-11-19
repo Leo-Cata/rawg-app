@@ -1,18 +1,20 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import NotFound from "../components/NotFound";
-// import { getRandomQuote } from "../services/UltimaApi";
+import { getRandomQuote } from "../services/UltimaApi";
+import { GameQuote } from "../Types/Types";
 
 const NotFoundContainer = () => {
-  // api not working
-  useEffect(() => {
-    // const getQuote = async () => {
-    //   const resp = await getRandomQuote();
-    //   console.log(resp);
-    // };
-    // getQuote();
-  }, []);
+  const [gameQuote, setGameQuote] = useState<GameQuote | undefined>();
 
-  return <NotFound />;
+  // gets quote from ultima.rest
+  useEffect(() => {
+    const getQuote = async () => {
+      const resp = await getRandomQuote();
+      setGameQuote(resp.data);
+    };
+    getQuote();
+  }, []);
+  return <NotFound gameQuote={gameQuote && gameQuote} />;
 };
 
 export default NotFoundContainer;

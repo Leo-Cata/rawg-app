@@ -97,7 +97,12 @@ const ProfileContainer = ({ userDisplayName, userPhoto }: UserDataType) => {
   const groupedGamesData = groupData(slicedSavedGames, numberOfGroups);
 
   return (
-    <Stack className="flex flex-col items-center" spacing={4} paddingX={2}>
+    <Stack
+      className="flex flex-col items-center"
+      spacing={4}
+      paddingX={2}
+      component={"section"}
+    >
       <Profile
         userDisplayName={userDisplayName}
         userPhoto={userPhoto}

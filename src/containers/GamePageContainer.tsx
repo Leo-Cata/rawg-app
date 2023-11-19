@@ -47,11 +47,11 @@ const GamePageContainer = () => {
   }, [slug, nav]);
 
   return (
-    <>
+    <section>
       {gameData && gameScreenshots && (
         <GamePage gameData={gameData} gameScreenshots={gameScreenshots} />
       )}
-    </>
+    </section>
   );
 };
 

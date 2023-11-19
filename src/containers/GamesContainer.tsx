@@ -34,6 +34,7 @@ import CardsSkeleton from "../components/CardsSkeleton";
 
 // get params from url
 import { useParams } from "react-router-dom";
+import GamesNotFound from "../components/GamesNotFound";
 
 const GamesContainer = () => {
   // gets the slug from the browsers search bar
@@ -115,7 +116,7 @@ const GamesContainer = () => {
   }
 
   return (
-    <Stack spacing={4} paddingX={2}>
+    <Stack spacing={4} paddingX={2} component={"section"}>
       {/* order selector  */}
       <div className="flex w-full justify-center sm:block">
         <OrderSelector
@@ -125,13 +126,15 @@ const GamesContainer = () => {
       </div>
 
       {/* game cards/skeleton */}
-      {gameData ? (
+      {gameData && gameData.count ? (
         <Stack className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+          {/* map through the x amount of groups */}
           {groupedData.map((group, index) => (
             <Stack
               key={group[index]?.slug || `group_${index}`}
               className="space-y-4"
             >
+              {/* then for each group, render in a column a card */}
               {group.map((game) => (
                 <GameCards
                   name={game.name}
@@ -155,7 +158,11 @@ const GamesContainer = () => {
             </Stack>
           ))}
         </Stack>
+      ) : gameData && !gameData.count ? (
+        // if not have has been found
+        <GamesNotFound />
       ) : (
+        // else skeleton
         <CardsSkeleton itemsPerPage={itemsPerPage} />
       )}
 

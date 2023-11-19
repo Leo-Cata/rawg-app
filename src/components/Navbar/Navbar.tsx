@@ -53,8 +53,11 @@ const Navbar = ({ userDisplayName, userPhoto, handleUserId }: UserDataType) => {
 
   return (
     <>
-      <AppBar position="static" className="mb-4" component={"nav"}>
-        <Toolbar className="flex justify-between space-x-4 p-2">
+      <AppBar position="static" className="mb-4">
+        <Toolbar
+          className="flex justify-between space-x-4 p-2"
+          component={"nav"}
+        >
           <Link to={"/"} className="flex w-fit items-center">
             {/* icon */}
             <IconButton className="w-12 p-1">

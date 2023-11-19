@@ -54,8 +54,8 @@ const App = () => {
   }, [userId]);
 
   return (
-    <main className="flex min-h-screen flex-col">
-      <div className="flex-grow">
+    <>
+      <div className="min-h-screen">
         {isLoaded && (
           <>
             <Navbar
@@ -63,34 +63,36 @@ const App = () => {
               userPhoto={profileData?.userPhoto}
               handleUserId={handleUserId}
             />
-            <Routes>
-              <Route
-                path="/"
-                element={<GamesContainer key={gamesContainerKey} />}
-              />
-              <Route
-                path="/search/:slug"
-                element={<GamesContainer key={gamesContainerKey} />}
-              />
-              <Route
-                path="/profile"
-                element={
-                  <ProfileContainer
-                    userDisplayName={profileData?.userDisplayName}
-                    userPhoto={profileData?.userPhoto}
-                  />
-                }
-              />
-              <Route path="/games/:slug" element={<GamePageContainer />} />
+            <main>
+              <Routes>
+                <Route
+                  path="/"
+                  element={<GamesContainer key={gamesContainerKey} />}
+                />
+                <Route
+                  path="/search/:slug"
+                  element={<GamesContainer key={gamesContainerKey} />}
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <ProfileContainer
+                      userDisplayName={profileData?.userDisplayName}
+                      userPhoto={profileData?.userPhoto}
+                    />
+                  }
+                />
+                <Route path="/games/:slug" element={<GamePageContainer />} />
 
-              <Route path="*" element={<NotFoundContainer />} />
-            </Routes>
+                <Route path="*" element={<NotFoundContainer />} />
+              </Routes>
+            </main>
           </>
         )}
       </div>
 
       <Footer />
-    </main>
+    </>
   );
 };
 
