@@ -1,7 +1,10 @@
 import { Stack, Typography, Box } from "@mui/material";
 import { GameQuote } from "../Types/Types";
+import { Link } from "react-router-dom";
 
 const NotFound = ({ gameQuote }: { gameQuote: GameQuote | undefined }) => {
+  // const nav = useNavigate()
+
   return (
     <Stack
       width={"100%"}
@@ -32,7 +35,14 @@ const NotFound = ({ gameQuote }: { gameQuote: GameQuote | undefined }) => {
             "{gameQuote?.quote}"
           </Typography>
           <Typography variant="subtitle1" className="font-hyperlegible">
-            -{gameQuote?.character}, {gameQuote?.title}.
+            -{gameQuote?.character},{" "}
+            <Link
+              to={`/search/${gameQuote.title}`}
+              className="underline hover:text-blue-500"
+            >
+              {gameQuote?.title}
+            </Link>
+            .
           </Typography>
         </Box>
       )}

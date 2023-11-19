@@ -54,8 +54,8 @@ const App = () => {
   }, [userId]);
 
   return (
-    <main className="flex min-h-screen flex-col">
-      <div className="flex-grows">
+    <main>
+      <div className="min-h-screen">
         {isLoaded && (
           <>
             <Navbar
