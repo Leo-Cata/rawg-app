@@ -168,7 +168,7 @@ interface Esrb_rating {
 // extends platforms and adds the release date and an object
 export interface GameInfoPlatform extends Platforms {
   released_at: string;
-  requirements: Requirements[];
+  requirements: Requirements;
 }
 
 export interface Tags {
