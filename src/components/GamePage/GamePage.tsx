@@ -16,6 +16,7 @@ import CarouselGamePage from "./CarouselGamePage";
 
 // router hook to get state from the url
 import { useLocation } from "react-router-dom";
+import RequirementsDetails from "./Details/RequirementsDetails";
 
 const GamePage = ({
   gameData,
@@ -26,6 +27,11 @@ const GamePage = ({
 }) => {
   // gets the state to check if the game is in favorite
   const { state } = useLocation();
+
+  // check if the game is available in pc
+  const availablePc = gameData.platforms.find(
+    (platformsArray) => platformsArray.platform.id === 4,
+  );
 
   return (
     <Grid container justifyContent={"center"} marginY={8} px={2}>
@@ -91,6 +97,20 @@ const GamePage = ({
 
           {/* tags */}
           <TagsGamePage tags={gameData.tags} />
+
+          {/* pc requirements */}
+          {availablePc && (
+            <>
+              <RequirementsDetails
+                title="Minimum Pc Specs"
+                text={availablePc.requirements.minimum}
+              />
+              <RequirementsDetails
+                title="Recommended Pc Specs"
+                text={availablePc.requirements.recommended}
+              />
+            </>
+          )}
         </div>
       </Grid>
     </Grid>
