@@ -4,15 +4,15 @@ export const requirementsFormatter = (text: string) => {
     //first deletes the words Recommended and Minimum
     const deleteCategory = text.replace(/\s*(Recommended:|Minimum:)\s*/g, "");
 
-    // then delete any text after 'Additional Notes:
+    // then delete any text after 'Additional Notes:' and annoying EA note (mirror's edge)
     const deleteAdditionalNotes = deleteCategory.replace(
-      /Additional Notes:.*/,
+      /Additional Notes:|INTERNET CONNECTION, ONLINE AUTHENTICATION.*/,
       "",
     );
 
-    //finally, format the text to have line breaks after the specified words
+    //finally, format the text to have line breaks after the specified words, only if that word isn't the first word of the text
     const finalText = deleteAdditionalNotes.replace(
-      /(Processor:|Graphics:|Storage:|Sound Card:|Memory:)/g,
+      /(?<!^)(Processor:|Graphics:|Storage:|Sound Card:|Memory:|Hard Drive:|CPU:|Video Card:|Hard Drive Space:)/g,
       "<br/>$1",
     );
 
