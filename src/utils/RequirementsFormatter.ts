@@ -12,7 +12,7 @@ export const requirementsFormatter = (text: string) => {
 
     //finally, format the text to have line breaks after the specified words, only if that word isn't the first word of the text
     const finalText = deleteAdditionalNotes.replace(
-      /(?<!^)(Processor:|Graphics:|Storage:|Sound Card:|Memory:|Hard Drive:|CPU:|Video Card:|Hard Drive Space:)/g,
+      /(?<!^)(Processor:|Graphics:|Storage:|Sound Card:|Memory:|Hard Drive:|CPU:|Video Card:|Hard Drive Space:| Sound:)/g,
       "<br/>$1",
     );
 
