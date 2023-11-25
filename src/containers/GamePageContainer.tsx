@@ -12,6 +12,7 @@ import { GameInfo, GameScreenshots } from "../Types/Types";
 
 // component
 import GamePage from "../components/GamePage/GamePage";
+import GameSkeleton from "../components/Skeletons/GameSkeleton";
 
 const GamePageContainer = () => {
   // get the slug from the url
@@ -48,8 +49,10 @@ const GamePageContainer = () => {
 
   return (
     <section>
-      {gameData && gameScreenshots && (
+      {gameData && gameScreenshots ? (
         <GamePage gameData={gameData} gameScreenshots={gameScreenshots} />
+      ) : (
+        <GameSkeleton />
       )}
     </section>
   );

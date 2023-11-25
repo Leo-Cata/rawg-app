@@ -30,7 +30,7 @@ import groupData from "../utils/GroupedData";
 import { handleResize } from "../utils/WindowWidth";
 
 // skeleton
-import CardsSkeleton from "../components/CardsSkeleton";
+import CardsSkeleton from "../components/Skeletons/CardsSkeleton";
 
 // get params from url
 import { useParams } from "react-router-dom";
