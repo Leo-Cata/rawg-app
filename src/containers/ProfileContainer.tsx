@@ -27,7 +27,7 @@ import Profile from "../components/Profile";
 
 // pagination component
 import CustomPagination from "../components/CustomPagination";
-import CardsSkeleton from "../components/CardsSkeleton";
+import CardsSkeleton from "../components/Skeletons/CardsSkeleton";
 import { handleResize } from "../utils/WindowWidth";
 import NoGamesBacklogged from "../components/NoGamesBacklogged";
 
@@ -101,6 +101,7 @@ const ProfileContainer = ({ userDisplayName, userPhoto }: UserDataType) => {
       className="flex flex-col items-center"
       spacing={4}
       paddingX={2}
+      pb={8}
       component={"section"}
     >
       <Profile
