@@ -3,7 +3,11 @@ import { getGenresList } from "../services/RawgApi";
 import { GenresList } from "../Types/Types";
 import SidePanelGenres from "../components/SidePanelGenres";
 
-const SidePanelContainer = () => {
+const SidePanelContainer = ({
+  setSearchGenre,
+}: {
+  setSearchGenre: (value: number) => void;
+}) => {
   const [genreList, setGenreList] = useState<GenresList[] | undefined>();
 
   useEffect(() => {
@@ -14,9 +18,16 @@ const SidePanelContainer = () => {
     gamesGenresList();
   }, []);
 
-  console.log(genreList);
-
-  return <>{genreList && <SidePanelGenres genreList={genreList} />}</>;
+  return (
+    <>
+      {genreList && (
+        <SidePanelGenres
+          genreList={genreList}
+          setSearchGenre={setSearchGenre}
+        />
+      )}
+    </>
+  );
 };
 
 export default SidePanelContainer;

@@ -9,17 +9,26 @@ import {
 } from "@mui/material";
 import { GenresList } from "../Types/Types";
 
-const SidePanelGenres = ({ genreList }: { genreList: GenresList[] }) => {
+const SidePanelGenres = ({
+  genreList,
+  setSearchGenre,
+}: {
+  genreList: GenresList[];
+  setSearchGenre: (value: number) => void;
+}) => {
   return (
-    <Stack>
+    <Stack component={"aside"}>
       <Typography variant="subtitle1" textAlign={"center"} fontWeight={"600"}>
         Search By Genres
       </Typography>
-      <List component={"aside"} className="w-full max-w-[160px]">
+      <List className="w-full max-w-[160px]">
         {genreList &&
           genreList.map((genre) => (
             <ListItem key={genre.slug} className="p-0">
-              <ListItemButton>
+              <ListItemButton
+                className="rounded-sm"
+                onClick={() => setSearchGenre(genre.id)}
+              >
                 <ListItemIcon>
                   <img
                     src={genre.image_background}

@@ -56,9 +56,13 @@ const GamesContainer = () => {
   // get userId context and fav games state
   const userId = useContext(userIdContext)?.userId;
 
+  // setter to know which games are saved and display the appropriate bookmark
   const [savedGames, setSavedGames] = useState<GameData[] | undefined>();
 
   const itemsPerPage: number = 32;
+
+  // setter for the genres
+  const [searchGenre, setSearchGenre] = useState<number>();
 
   //fetch all games by popularity and if the userId exists, get fav games
   useEffect(() => {
@@ -78,6 +82,7 @@ const GamesContainer = () => {
           search: URLSlug.slug,
           ordering: gamesOrdering,
           page: pageNumber,
+          genres: searchGenre,
         });
         setGameData(resp.data);
       } catch (error) {
@@ -86,7 +91,7 @@ const GamesContainer = () => {
     };
 
     fetchGames();
-  }, [userId, gamesOrdering, pageNumber, setSavedGames, URLSlug]);
+  }, [userId, gamesOrdering, pageNumber, setSavedGames, URLSlug, searchGenre]);
 
   // useEffect to set the windows width
   useEffect(() => {
@@ -115,10 +120,10 @@ const GamesContainer = () => {
       });
     })();
   }
-
+  console.log(searchGenre);
   return (
     <Stack direction={"row"}>
-      <SidePanelContainer />
+      <SidePanelContainer setSearchGenre={setSearchGenre} />
       <Stack spacing={4} paddingX={2} component={"section"} width={"100%"}>
         {/* order selector  */}
         <div className="flex w-full justify-center sm:block">

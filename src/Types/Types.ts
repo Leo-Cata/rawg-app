@@ -5,7 +5,7 @@ export interface GamesSearchOptions {
   page?: number;
   search?: string | undefined;
   platforms?: number;
-  genres?: string;
+  genres?: number;
   tags?: string;
   dates?: string;
   metacritic?: string;
@@ -218,6 +218,7 @@ export interface GameQuote {
 
 //genre list
 export interface GenresList {
+  id: number;
   name: string;
   slug: string;
   image_background: string;
