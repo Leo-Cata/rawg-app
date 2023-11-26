@@ -119,7 +119,7 @@ const GamesContainer = () => {
   return (
     <Stack direction={"row"}>
       <SidePanelContainer />
-      <Stack spacing={4} paddingX={2} component={"section"}>
+      <Stack spacing={4} paddingX={2} component={"section"} width={"100%"}>
         {/* order selector  */}
         <div className="flex w-full justify-center sm:block">
           <OrderSelector
