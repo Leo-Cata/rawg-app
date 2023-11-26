@@ -34,3 +34,8 @@ export const getGameInfo = (slug: string) => {
 export const getGameScreenshots = (slug: string) => {
   return api.get(`games/${slug}/screenshots`);
 };
+
+// fetch all genres
+export const getGenresList = () => {
+  return api.get("/genres");
+};

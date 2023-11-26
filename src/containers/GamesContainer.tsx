@@ -35,6 +35,7 @@ import CardsSkeleton from "../components/Skeletons/CardsSkeleton";
 // get params from url
 import { useParams } from "react-router-dom";
 import GamesNotFound from "../components/GamesNotFound";
+import SidePanelContainer from "./SidePanelContainer";
 
 const GamesContainer = () => {
   // gets the slug from the browsers search bar
@@ -116,63 +117,66 @@ const GamesContainer = () => {
   }
 
   return (
-    <Stack spacing={4} paddingX={2} component={"section"}>
-      {/* order selector  */}
-      <div className="flex w-full justify-center sm:block">
-        <OrderSelector
-          setGamesOrdering={setGamesOrdering}
-          gamesOrdering={gamesOrdering}
+    <Stack direction={"row"}>
+      <SidePanelContainer />
+      <Stack spacing={4} paddingX={2} component={"section"}>
+        {/* order selector  */}
+        <div className="flex w-full justify-center sm:block">
+          <OrderSelector
+            setGamesOrdering={setGamesOrdering}
+            gamesOrdering={gamesOrdering}
+          />
+        </div>
+
+        {/* game cards/skeleton */}
+        {gameData && gameData.count ? (
+          <Stack className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+            {/* map through the x amount of groups */}
+            {groupedData.map((group, index) => (
+              <Stack
+                key={group[index]?.slug || `group_${index}`}
+                className="space-y-4"
+              >
+                {/* then for each group, render in a column a card */}
+                {group.map((game) => (
+                  <GameCards
+                    name={game.name}
+                    background_image={game.background_image}
+                    key={game.slug}
+                    metacritic={game.metacritic}
+                    parent_platforms={game.parent_platforms}
+                    released={game.released}
+                    userId={userId}
+                    slug={game.slug}
+                    // if there is user id, check if the array has a matching name
+                    isInFavorite={
+                      userId
+                        ? savedGames?.some(
+                            (favGame) => favGame.name === game.name,
+                          )
+                        : false
+                    }
+                  />
+                ))}
+              </Stack>
+            ))}
+          </Stack>
+        ) : gameData && !gameData.count ? (
+          // if not have has been found
+          <GamesNotFound />
+        ) : (
+          // else skeleton
+          <CardsSkeleton itemsPerPage={itemsPerPage} />
+        )}
+
+        {/* pagination */}
+        <CustomPagination
+          setPageNumber={setPageNumber}
+          itemsCount={gameData?.count}
+          itemsPerPage={itemsPerPage}
+          pageNumber={pageNumber}
         />
-      </div>
-
-      {/* game cards/skeleton */}
-      {gameData && gameData.count ? (
-        <Stack className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-          {/* map through the x amount of groups */}
-          {groupedData.map((group, index) => (
-            <Stack
-              key={group[index]?.slug || `group_${index}`}
-              className="space-y-4"
-            >
-              {/* then for each group, render in a column a card */}
-              {group.map((game) => (
-                <GameCards
-                  name={game.name}
-                  background_image={game.background_image}
-                  key={game.slug}
-                  metacritic={game.metacritic}
-                  parent_platforms={game.parent_platforms}
-                  released={game.released}
-                  userId={userId}
-                  slug={game.slug}
-                  // if there is user id, check if the array has a matching name
-                  isInFavorite={
-                    userId
-                      ? savedGames?.some(
-                          (favGame) => favGame.name === game.name,
-                        )
-                      : false
-                  }
-                />
-              ))}
-            </Stack>
-          ))}
-        </Stack>
-      ) : gameData && !gameData.count ? (
-        // if not have has been found
-        <GamesNotFound />
-      ) : (
-        // else skeleton
-        <CardsSkeleton itemsPerPage={itemsPerPage} />
-      )}
-
-      {/* pagination */}
-      <CustomPagination
-        setPageNumber={setPageNumber}
-        itemsCount={gameData?.count}
-        itemsPerPage={itemsPerPage}
-        pageNumber={pageNumber}
-      />
+      </Stack>
     </Stack>
   );
 };

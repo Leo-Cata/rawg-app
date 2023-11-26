@@ -215,3 +215,10 @@ export interface GameQuote {
   character: string;
   title: string;
 }
+
+//genre list
+export interface GenresList {
+  name: string;
+  slug: string;
+  image_background: string;
+}
