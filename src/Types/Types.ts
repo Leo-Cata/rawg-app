@@ -86,11 +86,15 @@ export interface HandleUserId {
 }
 
 // createContext type
-export interface UserContextValues {
+export interface appContextValues {
   userId: string | null;
   handleUserId: HandleUserId;
   savedGames: GameData[] | undefined;
   setSavedGames: (value: GameData[]) => void;
+  searchGenres: number | undefined;
+  setSearchGenres: (value: number | undefined) => void;
+  searchDates: string | undefined;
+  setSearchDates: (value: string | undefined) => void;
 }
 
 // Search setter type
@@ -225,8 +229,10 @@ export interface GenresList {
 }
 
 // side panel genre props
-export interface GenreProps {
-  genreList?: GenresList[];
-  setSearchGenre: (value: number | undefined) => void;
-  searchGenre: number | undefined;
-}
+// export interface GenreProps {
+//   genreList?: GenresList[];
+//   setSearchGenre?: (value: number | undefined) => void;
+//   searchGenre?: number | undefined;
+//   searchDates?: string | undefined;
+//   setSearchDates?: (value: string | undefined) => void;
+// }

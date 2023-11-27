@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { getGames } from "../services/RawgApi";
 
 // types
-import { GameData, GamesSearch } from "../Types/Types";
+import { GameData, GamesSearch, appContextValues } from "../Types/Types";
 
 // cards component for mapping
 import GameCards from "../components/GameCards/GameCards";
@@ -17,7 +17,7 @@ import { Stack } from "@mui/material";
 import { readData } from "../Firebase/Database";
 
 //context
-import { userIdContext } from "../context/UserContext";
+import { appContext } from "../context/appContext";
 
 // order selector component
 import OrderSelector from "../components/OrderSelector";
@@ -54,15 +54,14 @@ const GamesContainer = () => {
   const [numberOfGroups, setNumberOfGroups] = useState<number>(4);
 
   // get userId context and fav games state
-  const userId = useContext(userIdContext)?.userId;
+  const { userId, searchGenres, searchDates } = useContext(
+    appContext,
+  ) as appContextValues;
 
   // setter to know which games are saved and display the appropriate bookmark
   const [savedGames, setSavedGames] = useState<GameData[] | undefined>();
 
   const itemsPerPage: number = 32;
-
-  // setter for the genres
-  const [searchGenre, setSearchGenre] = useState<number>();
 
   //fetch all games by popularity and if the userId exists, get fav games
   useEffect(() => {
@@ -82,7 +81,8 @@ const GamesContainer = () => {
           search: URLSlug.slug,
           ordering: gamesOrdering,
           page: pageNumber,
-          genres: searchGenre,
+          genres: searchGenres,
+          dates: searchDates,
         });
         setGameData(resp.data);
       } catch (error) {
@@ -91,7 +91,15 @@ const GamesContainer = () => {
     };
 
     fetchGames();
-  }, [userId, gamesOrdering, pageNumber, setSavedGames, URLSlug, searchGenre]);
+  }, [
+    searchDates,
+    userId,
+    gamesOrdering,
+    pageNumber,
+    setSavedGames,
+    URLSlug,
+    searchGenres,
+  ]);
 
   // useEffect to set the windows width
   useEffect(() => {
@@ -122,10 +130,7 @@ const GamesContainer = () => {
   }
   return (
     <Stack className="flex flex-col lg:flex-row">
-      <SidePanelContainer
-        setSearchGenre={setSearchGenre}
-        searchGenre={searchGenre}
-      />
+      <SidePanelContainer />
       <Stack spacing={4} paddingX={2} component={"section"} width={"100%"}>
         {/* order selector  */}
         <div className="flex w-full justify-center sm:block">

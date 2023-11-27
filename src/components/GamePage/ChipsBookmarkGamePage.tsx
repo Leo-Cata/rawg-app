@@ -23,7 +23,7 @@ import { FaRegBookmark, FaBookmark } from "react-icons/fa6";
 
 // react hooks and context
 import { useContext, useState } from "react";
-import { userIdContext } from "../../context/UserContext";
+import { appContext } from "../../context/appContext";
 
 // util to add and delete games
 import { gamesHandler } from "../../utils/AddGames";
@@ -50,7 +50,7 @@ const ChipsBookmarkGamePage = ({
   //alert severity aka color setter
   const [severity, setSeverity] = useState<AlertColor>("success");
   //user id
-  const userId = useContext(userIdContext)?.userId;
+  const userId = useContext(appContext)?.userId;
 
   return (
     <>

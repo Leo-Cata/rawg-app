@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 // context
-import { userIdContext } from "./UserContext";
+import { appContext } from "./appContext";
 
 // type
 import { HandleUserId, GameData } from "../Types/Types";
@@ -18,13 +18,27 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
     setUserId(uid);
   };
 
+  // states for different forms of searching
+  const [searchGenres, setSearchGenres] = useState<number | undefined>();
+
+  const [searchDates, setSearchDates] = useState<string | undefined>();
+
   return (
     // from userContext you use the context created, hence why its not userProvider.Provider
-    <userIdContext.Provider
-      value={{ userId, handleUserId, savedGames, setSavedGames }}
+    <appContext.Provider
+      value={{
+        userId,
+        handleUserId,
+        savedGames,
+        setSavedGames,
+        searchGenres,
+        setSearchGenres,
+        searchDates,
+        setSearchDates,
+      }}
     >
       {children}
-    </userIdContext.Provider>
+    </appContext.Provider>
   );
 };
 

@@ -2,7 +2,7 @@
 import { useContext, useState, useEffect } from "react";
 
 //context
-import { userIdContext } from "../context/UserContext";
+import { appContext } from "../context/appContext";
 
 // gameCards component which we use to map
 import GameCards from "../components/GameCards/GameCards";
@@ -33,7 +33,7 @@ import NoGamesBacklogged from "../components/NoGamesBacklogged";
 
 const ProfileContainer = ({ userDisplayName, userPhoto }: UserDataType) => {
   // gets userId
-  const userId = useContext(userIdContext)?.userId;
+  const userId = useContext(appContext)?.userId;
 
   // to set the number of groups dynamically
   const [numberOfGroups, setNumberOfGroups] = useState<number>(1);
