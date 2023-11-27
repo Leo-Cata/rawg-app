@@ -14,6 +14,7 @@ const SidePanelGenres = ({
   setSearchGenre,
   searchGenre,
 }: GenreProps) => {
+  
   //handles selecting and deselecting genre
   const handleGenreSelector = (id: number) => {
     if (id === searchGenre) {
