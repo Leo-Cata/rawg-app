@@ -3,10 +3,10 @@ import GamesContainer from "./containers/GamesContainer";
 
 // hooks and context
 import { useContext, useEffect, useState } from "react";
-import { userIdContext } from "./context/UserContext";
+import { appContext } from "./context/appContext";
 
 // types
-import { UserContextValues, UserDataType } from "./Types/Types";
+import { appContextValues, UserDataType } from "./Types/Types";
 
 // function to check if the user is logged in
 import { checkIfLoggedIn } from "./Firebase/CheckIfLoggedIn";
@@ -28,10 +28,8 @@ import Footer from "./components/Footer/Footer";
 import NotFoundContainer from "./containers/NotFoundContainer";
 
 const App = () => {
-  // get the values and assert the type to use UserContextValues
-  const { userId, handleUserId } = useContext(
-    userIdContext,
-  ) as UserContextValues;
+  // get the values and assert the type to use appContextValues
+  const { userId, handleUserId } = useContext(appContext) as appContextValues;
 
   // State to manage GameContainer key
   const [gamesContainerKey, setGamesContainerKey] = useState(Date.now());
