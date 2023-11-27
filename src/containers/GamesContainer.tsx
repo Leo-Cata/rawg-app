@@ -121,7 +121,7 @@ const GamesContainer = () => {
     })();
   }
   return (
-    <Stack direction={"row"}>
+    <Stack className="flex flex-col lg:flex-row">
       <SidePanelContainer
         setSearchGenre={setSearchGenre}
         searchGenre={searchGenre}

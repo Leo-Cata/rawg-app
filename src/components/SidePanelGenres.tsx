@@ -24,11 +24,11 @@ const SidePanelGenres = ({
   };
 
   return (
-    <Stack component={"aside"} className="hidden md:flex">
+    <Stack component={"aside"} className="mb-4">
       <Typography variant="subtitle1" textAlign={"center"} fontWeight={"600"}>
         Search By Genres
       </Typography>
-      <List className="w-full max-w-[160px]">
+      <List className="flex h-fit w-full overflow-y-auto lg:block lg:max-w-[160px]">
         {genreList &&
           genreList.map((genre) => (
             <ListItem

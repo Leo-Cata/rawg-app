@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getGenresList } from "../services/RawgApi";
 import { GenreProps, GenresList } from "../Types/Types";
 import SidePanelGenres from "../components/SidePanelGenres";
+import SidePanelGenresSkeleton from "../components/Skeletons/SidePanelGenresSkeleton";
 
 const SidePanelContainer = ({ setSearchGenre, searchGenre }: GenreProps) => {
   // saves list of genres
@@ -18,12 +19,14 @@ const SidePanelContainer = ({ setSearchGenre, searchGenre }: GenreProps) => {
 
   return (
     <>
-      {genreList && (
+      {genreList ? (
         <SidePanelGenres
           genreList={genreList}
           setSearchGenre={setSearchGenre}
           searchGenre={searchGenre}
         />
+      ) : (
+        <SidePanelGenresSkeleton />
       )}
     </>
   );
