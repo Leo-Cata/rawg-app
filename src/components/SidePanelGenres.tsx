@@ -7,27 +7,39 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { GenresList } from "../Types/Types";
+import { GenreProps } from "../Types/Types";
 
 const SidePanelGenres = ({
   genreList,
   setSearchGenre,
-}: {
-  genreList: GenresList[];
-  setSearchGenre: (value: number) => void;
-}) => {
+  searchGenre,
+}: GenreProps) => {
+  //handles selecting and deselecting genre
+  const handleGenreSelector = (id: number) => {
+    if (id === searchGenre) {
+      setSearchGenre(undefined);
+    } else {
+      setSearchGenre(id);
+    }
+  };
+
   return (
-    <Stack component={"aside"}>
+    <Stack component={"aside"} className="hidden md:flex">
       <Typography variant="subtitle1" textAlign={"center"} fontWeight={"600"}>
         Search By Genres
       </Typography>
       <List className="w-full max-w-[160px]">
         {genreList &&
           genreList.map((genre) => (
-            <ListItem key={genre.slug} className="p-0">
+            <ListItem
+              key={genre.slug}
+              className={`rounded-md p-0 ${
+                searchGenre === genre.id ? "bg-[#512b814d]" : ""
+              }`}
+            >
               <ListItemButton
                 className="rounded-sm"
-                onClick={() => setSearchGenre(genre.id)}
+                onClick={() => handleGenreSelector(genre.id)}
               >
                 <ListItemIcon>
                   <img

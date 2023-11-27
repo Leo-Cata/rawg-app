@@ -223,3 +223,10 @@ export interface GenresList {
   slug: string;
   image_background: string;
 }
+
+// side panel genre props
+export interface GenreProps {
+  genreList?: GenresList[];
+  setSearchGenre: (value: number | undefined) => void;
+  searchGenre: number | undefined;
+}

@@ -120,10 +120,12 @@ const GamesContainer = () => {
       });
     })();
   }
-  console.log(searchGenre);
   return (
     <Stack direction={"row"}>
-      <SidePanelContainer setSearchGenre={setSearchGenre} />
+      <SidePanelContainer
+        setSearchGenre={setSearchGenre}
+        searchGenre={searchGenre}
+      />
       <Stack spacing={4} paddingX={2} component={"section"} width={"100%"}>
         {/* order selector  */}
         <div className="flex w-full justify-center sm:block">
