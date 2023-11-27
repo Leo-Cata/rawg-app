@@ -10,15 +10,18 @@ import {
 } from "@mui/material";
 
 // context
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { appContext } from "../../context/appContext";
 import { GenresList, appContextValues } from "../../Types/Types";
+import { IoMdArrowDropup } from "react-icons/io";
 
 const SidePanelGenres = ({ genreList }: { genreList: GenresList[] }) => {
   // app context
   const { setSearchGenres, searchGenres } = useContext(
     appContext,
   ) as appContextValues;
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   //handles selecting and deselecting genre
   const handleGenreSelector = (id: number) => {
@@ -29,12 +32,32 @@ const SidePanelGenres = ({ genreList }: { genreList: GenresList[] }) => {
     }
   };
 
+  const handleOpen = () => {
+    setIsOpen((prev) => !prev);
+  };
   return (
     <Stack className="mb-4">
-      <Typography variant="subtitle1" textAlign={"center"} fontWeight={"600"}>
-        Genres
-      </Typography>
-      <List className="flex h-fit w-full overflow-y-auto lg:block lg:max-w-[200px]">
+      <button
+        onClick={handleOpen}
+        className="flex cursor-pointer items-center justify-center"
+      >
+        <Typography variant="subtitle1" textAlign={"center"} fontWeight={"600"}>
+          Genres
+        </Typography>
+        <IoMdArrowDropup
+          size="20px"
+          className={`ml-2 transition-all duration-500 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+      <List
+        className={`flex w-full overflow-y-auto transition-all duration-500 lg:block lg:max-w-[200px] lg:flex-col ${
+          isOpen
+            ? "flex opacity-100 lg:h-fit"
+            : " hidden opacity-30 lg:flex lg:h-28 lg:overflow-y-hidden"
+        }`}
+      >
         {genreList &&
           genreList.map((genre) => (
             <ListItem
@@ -44,7 +67,7 @@ const SidePanelGenres = ({ genreList }: { genreList: GenresList[] }) => {
               }`}
             >
               <ListItemButton
-                className="rounded-sm"
+                className={isOpen ? "" : "hover:bg-transparent"}
                 onClick={() => handleGenreSelector(genre.id)}
               >
                 <ListItemIcon>

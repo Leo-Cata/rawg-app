@@ -1,5 +1,5 @@
 // context
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { appContext } from "../../context/appContext";
 import { appContextValues } from "../../Types/Types";
 
@@ -12,11 +12,32 @@ import {
   ListItemButton,
 } from "@mui/material";
 
+// arrow icon
+import { IoMdArrowDropup } from "react-icons/io";
+
 const SidePanelYears = () => {
+  //context
   const { searchDates, setSearchDates } = useContext(
     appContext,
   ) as appContextValues;
 
+  // boolean to open/close menu
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleOpen = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  //handles selecting year
+  const handleYearSelector = (date: string) => {
+    if (date === searchDates) {
+      setSearchDates(undefined);
+    } else {
+      setSearchDates(date);
+    }
+  };
+
+  // dates array
   const dates = [
     { year: 2023, dates: "2023-01-01,2023-12-31" },
     { year: 2022, dates: "2022-01-01,2022-12-31" },
@@ -45,17 +66,39 @@ const SidePanelYears = () => {
   ];
   return (
     <Stack className="mb-4">
-      <Typography variant="subtitle1" textAlign={"center"} fontWeight={"600"}>
-        Best By Years
-      </Typography>
-      <List className="flex h-fit w-full overflow-y-auto lg:block lg:max-w-[200px]">
+      <button
+        onClick={handleOpen}
+        className="flex cursor-pointer items-center justify-center"
+      >
+        <Typography variant="subtitle1" textAlign={"center"} fontWeight={600}>
+          Best By Years
+        </Typography>
+
+        <IoMdArrowDropup
+          size="20px"
+          className={`ml-2 transition-all duration-500 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+      <List
+        className={`flex w-full overflow-y-auto transition-all duration-500 lg:block lg:max-w-[200px] lg:flex-col ${
+          isOpen
+            ? "flex opacity-100 lg:h-fit"
+            : " hidden opacity-30 lg:flex lg:h-28 lg:overflow-y-hidden"
+        }`}
+      >
         {dates.map((date) => (
           <ListItem
+            key={date.year}
             className={`rounded-md p-0 ${
               searchDates === date.dates ? "bg-[#512b814d]" : ""
             }`}
           >
-            <ListItemButton onClick={() => setSearchDates(date.dates)}>
+            <ListItemButton
+              className={isOpen ? "" : "hover:bg-transparent"}
+              onClick={() => handleYearSelector(date.dates)}
+            >
               {date.year}
             </ListItemButton>
           </ListItem>
