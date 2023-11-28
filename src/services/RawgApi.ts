@@ -22,7 +22,7 @@ export const getGames = (options: GamesSearchOptions = {}) => {
 
 // helper to get all platforms list
 export const getPlatformsLists = () => {
-  return api.get("platforms/lists/parents");
+  return api.get("platforms");
 };
 
 // fetch for a game

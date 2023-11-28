@@ -23,6 +23,8 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [searchDates, setSearchDates] = useState<string | undefined>();
 
+  const [searchPlatforms, setSearchPlatforms] = useState<number | undefined>();
+
   return (
     // from userContext you use the context created, hence why its not userProvider.Provider
     <appContext.Provider
@@ -35,6 +37,8 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
         setSearchGenres,
         searchDates,
         setSearchDates,
+        searchPlatforms,
+        setSearchPlatforms,
       }}
     >
       {children}

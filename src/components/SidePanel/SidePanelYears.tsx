@@ -10,6 +10,7 @@ import {
   Typography,
   ListItem,
   ListItemButton,
+  Paper,
 } from "@mui/material";
 
 // arrow icon
@@ -64,46 +65,48 @@ const SidePanelYears = () => {
     { year: 2001, dates: "2001-01-01,2001-12-31" },
     { year: 2000, dates: "2000-01-01,2000-12-31" },
   ];
-  return (
-    <Stack className="mb-4">
-      <button
-        onClick={handleOpen}
-        className="flex cursor-pointer items-center justify-center"
-      >
-        <Typography variant="subtitle1" textAlign={"center"} fontWeight={600}>
-          Best By Years
-        </Typography>
 
-        <IoMdArrowDropup
-          size="20px"
-          className={`ml-2 transition-all duration-500 ${
-            isOpen ? "rotate-180" : ""
-          }`}
-        />
-      </button>
-      <List
-        className={`flex w-full overflow-y-auto transition-all duration-500 lg:block lg:max-w-[200px] lg:flex-col ${
-          isOpen
-            ? "flex opacity-100 lg:h-fit"
-            : " hidden opacity-30 lg:flex lg:h-28 lg:overflow-y-hidden"
-        }`}
-      >
-        {dates.map((date) => (
-          <ListItem
-            key={date.year}
-            className={`rounded-md p-0 ${
-              searchDates === date.dates ? "bg-[#512b814d]" : ""
+  return (
+    <Stack className="mb-4 px-4 lg:px-1">
+      <Paper className="flex flex-col items-center justify-center lg:items-start lg:justify-start">
+        <button onClick={handleOpen} className="flex lg:px-4">
+          <Typography variant="subtitle1" fontWeight={600}>
+            By Years
+          </Typography>
+
+          <IoMdArrowDropup
+            size="20px"
+            className={`ml-2 transition-all duration-500 ${
+              isOpen ? "rotate-180" : ""
             }`}
-          >
-            <ListItemButton
-              className={isOpen ? "" : "hover:bg-transparent"}
-              onClick={() => handleYearSelector(date.dates)}
+          />
+        </button>
+
+        {/* list with the selectors */}
+        <List
+          className={`flex w-full overflow-y-auto transition-all duration-500 lg:block lg:max-w-[200px] lg:flex-col ${
+            isOpen
+              ? "flex opacity-100 lg:h-fit"
+              : " hidden opacity-30 lg:flex lg:h-28 lg:overflow-y-hidden"
+          }`}
+        >
+          {dates.map((date) => (
+            <ListItem
+              key={date.year}
+              className={`rounded-md p-0 ${
+                searchDates === date.dates ? "bg-[#512b814d]" : ""
+              }`}
             >
-              {date.year}
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+              <ListItemButton
+                className={isOpen ? "" : "hover:bg-transparent"}
+                onClick={() => handleYearSelector(date.dates)}
+              >
+                {date.year}
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Paper>
     </Stack>
   );
 };

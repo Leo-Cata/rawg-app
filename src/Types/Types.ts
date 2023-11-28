@@ -95,6 +95,8 @@ export interface appContextValues {
   setSearchGenres: (value: number | undefined) => void;
   searchDates: string | undefined;
   setSearchDates: (value: string | undefined) => void;
+  searchPlatforms: number | undefined;
+  setSearchPlatforms: (value: number | undefined) => void;
 }
 
 // Search setter type
@@ -221,18 +223,9 @@ export interface GameQuote {
 }
 
 //genre list
-export interface GenresList {
+export interface SidePanelProps {
   id: number;
   name: string;
-  slug: string;
-  image_background: string;
+  slug?: string;
+  image_background?: string;
 }
-
-// side panel genre props
-// export interface GenreProps {
-//   genreList?: GenresList[];
-//   setSearchGenre?: (value: number | undefined) => void;
-//   searchGenre?: number | undefined;
-//   searchDates?: string | undefined;
-//   setSearchDates?: (value: string | undefined) => void;
-// }
