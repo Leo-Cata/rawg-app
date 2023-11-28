@@ -54,7 +54,7 @@ const GamesContainer = () => {
   const [numberOfGroups, setNumberOfGroups] = useState<number>(4);
 
   // get userId context and fav games state
-  const { userId, searchGenres, searchDates } = useContext(
+  const { userId, searchGenres, searchDates, searchPlatforms } = useContext(
     appContext,
   ) as appContextValues;
 
@@ -83,6 +83,7 @@ const GamesContainer = () => {
           page: pageNumber,
           genres: searchGenres,
           dates: searchDates,
+          platforms: searchPlatforms,
         });
         setGameData(resp.data);
       } catch (error) {
@@ -92,6 +93,7 @@ const GamesContainer = () => {
 
     fetchGames();
   }, [
+    searchPlatforms,
     searchDates,
     userId,
     gamesOrdering,

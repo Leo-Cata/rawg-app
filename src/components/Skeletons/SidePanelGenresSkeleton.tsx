@@ -2,10 +2,10 @@ import { Skeleton } from "@mui/material";
 
 const SidePanelGenresSkeleton = () => {
   return (
-    <div className="mb-4 flex flex-col lg:block lg:max-w-[160px]">
-      <Skeleton className="mx-2 my-4 h-7 w-36 transform-none self-center" />
+    <div className="mx-4 mb-4 flex flex-col lg:block lg:max-w-[200px]">
+      <Skeleton className="h-7 w-full transform-none self-center" />
 
-      <div className="flex h-fit w-full overflow-y-auto lg:block lg:max-w-[160px]">
+      <div className="hidden h-fit w-full overflow-y-auto lg:block lg:max-w-[200px]">
         {Array.from({ length: 19 }, (_, index) => (
           <Skeleton
             key={index * 123}
