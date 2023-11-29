@@ -92,11 +92,11 @@ export interface appContextValues {
   savedGames: GameData[] | undefined;
   setSavedGames: (value: GameData[]) => void;
   searchGenres: number | undefined;
-  setSearchGenres: (value: number | undefined) => void;
+  setSearchGenres: (value: number | string | undefined) => void;
   searchDates: string | undefined;
-  setSearchDates: (value: string | undefined) => void;
+  setSearchDates: (value: string | number | undefined) => void;
   searchPlatforms: number | undefined;
-  setSearchPlatforms: (value: number | undefined) => void;
+  setSearchPlatforms: (value: number | string | undefined) => void;
 }
 
 // Search setter type
@@ -223,9 +223,17 @@ export interface GameQuote {
 }
 
 //genre list
-export interface SidePanelProps {
-  id: number;
+export interface SidePanelObject {
+  id: number | string;
   name: string;
   slug?: string;
   image_background?: string;
+}
+
+//side panel props
+export interface SidePanelProp {
+  title: string;
+  stateValue: string | number | undefined;
+  setStateValue: (value: string | number | undefined) => void;
+  objectToMap: SidePanelObject[];
 }
