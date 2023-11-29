@@ -43,7 +43,6 @@ const SidePanelContainer = () => {
     gamesPlatforms();
   }, []);
 
-  console.log(platformsList);
   // dates array
   const dates = [
     { name: "2023", id: "2023-01-01,2023-12-31" },
@@ -80,7 +79,9 @@ const SidePanelContainer = () => {
           <CustomSidePanel
             title="Genres"
             stateValue={searchGenres}
-            setStateValue={setSearchGenres}
+            setStateValue={
+              setSearchGenres as (value: number | string | undefined) => void
+            }
             objectToMap={genreList}
           />
 
@@ -88,7 +89,9 @@ const SidePanelContainer = () => {
           <CustomSidePanel
             title="Platforms"
             stateValue={searchPlatforms}
-            setStateValue={setSearchPlatforms}
+            setStateValue={
+              setSearchPlatforms as (value: number | string | undefined) => void
+            }
             objectToMap={platformsList}
           />
 
@@ -96,7 +99,9 @@ const SidePanelContainer = () => {
           <CustomSidePanel
             title="Release Year"
             stateValue={searchDates}
-            setStateValue={setSearchDates}
+            setStateValue={
+              setSearchDates as (value: number | string | undefined) => void
+            }
             objectToMap={dates}
           />
         </div>

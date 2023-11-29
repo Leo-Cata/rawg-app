@@ -92,11 +92,11 @@ export interface appContextValues {
   savedGames: GameData[] | undefined;
   setSavedGames: (value: GameData[]) => void;
   searchGenres: number | undefined;
-  setSearchGenres: (value: number | string | undefined) => void;
+  setSearchGenres: (genresValue: number | undefined) => void;
   searchDates: string | undefined;
-  setSearchDates: (value: string | number | undefined) => void;
+  setSearchDates: (datesValue: string | undefined) => void;
   searchPlatforms: number | undefined;
-  setSearchPlatforms: (value: number | string | undefined) => void;
+  setSearchPlatforms: (platformValue: number | undefined) => void;
 }
 
 // Search setter type
