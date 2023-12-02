@@ -1,29 +1,20 @@
-# React + TypeScript + Vite
+This project utilizes [RAWG](https://rawg.io/)'s API services, offering a vast video game database, along with [Firebase](https://firebase.google.com/)'s Google Authentication and Firestore database, and [Ultima API](https://www.ultima.rest/) for game quotes.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This fully responsive site allows users to explore games based on decades, genres, platforms, Metacritic scores, and more. Users can access short descriptions, learn about genres, tags, release dates, view game screenshots, and more. Additionally, the site integrates Google authentication and Firestore, enabling users to add games to a backlog for later play, with the list accessible in their private profile.
 
-Currently, two official plugins are available:
+The primary focus of this project is to continuously enhance my front-end skills, incorporating new technologies like Firebase services and Swiper.js, while reinforcing proficiency in previously utilized tools and libraries.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The project is hosted on Netlify and can be viewed at: [Backlogged](https://backlogged.netlify.app)
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# rawg-app
-# rawg-app
+### Technologies Used:
+- React
+- TypeScript
+- React-Router-Dom
+- Material-UI (MUI)
+- React-Icons
+- Swiper.js
+- Axios
+- RAWG API
+- Firebase
+- DOMPurify
+- Vite
