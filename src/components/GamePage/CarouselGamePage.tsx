@@ -103,7 +103,7 @@ const CarouselGamePage = ({
             <img
               src={selectedImage}
               alt="fullscreen image"
-              className="max-h-full max-w-full"
+              className="max-h-dvh max-w-dvw"
             />
             <RiCloseCircleFill className="absolute right-[1%] top-[1%] z-20 text-2xl font-extrabold" />
           </div>
